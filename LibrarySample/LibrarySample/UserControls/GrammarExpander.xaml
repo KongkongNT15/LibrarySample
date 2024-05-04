@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Expander
+    x:Class="LibrarySample.UserControls.GrammarExpander"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LibrarySample.UserControls"
+    xmlns:root="using:LibrarySample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    HorizontalAlignment="Stretch"
+    HorizontalContentAlignment="Stretch"
+    MinHeight="{x:Bind root:Data.MinControlHeight}"
+    IsExpanded="True">
+
+    <Expander.Header >
+        <Grid Padding="0,9,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <FontIcon x:Name="FIcon" Glyph="&#xE7C3;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" FontSize="24" Grid.Column="0" />
+
+            <TextBlock Text="宣言" Grid.Column="1" VerticalAlignment="Center" TextWrapping="Wrap" />
+        </Grid>
+    </Expander.Header>
+
+    <StackPanel x:Name="ContentsPanel" Spacing="{x:Bind root:Data.FunctionExpanderStackPanelSpacing}" >
+        
+        <StackPanel x:Name="DefinitionPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
+            <TextBlock Text="宣言" Style="{StaticResource FunctionExpanderContentTitleTextBlockStyle}" />
+        </StackPanel>
+
+        <StackPanel x:Name="ParameterPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
+            <TextBlock Text="テンプレートパラメーター" Style="{StaticResource FunctionExpanderContentTitleTextBlockStyle}" />
+        </StackPanel>
+        
+    </StackPanel>
+</Expander>

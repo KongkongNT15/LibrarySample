@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="LibrarySample.Pages.CppHomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LibrarySample.Pages"
+    xmlns:root="using:LibrarySample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Padding="{x:Bind root:Data.PageScrollViewerPadding}" >
+        <StackPanel x:Name="ContentsPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" />
+    </ScrollViewer>
+</Page>

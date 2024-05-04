@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button
+    x:Class="LibrarySample.UserControls.SlideButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:root="using:LibrarySample"
+    xmlns:local="using:LibrarySample.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Style="{StaticResource DefaultButtonStyle}"
+    Background="{ThemeResource ExpanderHeaderBackground}"
+    BorderBrush="{ThemeResource ExpanderBorderBrush}"
+    HorizontalAlignment="Stretch"
+    MinHeight="{x:Bind root:Data.ControlHeight}"
+    Padding="0"
+    HorizontalContentAlignment="Stretch">
+
+    <Button.Resources >
+        <ResourceDictionary >
+            <ResourceDictionary.ThemeDictionaries >
+                <ResourceDictionary x:Key="Default" >
+                    <StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="ExpanderBorderBrush" />
+                    <StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="ExpanderBorderBrush" />
+                    <StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="ExpanderBorderBrush" />
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Light" >
+                    <StaticResource x:Key="ButtonBorderBrushPointerOver" ResourceKey="ExpanderBorderBrush" />
+                    <StaticResource x:Key="ButtonBorderBrushPressed" ResourceKey="ExpanderBorderBrush" />
+                    <StaticResource x:Key="ButtonBorderBrushDisabled" ResourceKey="ExpanderBorderBrush" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+
+    </Button.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <FontIcon x:Name="FIcon" FontFamily="Segoe MDL2 Assets" FontSize="24" HorizontalAlignment="Left" Grid.Column="0" />
+
+        <StackPanel VerticalAlignment="Center" Grid.Column="1" >
+            <TextBlock x:Name="TitleText" TextWrapping="Wrap" />
+            <TextBlock x:Name="DescriptionText" FontSize="12" TextWrapping="Wrap" Foreground="{ThemeResource AppBarToggleButtonCheckedPointerOverBackgroundThemeBrush}" />
+        </StackPanel>
+
+        <FontIcon Glyph="&#xE974;" FontSize="15" Margin="0,0,16,0" Grid.Column="2" />
+
+    </Grid>
+</Button>

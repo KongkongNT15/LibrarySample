@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ActiveDebugProfile>LibrarySample (Unpackaged)</ActiveDebugProfile>
+    <_LastSelectedProfileId>C:\Users\h5000\OneDrive\VisualStudio\LibrarySample\LibrarySample\Properties\PublishProfiles\win-x64.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="App.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <Page Update="UserControls\GrammarExpander.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CppClassPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CppLibraryPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CppHomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\CppHeaderButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CStructurePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\DescriptionTextCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\TextCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CHomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CLibraryPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\CHeaderButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\XmlNavigationViewItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ScrollablePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ConsolePane.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\FunctionExpander.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\SourceCodeViewer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\DescriptionSettingCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\SettingCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ValueCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\SlideButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ViewExpander.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Settings\VersionInfoPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Settings\SettingPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Settings\AboutAppPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\HomePageButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Settings\SettingWindowContent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\HeaderButtons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\SettingButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <None Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+</Project>

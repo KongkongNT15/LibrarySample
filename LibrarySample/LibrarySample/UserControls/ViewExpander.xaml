@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Expander
+    x:Class="LibrarySample.UserControls.ViewExpander"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:root="using:LibrarySample"
+    xmlns:local="using:LibrarySample.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    HorizontalAlignment="Stretch"
+    HorizontalContentAlignment="Stretch"
+    MinHeight="{x:Bind root:Data.ControlHeight}">
+
+    <Expander.Header>
+        <Grid Padding="0,9,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <FontIcon x:Name="FIcon" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" FontSize="24" Grid.Column="0" />
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock x:Name="TitleTextBlock" TextWrapping="Wrap" />
+                <TextBlock x:Name="DescriptionTextBlock" FontSize="12" Foreground="{ThemeResource AppBarToggleButtonCheckedPointerOverBackgroundThemeBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+        </Grid>
+    </Expander.Header>
+
+    
+</Expander>

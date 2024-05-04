@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<controls:ScrollableControl
+    x:Class="LibrarySample.Settings.SettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:LibrarySample.UserControls"
+    xmlns:local="using:LibrarySample.Settings"
+    xmlns:root="using:LibrarySample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel x:Name="RootPanel" Spacing="{x:Bind root:Data.NavigationViewContentPadding}" >
+
+        <StackPanel Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
+            <TextBlock Text="構成設定" />
+            <controls:DescriptionSettingCard Title="サンプル待機時間(ミリ秒)" Description="サンプルプログラムの終了を待つ最大時間を設定します" >
+                <NumberBox x:Name="WaitTimeNumberBox" SpinButtonPlacementMode="Inline" SmallChange="10" LargeChange="100" Minimum="10" Maximum="7200" Width="160" />
+            </controls:DescriptionSettingCard>
+        </StackPanel>
+
+        <StackPanel Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
+            <TextBlock Text="外観の設定" />
+            <controls:SettingCard Title="テーマ" >
+                <ComboBox x:Name="ThemeComboBox" Width="133" >
+                    <x:String>システムの既定</x:String>
+                    <x:String>ライト</x:String>
+                    <x:String>ダーク</x:String>
+                </ComboBox>
+            </controls:SettingCard>
+        </StackPanel>
+        
+    </StackPanel>
+    
+</controls:ScrollableControl>

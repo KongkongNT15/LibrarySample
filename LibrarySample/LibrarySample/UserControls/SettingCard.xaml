@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="LibrarySample.UserControls.SettingCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:root="using:LibrarySample"
+    xmlns:local="using:LibrarySample.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    MinHeight="{x:Bind root:Data.MinControlHeight}">
+
+    <Grid x:Name="RootGrid" Style="{StaticResource EGrid}" >
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock x:Name="TitleText" VerticalAlignment="Center" Grid.Column="0" />
+
+        <UserControl x:Name="ControlArea" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" />
+    </Grid>
+    
+</UserControl>
