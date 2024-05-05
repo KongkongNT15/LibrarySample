@@ -7,6 +7,7 @@
 #include <array>
 #include <cmath>
 #include <cstring>
+#include <exception>
 #include <iostream>
 #include <string>
 
@@ -44,6 +45,10 @@
 #define HAS_CPP17 CPPVERSION >= CPP17
 #define HAS_CPP14 CPPVERSION >= CPP14
 
+#if HAS_CPP23
+#include <print>
+#endif
+
 extern bool IsConsole;
 
 #define FUNCNAME const char* funcName
@@ -57,5 +62,6 @@ int RunSample(const char* folder, const char* func);
 
 int array__class__run(FUNCNAME);
 int array__hpp__run(FUNCNAME);
+int exception__class__run(FUNCNAME);
 
 #endif //!__PCH__

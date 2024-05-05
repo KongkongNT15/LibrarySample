@@ -39,6 +39,7 @@ namespace LibrarySample.Pages
                 (Frame as ContentPageFrame).AddXElement(value);
                 ContentsPanel.Children.Clear();
 
+                LibraryPageHelper.ApplyIncoplete(ContentsPanel, value);
                 ApplyTypeDefs();
                 ApplyConcepts();
                 ApplyClasses();

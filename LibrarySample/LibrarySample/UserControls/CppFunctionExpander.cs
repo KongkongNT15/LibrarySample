@@ -21,10 +21,15 @@ namespace LibrarySample.UserControls
 
         public CppFunctionExpander(XElement xElement, Category category) : base(xElement, category) { }
 
+        protected override StartSampleButton GetSampleButton()
+        {
+            return new StartSampleButton(SampleRunner.GetCppSampleRunner(CppVersion, ProcesserType).ApplicationName, Folder, FuncName);
+        }
+
         protected override void ApplyDefinition()
         {
-            CppVersion minVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMinVersion")?.Value.Replace("pp", "++"), CppVersion.MinValue);
-            CppVersion maxVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMaxVersion")?.Value.Replace("pp", "++"), CppVersion.MaxValue);
+            CppVersion minVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMinVersion")?.Value, CppVersion.MinValue);
+            CppVersion maxVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMaxVersion")?.Value, CppVersion.MaxValue);
 
             if (CppVersion < minVersion)
             {
@@ -62,7 +67,8 @@ namespace LibrarySample.UserControls
                     XElement source = xElement.Element("SourceCodeFile");
 
                     SourceCodeViewer defCode = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.Cpp);
-                    defCode.FilePath = XmlPath.CppLibrarySourceCodeDirectory + def.Value;
+                    //Tagと同じ名前のフォルダにある
+                    defCode.FilePath = XmlPath.CppLibrarySourceCodeDirectory + Folder + "/" + def.Value;
                     AddDefinitionCode(defCode);
 
                     //ソースコードがない
@@ -73,7 +79,7 @@ namespace LibrarySample.UserControls
                     }
 
                     SourceCodeViewer sourceCodeViewer = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.Cpp);
-                    sourceCodeViewer.FilePath = XmlPath.CppLibrarySourceCodeDirectory + source.Value;
+                    sourceCodeViewer.FilePath = XmlPath.CppLibrarySourceCodeDirectory + Folder + "/" + source.Value;
 
 
                     AddSourceCode(sourceCodeViewer);

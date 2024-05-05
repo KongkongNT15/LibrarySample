@@ -10,14 +10,14 @@
     mc:Ignorable="d">
 
     <StackPanel Spacing="{x:Bind root:Data.HeaderButtonsStackPanelSpacing}" Orientation="Horizontal" >
-        <ComboBox x:Name="CppVersionComboBox" Width="93" >
+        <ComboBox x:Name="CppVersionComboBox" Width="96" >
             <x:String>C++14</x:String>
             <x:String>C++17</x:String>
             <x:String>C++20</x:String>
             <x:String>C++23</x:String>
         </ComboBox>
 
-        <ComboBox x:Name="CppProcesserTypeComboBox" Width="91" >
+        <ComboBox x:Name="CppProcesserTypeComboBox" Width="92" >
             <x:String>x86</x:String>
             <x:String>x64</x:String>
         </ComboBox>

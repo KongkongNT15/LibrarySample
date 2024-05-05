@@ -31,5 +31,14 @@
     <ClCompile Include="stdbool.h.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="iso646.h.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="assert.h.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ctype.h.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

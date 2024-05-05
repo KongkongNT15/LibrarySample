@@ -42,7 +42,12 @@ namespace LibrarySample.UserControls
             string fileName = XElement.Element("Definition").Element("DefinitionFile").Value;
 
             SourceCodeViewer sourceCodeViewer = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage);
-            sourceCodeViewer.FilePath = XmlPath.CppLibrarySourceCodeDirectory + fileName;
+            sourceCodeViewer.FilePath = CodeLanguage switch
+            {
+                CodeLanguage.Cpp => XmlPath.CppLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
+
+                _ => throw new NotImplementedException(),
+            };
 
             DefinitionPanel.Children.Add(sourceCodeViewer);
         }
@@ -63,6 +68,19 @@ namespace LibrarySample.UserControls
                 ParameterPanel.Children.Add(new DescriptionTextCard { Title = xParameter.Attribute("Name").Value, Description = xParameter.Attribute("Description").Value });
             }
 
+        }
+
+        //XmlRoot‚Ì–¼‘O‚ðŽæ“¾
+        private string GetXElementRootTag()
+        {
+            XElement xElement = XElement;
+
+            while (xElement.Parent != null)
+            {
+                xElement = xElement.Parent;
+            }
+
+            return xElement.Attribute("Tag").Value;
         }
     }
 }

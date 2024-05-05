@@ -42,6 +42,7 @@ namespace LibrarySample.Pages
                 ApplyTypeDefs();
                 ApplyStructures();
                 ApplyFunctions();
+                ApplyFunctionMacros();
                 ApplyMacro();
             }
         }
@@ -87,6 +88,25 @@ namespace LibrarySample.Pages
                 foreach (XElement xFunction in xFuntions.Elements("Function"))
                 {
                     panel.Children.Add(new CFunctionExpander(xFunction, Category.Function));
+
+                    await Task.Delay(1);
+                }
+
+            }
+        }
+
+        private async void ApplyFunctionMacros()
+        {
+            XElement xFuntions = XElement.Element("FunctionMacros");
+
+            if (xFuntions != null)
+            {
+                StackPanel panel = LibraryPageHelper.CreateHeaderPanel("ä÷êîÉ}ÉNÉç");
+                ContentsPanel.Children.Add(panel);
+
+                foreach (XElement xFunction in xFuntions.Elements("Function"))
+                {
+                    panel.Children.Add(new CFunctionExpander(xFunction, Category.Macro));
 
                     await Task.Delay(1);
                 }

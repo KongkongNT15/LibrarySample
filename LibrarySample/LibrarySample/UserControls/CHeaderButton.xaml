@@ -10,12 +10,12 @@
     mc:Ignorable="d">
 
     <StackPanel Spacing="{x:Bind root:Data.HeaderButtonsStackPanelSpacing}" Orientation="Horizontal" >
-        <ComboBox x:Name="CVersionComboBox" Width="82" >
+        <ComboBox x:Name="CVersionComboBox" Width="84" >
             <x:String>C11</x:String>
             <x:String>C17</x:String>
         </ComboBox>
         
-        <ComboBox x:Name="CProcesserTypeComboBox" Width="91" >
+        <ComboBox x:Name="CProcesserTypeComboBox" Width="92" >
             <x:String>x86</x:String>
             <x:String>x64</x:String>
         </ComboBox>

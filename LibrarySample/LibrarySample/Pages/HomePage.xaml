@@ -11,7 +11,7 @@
     mc:Ignorable="d">
 
     <ScrollViewer x:Name="Viewer" >
-        <VariableSizedWrapGrid x:Name="RootGrid" Orientation="Horizontal" ItemHeight="102" ItemWidth="372" Margin="{x:Bind root:Data.PageScrollViewerPadding}" />
+        <VariableSizedWrapGrid x:Name="RootGrid" Orientation="Horizontal" ItemHeight="102" ItemWidth="372" />
     </ScrollViewer>
     
 

@@ -32,9 +32,36 @@ namespace LibrarySample.Pages
             return panel;
         }
 
+        public static InfoBar CreateIncompleteInfoBar()
+        {
+            InfoBar bar = new InfoBar();
+
+            bar.Title = "不完全なページ";
+            bar.Message = "まだここに載っていない項目があります";
+
+            bar.IsOpen = true;
+            bar.IsClosable = false;
+            bar.Severity = InfoBarSeverity.Warning;
+
+            return bar;
+        }
+
         public static StackPanel CreateHeaderPanel(Category category)
         {
             return CreateHeaderPanel(EnumConverter.ToPanelHeader(category));
+        }
+
+        public static void ApplyIncoplete(StackPanel rootPanel, XElement xElement)
+        {
+            XAttribute xIncomplete = xElement.Attribute("IsIncomplete");
+
+            //nullはFalseとみなす
+            if (xIncomplete == null) return;
+
+            //Falseなら何もしない
+            if (xIncomplete.Value != "True") return;
+
+            rootPanel.Children.Add(CreateIncompleteInfoBar());
         }
 
         public static void ApplyClasses(StackPanel rootPanel, XElement xElement, string elementName, string header, string libraryPath, CodeLanguage codeLanguage, Category category)

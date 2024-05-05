@@ -1,5 +1,15 @@
 #include "pch.h"
 
+static void func(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+
+    vprintf(format, args);
+
+    va_end(args);
+}
+
 static int macro()
 {
     puts("BUFSIZ");
@@ -430,6 +440,150 @@ static int f15(void)
     return 0;
 }
 
+//scanf
+static int f16(void)
+{
+    int n;
+    int c;
+
+    if (IsConsole()) printf("整数を入力: ");
+    scanf("%d", &n);
+
+    printf("n = %d\n", n);
+
+    printf("stdinに残った文字: \"");
+    while ((c = getchar()) != '\n' && c != EOF) {
+        putchar(c);
+    }
+    puts("\"");
+
+    return 0;
+}
+
+//snprintf
+static int f17(void)
+{
+    size_t ret;
+    size_t length;
+
+    ret = snprintf(NULL, 0, "友達が%d月%d日に名駅のホテルに泊まるらしい", 5, 4);
+
+    printf("文字数: %zu\n", ret);
+
+    length = ret + 1;
+
+    char* str = malloc(length * sizeof(char));
+
+    if (str == NULL) {
+        fputs("メモリの確保に失敗しました", stderr);
+        return 1;
+    }
+
+    snprintf(str, length, "友達が%d月%d日に名駅のホテルに泊まるらしい", 5, 4);
+
+    printf("str: %s\n", str);
+
+    free(str);
+
+    return 0;
+}
+
+//sprintf
+static int f18(void)
+{
+    char str[100];
+
+    sprintf(str, "今日の気温は%d℃です", 21);
+
+    printf("str: %s\n", str);
+
+    return 0;
+}
+
+//sscanf
+static int f19(void)
+{
+    char str1[] = "25";
+    char str2[] = "11.2";
+    char str3[] = "今日の日付: 8月27日";
+    int a;
+    double b;
+    int c;
+    int d;
+
+    sscanf(str1, "%d", &a);
+    sscanf(str2, "%lf", &b);
+    sscanf(str3, "今日の日付: %d月%d日", &c, &d);
+
+    printf("a: %d\n", a);
+    printf("b: %lf\n", b);
+    printf("c: %d\n", c);
+    printf("d: %d\n", d);
+
+    return 0;
+}
+
+//tmpnam
+static int f20(void)
+{
+    char path[FILENAME_MAX];
+
+    for (int i = 0; i < 100; i++) {
+        if (tmpnam(path) == NULL) {
+            fputs("ファイル名を作成できませんでした\n", stderr);
+            return 1;
+        }
+
+        puts(path);
+    }
+
+    return 0;
+}
+
+//ungetc
+static int f21(void)
+{
+    int c;
+
+    while (1) {
+        printf("数字を入力: ");
+
+        while ((c = getchar()) != '\n') {
+            if (isdigit(c) == 0) {
+                ungetc(c, stdin);
+
+                putchar('\n');
+                printf("stdinに残った文字: \"");
+                while ((c = getchar()) != '\n') {
+                    putchar(c);
+                }
+                putchar('\"');
+
+                break;
+            }
+            putchar(c);
+        }
+        putchar('\n');
+    }
+
+    return 0;
+}
+
+//vprintf
+static int f22(void)
+{
+    char str[] = "Windows 11 2022 Update";
+    int n = 38;
+    double x = 2.6;
+
+    func("%s\n", str);
+    func("共通テスト英語リスニング: %d/%d\n", n, 100);
+    func("%.2lf GHz\n", x);
+    func("vprintf: %p\n", vprintf);
+
+    return 0;
+}
+
 int stdio__h__run(FUNCNAME)
 {
     if (IsEqualFuncName("feof")) return f0();
@@ -440,7 +594,6 @@ int stdio__h__run(FUNCNAME)
     if (IsEqualFuncName("fprintf")) return f5();
     if (IsEqualFuncName("fputc")) return f11();
     if (IsEqualFuncName("fputs")) return f6();
-    if (IsEqualFuncName("fseek")) return f3();
     if (IsEqualFuncName("getc")) return f7();
     if (IsEqualFuncName("getchar")) return f8();
     if (IsEqualFuncName("perror")) return f9();
@@ -449,8 +602,15 @@ int stdio__h__run(FUNCNAME)
     if (IsEqualFuncName("putchar")) return f13();
     if (IsEqualFuncName("puts")) return f14();
     if (IsEqualFuncName("remove")) return f15();
+    if (IsEqualFuncName("scanf")) return f16();
+    if (IsEqualFuncName("snprintf")) return f17();
+    if (IsEqualFuncName("sprintf")) return f18();
+    if (IsEqualFuncName("sscanf")) return f19();
+    if (IsEqualFuncName("tmpnam")) return f20();
+    if (IsEqualFuncName("ungetc")) return f21();
+    if (IsEqualFuncName("vprintf")) return f22();
 
     if (IsEqualFuncName(MACRO_FUNCTION)) return macro();
 
-    return ExitFailure();
+    return NotFound(FUNCNAMEVALUE);
 }

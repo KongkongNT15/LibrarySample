@@ -39,10 +39,10 @@ namespace LibrarySample
         {
             return value switch
             {
-                "C++14" => CppVersion.Cpp14,
-                "C++17" => CppVersion.Cpp17,
-                "C++20" => CppVersion.Cpp20,
-                "C++23" => CppVersion.Cpp23,
+                "Cpp14" => CppVersion.Cpp14,
+                "Cpp17" => CppVersion.Cpp17,
+                "Cpp20" => CppVersion.Cpp20,
+                "Cpp23" => CppVersion.Cpp23,
                 "MinValue" => CppVersion.MinValue,
                 "MaxValue" => CppVersion.MaxValue,
                 _ => defaultValue
@@ -79,6 +79,7 @@ namespace LibrarySample
                 Category.Class => "\uEA86",
                 Category.Concept => "\uEA86",
                 Category.Constructor => "\uF158",
+                Category.Destructor => "\uF158",
                 Category.Field => "\uEA86",
                 Category.Function => "\uF158",
                 Category.Macro => "\uE71A",

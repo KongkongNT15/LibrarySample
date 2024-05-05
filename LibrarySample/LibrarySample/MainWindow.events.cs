@@ -290,6 +290,7 @@ namespace LibrarySample
         {
             int tag = (int)sender.Tag;
 
+            //Gridからページを削除
             foreach (UIElement uIElement in ContentsGrid.Children)
             {
                 if ((int)(uIElement as Frame).Tag == tag)

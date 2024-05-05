@@ -71,7 +71,7 @@ namespace LibrarySample.Settings
 
             WriteData(streamWriter, "CVersion", CVersion.ToString());
             WriteData(streamWriter, "CProcesserType", CProcesserType.ToString());
-            WriteData(streamWriter, "CppVersion", CppVersion.ToString().Replace("pp", "++"));
+            WriteData(streamWriter, "CppVersion", CppVersion.ToString());
             WriteData(streamWriter, "CppProcesserType", CppProcesserType.ToString());
             WriteData(streamWriter, "WaitTime", WaitTime.ToString());
             WriteData(streamWriter, "RequestedTheme", RequestedTheme.ToString());
@@ -105,7 +105,7 @@ namespace LibrarySample.Settings
                         break;
 
                     case "CppVersion":
-                        _cppVersion = EnumConverter.ToCppVersion(value[1].Replace("++", "pp"));
+                        _cppVersion = EnumConverter.ToCppVersion(value[1]);
                         break;
 
                     case "CppProcesserType":

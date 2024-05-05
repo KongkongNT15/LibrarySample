@@ -27,6 +27,7 @@ namespace LibrarySample.Pages
         public HomePage()
         {
             this.InitializeComponent();
+            RootGrid.Margin = new Thickness(Data.NavigationViewContentPadding, 0, 0, 0);
             AddLibraryButton(new HomePageButton(XmlPath.CLibraryDirectory, CodeLanguage.C) { ImageSource = ImageSources.CIconSource, Title = HomePageData.CHomePageTitle, Description = HomePageData.CHomePageDescription });
             AddLibraryButton(new HomePageButton(XmlPath.CppLibraryDirectory, CodeLanguage.Cpp) { ImageSource = ImageSources.CppIconSource, Title = HomePageData.CppHomePageTitle, Description = HomePageData.CppHomePageDescription });
         }

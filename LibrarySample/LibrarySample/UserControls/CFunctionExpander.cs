@@ -24,6 +24,11 @@ namespace LibrarySample.UserControls
 
         }
 
+        protected override StartSampleButton GetSampleButton()
+        {
+            return new StartSampleButton(SampleRunner.GetCSampleRunner(CVersion, ProcesserType).ApplicationName, Folder, FuncName);
+        }
+
         protected override void ApplyDefinition()
         {
             CVersion minVersion = EnumConverter.ToCLanguage(XElement.Attribute("TargetMinVersion")?.Value, CVersion.MinValue);

@@ -1,4 +1,3 @@
-using LibrarySample.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -19,13 +18,24 @@ using Windows.Foundation.Collections;
 
 namespace LibrarySample.Settings
 {
-    public sealed partial class AboutAppPage : ScrollableControl
+    public sealed partial class InnerInfoTextCard : UserControl
     {
-        public static AboutAppPage Instance { get; } = new AboutAppPage();
+        public string Title
+        {
+            get => TitleText.Text;
+            set => TitleText.Text = value;
+        }
 
-        private AboutAppPage()
+        public string Value
+        {
+            get => ValueText.Text;
+            set => ValueText.Text = value;
+        }
+
+        public InnerInfoTextCard()
         {
             this.InitializeComponent();
+            RootGrid.Padding = new Thickness(Data.ControlPaddingHeight, 0, Data.ControlPaddingHeight, 0);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace LibrarySample.UserControls
 
         private void CppVersionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SaveData.CppVersion = EnumConverter.ToCppVersion(CppVersionComboBox.SelectedItem as string);
+            SaveData.CppVersion = EnumConverter.ToCppVersion((CppVersionComboBox.SelectedItem as string).Replace("++", "pp"));
         }
 
         private void CppProcesserTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

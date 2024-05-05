@@ -24,16 +24,16 @@ namespace LibrarySample.Settings
     {
         private ViewExpander ViewExpander { get; } = new ViewExpander();
 
-        private int _year = 2000;
+        private readonly int _year = 2000;
 
-        private int _month = 1;
+        private readonly int _month = 1;
 
-        private int _date = 1;
+        private readonly int _date = 1;
 
-        private int _versionMajor = 0;
-        private int _versionMinor = 0;
-        private int _versionBuild = 0;
-        private int _versionRevision = 0;
+        private readonly int _versionMajor = 0;
+        private readonly int _versionMinor = 0;
+        private readonly int _versionBuild = 0;
+        private readonly int _versionRevision = 0;
 
         private StackPanel RootPanel { get; } = new StackPanel();
 
@@ -56,7 +56,7 @@ namespace LibrarySample.Settings
 
             foreach (XElement xTextLine in xReleaseNote.Elements("TextLine"))
             {
-                RootPanel.Children.Add(new TextBlock { Text = $"・{xTextLine.Value}" });
+                RootPanel.Children.Add(new TextBlock { Text = $"・　{xTextLine.Value}", TextWrapping = TextWrapping.Wrap });
             }
         }
 

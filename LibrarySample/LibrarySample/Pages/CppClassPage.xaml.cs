@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -38,10 +39,12 @@ namespace LibrarySample.Pages
                 (Frame as ContentPageFrame).AddXElement(value);
                 ContentsPanel.Children.Clear();
 
+                LibraryPageHelper.ApplyIncoplete(ContentsPanel, value);
                 ApplyGrammar();
                 ApplyStaticMethods();
                 ApplyTypeDefinitions();
                 ApplyConstructors();
+                ApplyDestructor();
                 ApplyOperators();
                 ApplyMethods();
             }
@@ -76,6 +79,20 @@ namespace LibrarySample.Pages
         private async void ApplyConstructors()
         {
             await LibraryPageHelper.ApplyCppFunctions(ContentsPanel, XElement, "Constructors", "コンストラクター", Category.Constructor);
+        }
+
+        private async void ApplyDestructor()
+        {
+            XElement xDestructor = XElement.Element("Destructor");
+
+            if (xDestructor == null) return;
+
+            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("デストラクター");
+            ContentsPanel.Children.Add(panel);
+
+            panel.Children.Add(new CppFunctionExpander(xDestructor, Category.Destructor));
+
+            await Task.Delay(1);
         }
 
         private async void ApplyOperators()

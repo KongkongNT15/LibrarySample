@@ -85,7 +85,14 @@ namespace LibrarySample.UserControls
 
             //
             Title = (Category == Category.Operator ? "operator" : "") + xElement.Attribute("Name").Value;
-            Description = xElement.Attribute("Description").Value;
+
+            Description = Category switch
+            {
+                Category.Constructor => "オブジェクトを構築します",
+                Category.Destructor => "オブジェクトを破棄します",
+                _ => xElement.Attribute("Description").Value,
+            };
+            
 
             //未完成サンプル
             if (Description == "???")
@@ -139,10 +146,10 @@ namespace LibrarySample.UserControls
         private void ApplyFolder()
         {
             XAttribute xAttribute = XElement.Attribute("Tag");
+            _folder = GetXElementRootTag();
 
             if (xAttribute != null)
             {
-                _folder = GetXElementRootTag();
                 _funcName = xAttribute.Value;
             }
         }
@@ -234,6 +241,8 @@ namespace LibrarySample.UserControls
             return xElement.Attribute("Tag").Value;
         }
 
+        protected abstract StartSampleButton GetSampleButton();
+
         private void ApplyLaunchType()
         {
             switch (LaunchType)
@@ -248,7 +257,7 @@ namespace LibrarySample.UserControls
                     ResultsPanel.Children.Remove(_outputConsole);
                     ResultsInnerGrid.Children.Remove(LaunchButtons);
 
-                    ResultsPanel.Children.Add(new StartSampleButton(SampleRunner.GetCSampleRunner(SaveData.CVersion, SaveData.CProcesserType).ApplicationName, _folder, _funcName));
+                    ResultsPanel.Children.Add(GetSampleButton());
 
                     return;
 

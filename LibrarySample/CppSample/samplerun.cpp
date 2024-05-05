@@ -18,6 +18,7 @@ int RunSample(const char* folder, const char* func)
 {
     if (IsEqualFolderName("array.class")) return array__class__run(func);
     if (IsEqualFolderName("array.hpp")) return array__hpp__run(func);
+    if (IsEqualFolderName("exception.class")) return exception__class__run(func);
 
     auto d = get<1>(array<int, 5>{ 2, 34, 5, 6, 6 });
 

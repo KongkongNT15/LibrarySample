@@ -1,4 +1,3 @@
-using LibrarySample.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -19,13 +18,20 @@ using Windows.Foundation.Collections;
 
 namespace LibrarySample.Settings
 {
-    public sealed partial class AboutAppPage : ScrollableControl
+    public sealed partial class SettingExpander : Expander
     {
-        public static AboutAppPage Instance { get; } = new AboutAppPage();
+        public UIElementCollection Children => RootPanel.Children;
 
-        private AboutAppPage()
+        public string Title
+        {
+            get => TitleText.Text;
+            set => TitleText.Text = value;
+        }
+
+        public SettingExpander()
         {
             this.InitializeComponent();
+            TitleText.Margin = new Thickness(Data.ControlPaddingHeight, 0, 0, 0);
         }
     }
 }

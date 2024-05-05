@@ -26,6 +26,11 @@ namespace LibrarySample.UserControls
             set => OutputText.Text = value;
         }
 
+        public void SetAsWaiting()
+        {
+            OutputText.Text = "‚¨‘Ò‚¿‚­‚¾‚³‚¢...";
+        }
+
         public ConsolePane()
         {
             this.InitializeComponent();

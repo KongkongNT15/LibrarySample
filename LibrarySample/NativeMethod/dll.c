@@ -1,6 +1,10 @@
 #include <wchar.h>
 #include <Windows.h>
 
+//パイプのバッファーの長さ？
+#define PIPE_INPUT_LENGTH 1024
+#define PIPE_OUTPUT_LENGTH 16384
+
 __declspec(dllexport) const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsigned long wait, unsigned long* returnCode);
 
 char* ptr = NULL;
@@ -34,7 +38,7 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 	DWORD length;
 
 	//入力ストリーム作成
-	if (!CreatePipe(&hInputStdIn, &hOutputStdIn, &securityAttributes, 0)) {
+	if (!CreatePipe(&hInputStdIn, &hOutputStdIn, &securityAttributes, PIPE_INPUT_LENGTH)) {
 		*returnCode = -1;
 		return pipeCreationErrorMessage;
 	}
@@ -49,7 +53,7 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 	}
 
 	//出力ストリーム作成
-	if (!CreatePipe(&hInputStdOut, &hOutputStdOut, &securityAttributes, 0)) {
+	if (!CreatePipe(&hInputStdOut, &hOutputStdOut, &securityAttributes, PIPE_OUTPUT_LENGTH)) {
 		CloseHandle(hInputStdIn);
 		CloseHandle(hOutputStdIn);
 
@@ -163,6 +167,19 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 	}
 
 	ptr = malloc(length + 1);
+
+	//
+	if (length == 0) {
+		CloseHandle(hInputStdIn);
+		CloseHandle(hInputStdOut);
+		CloseHandle(hOutputStdIn);
+		CloseHandle(hOutputStdOut);
+		CloseHandle(pInfo.hProcess);
+		CloseHandle(pInfo.hThread);
+
+		*ptr = '\0';
+		return ptr;
+	}
 
 	//メモリ確保に失敗
 	if (ptr == NULL) {
