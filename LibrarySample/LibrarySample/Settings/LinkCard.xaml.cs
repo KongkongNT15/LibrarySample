@@ -1,4 +1,3 @@
-using LibrarySample.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -19,14 +18,25 @@ using Windows.Foundation.Collections;
 
 namespace LibrarySample.Settings
 {
-    public sealed partial class AboutAppPage : ScrollableControl
+    public sealed partial class LinkCard : UserControl
     {
-        public static AboutAppPage Instance { get; } = new AboutAppPage();
+        public string Title
+        {
+            get => LinkButton.Content as string;
+            set => LinkButton.Content = value;
+        }
 
-        private AboutAppPage()
+        public Uri NavigateUri
+        {
+            get => LinkButton.NavigateUri;
+            set => LinkButton.NavigateUri = value;
+        }
+
+        public LinkCard()
         {
             this.InitializeComponent();
-            RootPanel.Padding = new Thickness(0, 0, 0, Data.NavigationViewContentPadding);
+
+            RootGrid.Padding = new Thickness(Data.ControlPaddingHeight - 10.0, 0, Data.ControlPaddingHeight, 0);
         }
     }
 }

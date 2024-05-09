@@ -39,6 +39,8 @@ namespace LibrarySample.Pages
                 (Frame as ContentPageFrame).AddXElement(value);
                 ContentsPanel.Children.Clear();
 
+                if (!ApplySupportedVersion()) return;
+
                 LibraryPageHelper.ApplyIncoplete(ContentsPanel, value);
                 ApplyTypeDefs();
                 ApplyConcepts();
@@ -57,7 +59,35 @@ namespace LibrarySample.Pages
             this.InitializeComponent();
         }
 
-        
+        private bool ApplySupportedVersion()
+        {
+            CppVersion minVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMinVersion")?.Value);
+            CppVersion maxVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMaxVersion")?.Value);
+
+            if (SaveData.CppVersion < minVersion)
+            {
+                TextBlock textBlock = new TextBlock { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+
+                textBlock.Text = minVersion == CppVersion.MaxValue ? $"このヘッダーを使用するには{CppVersion.MaxValue.ToString().Replace("pp", "++")}が必要です" : $"このヘッダーを使用するには{minVersion.ToString().Replace("pp", "++")}以降が必要です";
+
+                Content = textBlock;
+
+                return false;
+            }
+
+            if (SaveData.CppVersion < maxVersion)
+            {
+                TextBlock textBlock = new TextBlock { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+
+                textBlock.Text = $"このヘッダーを使用するには{maxVersion.ToString().Replace("pp", "++")}以前が必要です";
+
+                Content = textBlock;
+
+                return false;
+            }
+
+            return true;
+        }
 
         private void ApplyTypeDefs()
         {

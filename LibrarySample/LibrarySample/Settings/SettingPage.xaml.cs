@@ -27,6 +27,8 @@ namespace LibrarySample.Settings
         {
             this.InitializeComponent();
 
+            RootPanel.Padding = new Thickness(0, 0, 0, Data.NavigationViewContentPadding);
+
             WaitTimeNumberBox.Value = SaveData.WaitTime;
             ThemeComboBox.SelectedIndex = (int)SaveData.RequestedTheme;
 

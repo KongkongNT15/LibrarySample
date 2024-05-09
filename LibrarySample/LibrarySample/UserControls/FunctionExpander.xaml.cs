@@ -166,7 +166,7 @@ namespace LibrarySample.UserControls
         private void ApplyParameters()
         {
             //関数形式以外はパラメータなし
-            if (Category != Category.Function && Category != Category.Operator && Category != Category.Constructor)
+            if (Category != Category.Function && Category != Category.Method && Category != Category.Operator && Category != Category.Constructor)
             {
                 RootPanel.Children.Remove(ParameterPanel);
                 return;
@@ -192,7 +192,7 @@ namespace LibrarySample.UserControls
 
         private void ApplyReturns()
         {
-            if (Category != Category.Function && Category != Category.Operator)
+            if (Category != Category.Function && Category != Category.Method && Category != Category.Operator)
             {
                 RootPanel.Children.Remove(ReturnsPanel);
                 return;

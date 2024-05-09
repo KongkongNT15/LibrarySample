@@ -23,6 +23,7 @@
     <None Remove="Pages\HomePage.xaml" />
     <None Remove="Settings\AboutAppPage.xaml" />
     <None Remove="Settings\InnerInfoTextCard.xaml" />
+    <None Remove="Settings\LinkCard.xaml" />
     <None Remove="Settings\SettingExpander.xaml" />
     <None Remove="Settings\SettingPage.xaml" />
     <None Remove="Settings\SettingWindowContent.xaml" />
@@ -70,6 +71,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Settings\LinkCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Settings\SettingExpander.xaml">

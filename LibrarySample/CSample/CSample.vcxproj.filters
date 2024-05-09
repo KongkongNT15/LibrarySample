@@ -40,5 +40,8 @@
     <ClCompile Include="ctype.h.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="errno.h.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

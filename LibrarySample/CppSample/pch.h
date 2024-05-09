@@ -45,6 +45,10 @@
 #define HAS_CPP17 CPPVERSION >= CPP17
 #define HAS_CPP14 CPPVERSION >= CPP14
 
+#if HAS_CPP17
+#include <any>
+#endif
+
 #if HAS_CPP23
 #include <print>
 #endif
@@ -60,6 +64,8 @@ bool IsEqual(const char* left, const char* right);
 int NotFound(const char* funcName);
 int RunSample(const char* folder, const char* func);
 
+int any__class__run(FUNCNAME);
+int any__hpp__run(FUNCNAME);
 int array__class__run(FUNCNAME);
 int array__hpp__run(FUNCNAME);
 int exception__class__run(FUNCNAME);

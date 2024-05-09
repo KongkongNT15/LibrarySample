@@ -30,6 +30,7 @@ namespace LibrarySample.Pages
     public sealed partial class CppClassPage : Page, IXml, ICppHandler
     {
         private XElement _xElement = null;
+
         public XElement XElement
         {
             get => _xElement;
@@ -39,8 +40,12 @@ namespace LibrarySample.Pages
                 (Frame as ContentPageFrame).AddXElement(value);
                 ContentsPanel.Children.Clear();
 
+                if (!ApplySupportedVersion()) return;
+
                 LibraryPageHelper.ApplyIncoplete(ContentsPanel, value);
                 ApplyGrammar();
+                ApplyBaseClasses();
+                ApplyDerivedClasses();
                 ApplyStaticMethods();
                 ApplyTypeDefinitions();
                 ApplyConstructors();
@@ -58,6 +63,36 @@ namespace LibrarySample.Pages
             this.InitializeComponent();
         }
 
+        private bool ApplySupportedVersion()
+        {
+            CppVersion minVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMinVersion")?.Value);
+            CppVersion maxVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMaxVersion")?.Value);
+
+            if (SaveData.CppVersion < minVersion)
+            {
+                TextBlock textBlock = new TextBlock { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+
+                textBlock.Text = minVersion == CppVersion.MaxValue ? $"このクラスを使用するには{CppVersion.MaxValue.ToString().Replace("pp", "++")}が必要です" : $"このクラスを使用するには{minVersion.ToString().Replace("pp", "++")}以降が必要です";
+
+                Content = textBlock;
+
+                return false;
+            }
+
+            if (SaveData.CppVersion < maxVersion)
+            {
+                TextBlock textBlock = new TextBlock { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+
+                textBlock.Text = $"このクラスを使用するには{maxVersion.ToString().Replace("pp", "++")}以前が必要です";
+
+                Content = textBlock;
+
+                return false;
+            }
+
+            return true;
+        }
+
         private void ApplyGrammar()
         {
             StackPanel panel = LibraryPageHelper.CreateHeaderPanel("構文");
@@ -66,9 +101,61 @@ namespace LibrarySample.Pages
             panel.Children.Add(new GrammarExpander(XElement.Element("Grammar"), CodeLanguage.Cpp));
         }
 
+        private void ApplyBaseClasses()
+        {
+            XElement xBaseClasses = XElement.Element("BaseClasses");
+
+            if (xBaseClasses == null) return;
+
+            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("基底");
+            ContentsPanel.Children.Add(panel);
+
+            foreach (XElement xReference in xBaseClasses.Elements())
+            {
+                string fileName = xReference.Attribute("FileName").Value;
+
+                XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + fileName);
+
+                panel.Children.Add(new SlideButton(xClass, CodeLanguage.Cpp) { Glyph = EnumConverter.ToGlyph(Category.Class) });
+            }
+        }
+
+        private void ApplyDerivedClasses()
+        {
+            XElement xDerivedClasses = XElement.Element("DerivedClasses");
+
+            if (xDerivedClasses == null) return;
+
+            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("派生");
+            ContentsPanel.Children.Add(panel);
+
+            foreach (XElement xReference in xDerivedClasses.Elements())
+            {
+                string fileName = xReference.Attribute("FileName").Value;
+
+                XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + fileName);
+
+                panel.Children.Add(new SlideButton(xClass, CodeLanguage.Cpp) { Glyph = EnumConverter.ToGlyph(Category.Class) });
+            }
+        }
+
         private async void ApplyStaticMethods()
         {
-            await LibraryPageHelper.ApplyCppFunctions(ContentsPanel, XElement, "StaticMethods", "静的メンバー関数", Category.Method);
+            List<XElement> xFunctions = new List<XElement>();
+
+            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, "StaticMethods");
+
+            if (xFunctions.Count == 0) return;
+
+            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("静的メンバー関数");
+            ContentsPanel.Children.Add(panel);
+
+            foreach (XElement xFunction in xFunctions)
+            {
+                panel.Children.Add(new CppFunctionExpander(xFunction, Category.Method));
+
+                await Task.Delay(1);
+            }
         }
 
         private void ApplyTypeDefinitions()
@@ -97,12 +184,41 @@ namespace LibrarySample.Pages
 
         private async void ApplyOperators()
         {
-            await LibraryPageHelper.ApplyCppFunctions(ContentsPanel, XElement, "Operators", "演算子", Category.Operator);
+            List<XElement> xFunctions = new List<XElement>();
+
+            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, "Operators");
+
+            if (xFunctions.Count == 0) return;
+
+            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("演算子");
+            ContentsPanel.Children.Add(panel);
+
+            foreach (XElement xFunction in xFunctions)
+            {
+                panel.Children.Add(new CppFunctionExpander(xFunction, Category.Operator));
+
+                await Task.Delay(1);
+            }
         }
 
         private async void ApplyMethods()
         {
-            await LibraryPageHelper.ApplyCppFunctions(ContentsPanel, XElement, "Methods", "メンバー関数", Category.Method);
+            List<XElement> xFunctions = new List<XElement>();
+
+            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, "Methods");
+
+            if (xFunctions.Count == 0) return;
+
+            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("メンバー関数");
+            ContentsPanel.Children.Add(panel);
+
+            foreach (XElement xFunction in xFunctions)
+            {
+                panel.Children.Add(new CppFunctionExpander(xFunction, Category.Method));
+
+                await Task.Delay(1);
+            }
+
         }
     }
 }

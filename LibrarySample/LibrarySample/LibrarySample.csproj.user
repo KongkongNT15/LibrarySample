@@ -11,6 +11,9 @@
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>
+    <Page Update="Settings\LinkCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Settings\SettingExpander.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -28,6 +28,7 @@ namespace LibrarySample.Settings
         private VersionInfoPage()
         {
             this.InitializeComponent();
+            RootPanel.Padding = new Thickness(0, 0, 0, Data.NavigationViewContentPadding);
 
             SetReleaseNote();
         }

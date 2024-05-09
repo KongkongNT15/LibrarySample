@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <errno.h>
+#include <fenv.h>
 #include <iso646.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -48,6 +49,7 @@ int GetUTF8MultiByteCharLength(int c);
 
 int assert__h__run(FUNCNAME);
 int ctype__h__run(FUNCNAME);
+int errno__h__run(FUNCNAME);
 int iso646__h__run(FUNCNAME);
 int stdbool__h__run(FUNCNAME);
 int stdio__h__run(FUNCNAME);

@@ -9,7 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Windows.Media.Core;
 using Windows.Networking.Sockets;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LibrarySample.Pages
 {
@@ -82,12 +84,12 @@ namespace LibrarySample.Pages
             }
         }
 
-        public static async Task ApplyCppFunctions(StackPanel rootPanel, XElement xElement, string elementName, string header, Category category)
+        public static async Task<StackPanel> ApplyCppFunctions(StackPanel rootPanel, XElement xElement, string elementName, string header, Category category)
         {
             XElement xFunctions = xElement.Element(elementName);
 
             //なければ何もしない
-            if (xFunctions == null) return;
+            if (xFunctions == null) return null;
 
             StackPanel panel = CreateHeaderPanel(header);
             rootPanel.Children.Add(panel);
@@ -97,6 +99,8 @@ namespace LibrarySample.Pages
                 panel.Children.Add(new CppFunctionExpander(xFunction, category));
                 await Task.Delay(1);
             }
+
+            return panel;
         }
 
         public static void ApplyTypeDefs(StackPanel rootPanel, XElement xElement, string elementName, string header = "型名")
@@ -121,6 +125,71 @@ namespace LibrarySample.Pages
                 panel.Children.Add(valueCard);
             }
 
+        }
+
+
+        public static async Task GetBaseClassFunctionsAsync(List<XElement> xElements, XElement xPageRoot, string elementName, bool ignoreOperatorE = false)
+        {
+            await Task.Run(() =>
+            {
+                GetBaseClassFunctions(xElements, xPageRoot, elementName, ignoreOperatorE);
+            });
+        }
+
+        //
+        private static void GetBaseClassFunctions(List<XElement> xElements, XElement xPageRoot, string elementName, bool ignoreOperatorE)
+        {
+            XElement xBaseClasses = xPageRoot.Element("BaseClasses");
+            //基底クラスがあれば再起関数
+            if (xBaseClasses != null)
+            {
+                foreach (XElement xClassReference in  xBaseClasses.Elements())
+                {
+                    string fileName = xClassReference.Attribute("FileName").Value;
+                    XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + fileName);
+                    GetBaseClassFunctions(xElements, xClass, elementName, true);
+                }
+            }
+
+            XElement xFunctuions = xPageRoot.Element(elementName);
+
+            //なければなにもしない
+            if (xFunctuions == null) return;
+
+            bool func(XElement xFunction, string name)
+            {
+                for (int i = 0; i < xElements.Count; i++)
+                {
+                    string listName = xElements[i].Attribute("Name").Value;
+
+                    //同じメソッドがあれば派生クラスのを使う
+                    if (listName == name)
+                    {
+                        xElements[i] = xFunction;
+                        return true;
+                    }
+
+                    if (string.Compare(listName, name) > 0)
+                    {
+                        xElements.Insert(i, xFunction);
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            foreach (XElement xFunction in xFunctuions.Elements())
+            {
+                string name = xFunction.Attribute("Name").Value;
+
+                if (func(xFunction, name)) continue;
+
+                //operator=は継承しない
+                if (ignoreOperatorE && xFunction.Attribute("Name").Value.StartsWith("=(")) continue;
+
+                xElements.Add(xFunction);
+            }
         }
     }
 }
