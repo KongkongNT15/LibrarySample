@@ -12,6 +12,7 @@ namespace LibrarySample.SampleManagement
         Concept,
         Constructor,
         Destructor,
+        Enum,
         Field,
         Function,
         FunctionMacro,

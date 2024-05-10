@@ -13,8 +13,10 @@ namespace LibrarySample.Pages
     internal class ContentPageFrame : Frame
     {
         public static NavigationTransitionInfo DrillInNavigationTransitionInfo { get; } = new DrillInNavigationTransitionInfo();
-        public static NavigationTransitionInfo SlideNavigationTransitionInfo { get; } = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight };
+        public static NavigationTransitionInfo SlideFromLeftNavigationTransitionInfo { get; } = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft };
+        public static NavigationTransitionInfo SlideFromRightNavigationTransitionInfo { get; } = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight };
         public static NavigationTransitionInfo SuppressNavigationTransitionInfo { get; } = new SuppressNavigationTransitionInfo();
+        public static NavigationTransitionInfo EntranceNavigationTransitionInfo { get; } = new EntranceNavigationTransitionInfo();
 
         private List<XElement> XElements { get; } = [];
 

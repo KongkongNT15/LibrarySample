@@ -11,6 +11,12 @@
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>
+    <Page Update="Settings\AppInfoCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CppEnumPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Settings\LinkCard.xaml">
       <SubType>Designer</SubType>
     </Page>

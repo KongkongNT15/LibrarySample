@@ -46,6 +46,7 @@ namespace LibrarySample.Pages
                 ApplyGrammar();
                 ApplyBaseClasses();
                 ApplyDerivedClasses();
+                ApplyInnerClasses();
                 ApplyStaticMethods();
                 ApplyTypeDefinitions();
                 ApplyConstructors();
@@ -68,7 +69,7 @@ namespace LibrarySample.Pages
             CppVersion minVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMinVersion")?.Value);
             CppVersion maxVersion = EnumConverter.ToCppVersion(XElement.Attribute("TargetMaxVersion")?.Value);
 
-            if (SaveData.CppVersion < minVersion)
+            if (CppVersion < minVersion)
             {
                 TextBlock textBlock = new TextBlock { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
 
@@ -79,7 +80,7 @@ namespace LibrarySample.Pages
                 return false;
             }
 
-            if (SaveData.CppVersion < maxVersion)
+            if (CppVersion < maxVersion)
             {
                 TextBlock textBlock = new TextBlock { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
 
@@ -103,40 +104,17 @@ namespace LibrarySample.Pages
 
         private void ApplyBaseClasses()
         {
-            XElement xBaseClasses = XElement.Element("BaseClasses");
-
-            if (xBaseClasses == null) return;
-
-            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("Šî’ê");
-            ContentsPanel.Children.Add(panel);
-
-            foreach (XElement xReference in xBaseClasses.Elements())
-            {
-                string fileName = xReference.Attribute("FileName").Value;
-
-                XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + fileName);
-
-                panel.Children.Add(new SlideButton(xClass, CodeLanguage.Cpp) { Glyph = EnumConverter.ToGlyph(Category.Class) });
-            }
+            LibraryPageHelper.ApplyCppBaseOrDerivedClasses(ContentsPanel, XElement, "BaseClasses", "Šî’ê");
         }
 
         private void ApplyDerivedClasses()
         {
-            XElement xDerivedClasses = XElement.Element("DerivedClasses");
+            LibraryPageHelper.ApplyCppBaseOrDerivedClasses(ContentsPanel, XElement, "DerivedClasses", "”h¶");
+        }
 
-            if (xDerivedClasses == null) return;
-
-            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("”h¶");
-            ContentsPanel.Children.Add(panel);
-
-            foreach (XElement xReference in xDerivedClasses.Elements())
-            {
-                string fileName = xReference.Attribute("FileName").Value;
-
-                XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + fileName);
-
-                panel.Children.Add(new SlideButton(xClass, CodeLanguage.Cpp) { Glyph = EnumConverter.ToGlyph(Category.Class) });
-            }
+        private void ApplyInnerClasses()
+        {
+            LibraryPageHelper.ApplyCppBaseOrDerivedClasses(ContentsPanel, XElement, "InnerClasses", "“à•”ƒNƒ‰ƒX");
         }
 
         private async void ApplyStaticMethods()

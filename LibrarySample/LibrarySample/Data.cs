@@ -32,5 +32,7 @@ namespace LibrarySample
         public static readonly double SubTitleTextBlockFontSize = 20;
 
         public static readonly Thickness PageScrollViewerPadding = new Thickness(NavigationViewContentPadding, 0, NavigationViewContentPadding, NavigationViewContentPadding);
+
+        public static readonly Thickness IconMargin = new Thickness((ControlHeight - 24.0) / 2.0, 0, (ControlHeight - 24.0) / 2.0, 0);
     }
 }

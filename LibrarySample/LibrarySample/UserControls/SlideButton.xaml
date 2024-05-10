@@ -42,7 +42,7 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <FontIcon x:Name="FIcon" FontFamily="Segoe MDL2 Assets" FontSize="24" HorizontalAlignment="Left" Grid.Column="0" />
+        <FontIcon x:Name="FIcon" FontFamily="Segoe MDL2 Assets" FontSize="24" HorizontalAlignment="Left" Grid.Column="0" Margin="{x:Bind root:Data.IconMargin}" />
 
         <StackPanel VerticalAlignment="Center" Grid.Column="1" >
             <TextBlock x:Name="TitleText" TextWrapping="Wrap" />

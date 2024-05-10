@@ -191,5 +191,24 @@ namespace LibrarySample.Pages
                 xElements.Add(xFunction);
             }
         }
+
+        public static void ApplyCppBaseOrDerivedClasses(StackPanel rootPanel, XElement xElement, string elementName, string headerName)
+        {
+            XElement xDerivedClasses = xElement.Element(elementName);
+
+            if (xDerivedClasses == null) return;
+
+            StackPanel panel = CreateHeaderPanel(headerName);
+            rootPanel.Children.Add(panel);
+
+            foreach (XElement xReference in xDerivedClasses.Elements())
+            {
+                string fileName = xReference.Attribute("FileName").Value;
+
+                XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + fileName);
+
+                panel.Children.Add(new SlideButton(xClass, CodeLanguage.Cpp) { Glyph = EnumConverter.ToGlyph(Category.Class) });
+            }
+        }
     }
 }

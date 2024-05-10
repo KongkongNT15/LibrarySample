@@ -12,16 +12,21 @@
     <EnableMsixTooling>true</EnableMsixTooling>
 	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	<WindowsPackageType>None</WindowsPackageType>
+	<PackageId>App</PackageId>
+	<Product>App</Product>
+	<AssemblyName>LibrarySampleApp</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\CHomePage.xaml" />
     <None Remove="Pages\CLibraryPage.xaml" />
     <None Remove="Pages\CppClassPage.xaml" />
+    <None Remove="Pages\CppEnumPage.xaml" />
     <None Remove="Pages\CppHomePage.xaml" />
     <None Remove="Pages\CppLibraryPage.xaml" />
     <None Remove="Pages\CStructurePage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
     <None Remove="Settings\AboutAppPage.xaml" />
+    <None Remove="Settings\AppInfoCard.xaml" />
     <None Remove="Settings\InnerInfoTextCard.xaml" />
     <None Remove="Settings\LinkCard.xaml" />
     <None Remove="Settings\SettingExpander.xaml" />
@@ -71,6 +76,16 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Settings\AppInfoCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\CppEnumPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Settings\LinkCard.xaml">
@@ -240,5 +255,23 @@
   -->
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <DebugType>none</DebugType>
   </PropertyGroup>
 </Project>

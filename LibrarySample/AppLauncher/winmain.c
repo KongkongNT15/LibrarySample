@@ -11,7 +11,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
 
-	wchar_t cmdline[] = L"LibrarySample";
+	wchar_t cmdline[] = L"LibrarySampleApp";
 
 	if (!CreateProcess(NULL, cmdline, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
 		MessageBox(NULL, L"アプリケーションの起動に失敗しました", L"LibrarySample", MB_OK | MB_ICONERROR);

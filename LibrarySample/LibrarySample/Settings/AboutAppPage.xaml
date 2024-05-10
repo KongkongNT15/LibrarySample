@@ -11,6 +11,8 @@
     mc:Ignorable="d">
 
     <StackPanel x:Name="RootPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
+        <local:AppInfoCard />
+        
         <local:SettingExpander Title="Visual C++ コンパイラ" >
             <local:SettingExpander.Children >
                 <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (22621.0)" />

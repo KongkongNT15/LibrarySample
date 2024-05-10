@@ -65,7 +65,6 @@ namespace LibrarySample.UserControls
         public ValueCard()
         {
             this.InitializeComponent();
-            FIcon.Margin = new Thickness((Data.ControlHeight - 24.0) / 2.0, 0, (Data.ControlHeight - 24.0) / 2.0, 0);
             ValueText.Margin = new Thickness(Data.ControlPaddingHeight, 0, Data.ControlPaddingHeight, 0);
         }
     }

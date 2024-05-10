@@ -50,6 +50,9 @@ namespace LibrarySample.Settings
 
             AppWindow.SetPresenter(op);
 
+            //アイコン設定
+            AppWindow.SetIcon("Assets/AppIcon.ico");
+
             HWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
 
             double scaling = WindowAPI.GetScaleAdjustment(HWnd);

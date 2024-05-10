@@ -68,6 +68,8 @@ namespace LibrarySample.UserControls
 
         private bool _isNotSupported = false;
 
+        private bool _isDeletedFunction = false;
+
         //サンプルを実行中かどうか
         protected bool _isWorking = false;
 
@@ -92,30 +94,13 @@ namespace LibrarySample.UserControls
                 Category.Destructor => "オブジェクトを破棄します",
                 _ => xElement.Attribute("Description").Value,
             };
-            
+
+            LaunchType = EnumConverter.ToLaunchType(XElement.Attribute("LaunchType")?.Value);
 
             //未完成サンプル
             if (Description == "???")
             {
                 IsEnabled = false;
-                return;
-            }
-
-            LaunchType = EnumConverter.ToLaunchType(xElement.Attribute("LaunchType")?.Value);
-
-            ApplyDefinition();
-            if (!_isNotSupported)
-            {
-                ApplyFolder();
-                ApplyParameters();
-                ApplyReturns();
-                ApplySourceCode();
-
-                if (RootPanel.Children.Contains(ResultsPanel))
-                {
-                    ApplyLaunchType();
-                }
-                
             }
             
         }
@@ -154,6 +139,49 @@ namespace LibrarySample.UserControls
             }
         }
 
+        //削除された関数
+        private void SetAsDeletedFunction()
+        {
+            XAttribute xDeletedFunction = XElement.Attribute("IsDeleted");
+
+            //Falseと判定
+            if (xDeletedFunction == null) return;
+
+            if (xDeletedFunction.Value == "False") return;
+
+            InfoBar infoBar = new InfoBar();
+
+            infoBar.Severity = InfoBarSeverity.Error;
+            infoBar.IsOpen = true;
+            infoBar.IsClosable = false;
+            
+            switch (Category)
+            {
+                case Category.Operator:
+                    infoBar.Title = "削除された演算子";
+                    infoBar.Message = "この演算子は削除されています";
+                    break;
+
+                case Category.Constructor:
+                    infoBar.Title = "削除されたコンストラクター";
+                    infoBar.Message = "このコンストラクターは削除されています";
+                    break;
+
+                case Category.Method:
+                case Category.Function:
+                    infoBar.Title = "削除された関数";
+                    infoBar.Message = "この関数は削除されています";
+                    break;
+
+                default: throw new Exception();
+            }
+
+            RootPanel.Children.Insert(0, infoBar);
+
+            _isDeletedFunction = true;
+        }
+
+
         //定義ファイルの読み込み
         protected abstract void ApplyDefinition();
 
@@ -165,6 +193,13 @@ namespace LibrarySample.UserControls
 
         private void ApplyParameters()
         {
+            //削除された関数は引数の説明の必要なし
+            if (_isDeletedFunction)
+            {
+                RootPanel.Children.Remove(ParameterPanel);
+                return;
+            }
+
             //関数形式以外はパラメータなし
             if (Category != Category.Function && Category != Category.Method && Category != Category.Operator && Category != Category.Constructor)
             {
@@ -192,6 +227,13 @@ namespace LibrarySample.UserControls
 
         private void ApplyReturns()
         {
+            //削除された関数は戻り値の説明の必要なし
+            if (_isDeletedFunction)
+            {
+                RootPanel.Children.Remove(ReturnsPanel);
+                return;
+            }
+
             if (Category != Category.Function && Category != Category.Method && Category != Category.Operator)
             {
                 RootPanel.Children.Remove(ReturnsPanel);
@@ -285,6 +327,9 @@ namespace LibrarySample.UserControls
                     case "TextBox":
                         _inputsPanel.Children.Add(new TextPane(xInput));
                         break;
+                    case "NumberBox":
+                        _inputsPanel.Children.Add(new NumberBoxPane(xInput));
+                        break;
                 }
             }
 
@@ -312,7 +357,24 @@ namespace LibrarySample.UserControls
         private void ViewExpander_Expanding(Expander sender, ExpanderExpandingEventArgs args)
         {
             Expander.Expanding -= ViewExpander_Expanding;
-            if (RootPanel.Children.Contains(ResultsPanel) && !_inputsPanel.HasFilePicker)
+            SetAsDeletedFunction();
+            
+
+            ApplyDefinition();
+            if (!_isNotSupported)
+            {
+                ApplyFolder();
+                ApplyParameters();
+                ApplyReturns();
+                ApplySourceCode();
+
+                if (RootPanel.Children.Contains(ResultsPanel))
+                {
+                    ApplyLaunchType();
+                }
+
+            }
+            if (RootPanel.Children.Contains(ResultsPanel) && ResultsInnerGrid.Children.Contains(LaunchButtons) && !_inputsPanel.HasFilePicker)
             {
                 Launch();
             }

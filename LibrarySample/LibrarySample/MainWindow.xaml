@@ -10,10 +10,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     SizeChanged="Window_SizeChanged"
-    Activated="Window_Activated"
     Closed="Window_Closed">
 
-    <Grid x:Name="RootGrid" ActualThemeChanged="RootGrid_ActualThemeChanged" >
+    <Grid x:Name="RootGrid" ActualThemeChanged="RootGrid_ActualThemeChanged" Loaded="RootGrid_Loaded" >
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.ThemeDictionaries>
@@ -62,7 +61,14 @@
             <TabView x:Name="Tabs" 
                      Grid.Column="2" 
                      AddTabButtonClick="Tabs_AddTabButtonClick"
-                     SelectionChanged="Tabs_SelectionChanged"/>
+                     SelectionChanged="Tabs_SelectionChanged">
+
+                <TabView.TabStripHeader>
+                    <Image Source="/Assets/AppIcon.png" HorizontalAlignment="Left" Margin="14,4,8,0" VerticalAlignment="Center"
+                            Width="16" Height="16" />
+                </TabView.TabStripHeader>
+
+            </TabView>
 
             <Border x:Name="DraggableArea" BorderBrush="{StaticResource TabViewBorderBrush}" BorderThickness="0,0,0,1" Grid.Column="3" SizeChanged="DraggableArea_SizeChanged" />
             <Border BorderBrush="{StaticResource TabViewBorderBrush}" BorderThickness="0,0,0,1" Grid.Column="4" />

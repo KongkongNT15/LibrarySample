@@ -41,7 +41,6 @@ namespace LibrarySample.UserControls
         public ViewExpander()
         {
             this.InitializeComponent();
-            FIcon.Margin = new Thickness((Data.ControlHeight - 24.0) / 2.0, 0, (Data.ControlHeight - 24.0) / 2.0, 0);
         }
     }
 }

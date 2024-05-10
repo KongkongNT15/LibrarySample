@@ -46,7 +46,6 @@ namespace LibrarySample.UserControls
         public SlideButton(XElement xElement, CodeLanguage languageType)
         {
             this.InitializeComponent();
-            FIcon.Margin = new Thickness((Data.ControlHeight - 24.0) / 2.0, 0.0, (Data.ControlHeight - 24.0) / 2.0, 0.0);
             Click += SlideButton_Click;
 
             XElement = xElement;
@@ -60,7 +59,12 @@ namespace LibrarySample.UserControls
                     break;
             }
 
-            Title = XElement.Attribute("Name").Value;
+            switch (languageType)
+            {
+                case CodeLanguage.Cpp:
+                case CodeLanguage.CppWinRT: Title = XElement.Attribute("Name").Value.Replace("::", " : : "); break;
+                default: Title = XElement.Attribute("Name").Value; break;
+            }
             Description = xElement.Attribute("Description").Value;
         }
 
@@ -73,12 +77,12 @@ namespace LibrarySample.UserControls
                     switch(XElement.Name.LocalName)
                     {
                         case "Header":
-                            frame.Navigate(typeof(CLibraryPage), null, ContentPageFrame.SlideNavigationTransitionInfo);
+                            frame.Navigate(typeof(CLibraryPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
                             (frame.Content as CLibraryPage).XElement = XElement;
                             break;
 
                         case "Structure":
-                            frame.Navigate(typeof(CStructurePage), null, ContentPageFrame.SlideNavigationTransitionInfo);
+                            frame.Navigate(typeof(CStructurePage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
                             (frame.Content as CStructurePage).XElement = XElement;
                             break;
 
@@ -90,13 +94,18 @@ namespace LibrarySample.UserControls
                     switch (XElement.Name.LocalName)
                     {
                         case "Header":
-                            frame.Navigate(typeof(CppLibraryPage), null, ContentPageFrame.SlideNavigationTransitionInfo);
+                            frame.Navigate(typeof(CppLibraryPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
                             (frame.Content as CppLibraryPage).XElement = XElement;
                             break;
 
                         case "Class":
-                            frame.Navigate(typeof(CppClassPage), null, ContentPageFrame.SlideNavigationTransitionInfo);
+                            frame.Navigate(typeof(CppClassPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
                             (frame.Content as CppClassPage).XElement = XElement;
+                            break;
+
+                        case "Enum":
+                            frame.Navigate(typeof(CppEnumPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
+                            (frame.Content as CppEnumPage).XElement = XElement;
                             break;
 
                         default: throw new Exception();

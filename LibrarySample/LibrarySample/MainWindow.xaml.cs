@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -104,6 +105,9 @@ namespace LibrarySample
 
             this.SystemBackdrop = new MicaBackdrop { Kind = MicaKind.BaseAlt };
 
+            //アイコン設定
+            AppWindow.SetIcon("Assets/AppIcon.ico");
+
             this.InitializeComponent();
 
             //テーマの適用
@@ -168,13 +172,15 @@ namespace LibrarySample
 
         //左のメニューに項目を追加
         //ホームを表示
-        private async void SetNavViewItem()
+        private async Task SetNavViewItem()
         {
             IList<object> menuItems = NavView.MenuItems;
 
             //ホームの追加
             menuItems.Add(new NavigationViewItem { Icon = new SymbolIcon(Symbol.Home), Content = HomePageData.HomePageTitle });
             menuItems.Add(new NavigationViewItemSeparator());
+
+            AddHomePage();
 
             //Cライブラリの追加
             NavigationViewItem cHeaders = new NavigationViewItem { Content = HomePageData.CHomePageTitle, Icon = ImageSources.CImageSource.CreateIconElement() };
@@ -211,7 +217,7 @@ namespace LibrarySample
             menuItems.Add(cppHeaders);
 
 
-            static async Task createCppClassItem(NavigationViewItem item, XElement xElement, string elementName, Category category)
+            static async Task createCppClassItem(NavigationViewItem item, XElement xElement, string elementName, Category category, Type pageType)
             {
                 XElement xClasses = xElement.Element(elementName);
 
@@ -221,9 +227,9 @@ namespace LibrarySample
                     {
                         XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + xClassReference.Attribute("FileName").Value);
 
-                        string name = xClass.Attribute("Name").Value;
+                        string name = xClass.Attribute("Name").Value.Replace("::", " : : ");
 
-                        item.MenuItems.Add(new XmlNavigationViewItem(xClass, typeof(CppClassPage)) { Glyph = EnumConverter.ToGlyph(category), Content = name });
+                        item.MenuItems.Add(new XmlNavigationViewItem(xClass, pageType) { Glyph = EnumConverter.ToGlyph(category), Content = name });
                         await Task.Delay(1);
                     }
 
@@ -242,14 +248,15 @@ namespace LibrarySample
                 item.Content = xElement.Attribute("Name").Value;
 
                 //クラスを取得
-                await createCppClassItem(item, xElement, "Classes", Category.Class);
-                await createCppClassItem(item, xElement, "Structures", Category.Structure);
+                await createCppClassItem(item, xElement, "Classes", Category.Class, typeof(CppClassPage));
+                await createCppClassItem(item, xElement, "Structures", Category.Structure, typeof(CppClassPage));
+                await createCppClassItem(item, xElement, "Enums", Category.Enum, typeof(CppEnumPage));
 
                 cppHeaders.MenuItems.Add(item);
                 await Task.Delay(1);
             }
 
-            AddHomePage();
+            
         }
 
         private async void SetSelectedItem(ContentPageFrame contentPageFrame)
@@ -486,14 +493,14 @@ namespace LibrarySample
         }
 
         //ItemInvoked()からナビゲート
-        private void NavigateFrame(string content, ContentPageFrame frame)
+        private void NavigateFrame(string content, ContentPageFrame frame, NavigationTransitionInfo navigationTransitionInfo)
         {
             if (NavView.SelectedItem is not XmlNavigationViewItem)
             {
 
-                if (content == HomePageData.HomePageTitle) frame.Navigate(typeof(HomePage));
-                else if (content == HomePageData.CHomePageTitle) frame.Navigate(typeof(CHomePage));
-                else if(content == HomePageData.CppHomePageTitle) frame.Navigate(typeof(CppHomePage));
+                if (content == HomePageData.HomePageTitle) frame.Navigate(typeof(HomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.CHomePageTitle) frame.Navigate(typeof(CHomePage), null, navigationTransitionInfo);
+                else if(content == HomePageData.CppHomePageTitle) frame.Navigate(typeof(CppHomePage), null, navigationTransitionInfo);
                 else throw new Exception();
 
                 return;
@@ -502,7 +509,7 @@ namespace LibrarySample
             var item = NavView.SelectedItem as XmlNavigationViewItem;
 
 
-            frame.Navigate(item.PageType);
+            frame.Navigate(item.PageType, null, navigationTransitionInfo);
 
             (frame.Content as IXml).XElement = item.XElement;
         }
@@ -548,7 +555,5 @@ namespace LibrarySample
             AppWindow.TitleBar.SetDragRectangles(dragRects);
 
         }
-
-        
     }
 }

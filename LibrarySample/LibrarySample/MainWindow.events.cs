@@ -100,7 +100,7 @@ namespace LibrarySample
 
             func();
 
-            NavigateFrame(item, ActiveFrame);
+            NavigateFrame(item, ActiveFrame, ContentPageFrame.SlideFromLeftNavigationTransitionInfo);
         }
 
         private void Instance_ItemSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -118,7 +118,7 @@ namespace LibrarySample
             if (sender.SelectedItem == NavViewPreviusSelectedItem) return;
             IsNavViewItemInvoked = true;
 
-            NavigateFrame(args.InvokedItem as string, ActiveFrame);
+            NavigateFrame(args.InvokedItem as string, ActiveFrame, ContentPageFrame.EntranceNavigationTransitionInfo);
         }
 
         private void NavView_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -203,7 +203,7 @@ namespace LibrarySample
             {
                 func(HomePageData.CHomePageTitle);
             }
-            else if (item.PageType == typeof(CppLibraryPage) || item.PageType == typeof(CppClassPage))
+            else if (item.PageType == typeof(CppLibraryPage) || item.PageType == typeof(CppClassPage) || item.PageType == typeof(CppEnumPage))
             {
                 func(HomePageData.CppHomePageTitle);
             }
@@ -339,11 +339,29 @@ namespace LibrarySample
         }
 
         //最初にウィンドウを表示するときにアイテムを初期化
-        private void Window_Activated(object sender, WindowActivatedEventArgs args)
+        private async void RootGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            Activated -= Window_Activated;
+            RootGrid.Loaded -= RootGrid_Loaded;
 
-            SetNavViewItem();
+            ContentDialog contentDialog = new ContentDialog();
+
+            contentDialog.XamlRoot = Content.XamlRoot;
+            contentDialog.Title = "準備しています";
+
+            StackPanel panel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
+
+            panel.Children.Add(new TextBlock { Text = "ページの準備をしています", HorizontalAlignment = HorizontalAlignment.Center });
+            panel.Children.Add(new ProgressBar { IsIndeterminate = true, ShowPaused = false, ShowError = false });
+
+            contentDialog.Content = panel;
+
+            panel.Loaded += async (s, e) =>
+            {
+                await SetNavViewItem();
+                contentDialog.Hide();
+            };
+
+            _ = await contentDialog.ShowAsync();
         }
     }
 }

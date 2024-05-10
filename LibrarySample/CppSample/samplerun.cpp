@@ -20,7 +20,14 @@ int RunSample(const char* folder, const char* func)
     if (IsEqualFolderName("any.hpp")) return any__hpp__run(func);
     if (IsEqualFolderName("array.class")) return array__class__run(func);
     if (IsEqualFolderName("array.hpp")) return array__hpp__run(func);
+    if (IsEqualFolderName("bad_any_cast.class")) return bad_any_cast__class__run(func);
+    if (IsEqualFolderName("bad_cast.class")) return bad_cast__class__run(func);
+    if (IsEqualFolderName("bad_typeid.class")) return bad_typeid__class__run(func);
+    if (IsEqualFolderName("bit.hpp")) return bit__hpp__run(func);
+    if (IsEqualFolderName("bitset.class")) return bitset__class__run(func);
+    if (IsEqualFolderName("bitset.hpp")) return bitset__hpp__run(func);
     if (IsEqualFolderName("exception.class")) return exception__class__run(func);
+    if (IsEqualFolderName("type_info.class")) return type_info__class__run(func);
 
     return NotFound(folder);
 }

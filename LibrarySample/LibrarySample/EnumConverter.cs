@@ -80,6 +80,7 @@ namespace LibrarySample
                 Category.Concept => "\uEA86",
                 Category.Constructor => "\uF158",
                 Category.Destructor => "\uF158",
+                Category.Enum => "\uEA86",
                 Category.Field => "\uEA86",
                 Category.Function => "\uF158",
                 Category.Macro => "\uE71A",

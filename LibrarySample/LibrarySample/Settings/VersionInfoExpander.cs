@@ -24,17 +24,6 @@ namespace LibrarySample.Settings
     {
         private ViewExpander ViewExpander { get; } = new ViewExpander();
 
-        private readonly int _year = 2000;
-
-        private readonly int _month = 1;
-
-        private readonly int _date = 1;
-
-        private readonly int _versionMajor = 0;
-        private readonly int _versionMinor = 0;
-        private readonly int _versionBuild = 0;
-        private readonly int _versionRevision = 0;
-
         private StackPanel RootPanel { get; } = new StackPanel();
 
         public VersionInfoExpander(XElement xReleaseNote)
@@ -43,31 +32,15 @@ namespace LibrarySample.Settings
             ViewExpander.Content = RootPanel;
             ViewExpander.Glyph = "\uE7C3";
 
-            _year = int.Parse(xReleaseNote.Attribute("Year").Value);
-            _month = int.Parse(xReleaseNote.Attribute("Month").Value);
-            _date = int.Parse(xReleaseNote.Attribute("Date").Value);
-            _versionMajor = int.Parse(xReleaseNote.Attribute("VersionMajor").Value);
-            _versionMinor = int.Parse(xReleaseNote.Attribute("VersionMinor").Value);
-            _versionBuild = int.Parse(xReleaseNote.Attribute("VersionBuild").Value);
-            _versionRevision = int.Parse(xReleaseNote.Attribute("VersionRevision").Value);
+            ReleaseInfo releaseInfo = new ReleaseInfo(xReleaseNote);
 
-            SetDate();
-            SetVersion();
+            ViewExpander.Title = releaseInfo.VersionText;
+            ViewExpander.Description = releaseInfo.DateText;
 
             foreach (XElement xTextLine in xReleaseNote.Elements("TextLine"))
             {
                 RootPanel.Children.Add(new TextBlock { Text = $"・　{xTextLine.Value}", TextWrapping = TextWrapping.Wrap });
             }
-        }
-
-        private void SetDate()
-        {
-            ViewExpander.Description = $"{_year}年{_month}月{_date}日";
-        }
-
-        private void SetVersion()
-        {
-            ViewExpander.Title = $"Version {_versionMajor}.{_versionMinor}.{_versionBuild}.{_versionRevision}";
         }
     }
 }

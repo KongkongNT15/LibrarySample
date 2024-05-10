@@ -46,6 +46,7 @@ namespace LibrarySample.Pages
                 ApplyConcepts();
                 ApplyClasses();
                 ApplyStructures();
+                ApplyEnums();
                 ApplyOperators();
                 ApplyFunctions();
             }
@@ -107,6 +108,11 @@ namespace LibrarySample.Pages
         private void ApplyStructures()
         {
             LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Structures", "ç\ë¢ëÃ", XmlPath.CppLibraryDirectory, CodeLanguage.Cpp, Category.Class);
+        }
+
+        private void ApplyEnums()
+        {
+            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Enums", "óÒãìå^", XmlPath.CppLibraryDirectory, CodeLanguage.Cpp, Category.Enum);
         }
 
         private async void ApplyOperators()

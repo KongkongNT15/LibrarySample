@@ -13,13 +13,13 @@
     MinHeight="{x:Bind root:Data.ControlHeight}">
 
     <Expander.Header>
-        <Grid Padding="0,9,0,10">
+        <Grid Padding="0,9,48,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <FontIcon x:Name="FIcon" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" FontSize="24" Grid.Column="0" />
+            <FontIcon x:Name="FIcon" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" FontSize="24" Grid.Column="0" Margin="{x:Bind root:Data.IconMargin}" />
 
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <TextBlock x:Name="TitleTextBlock" TextWrapping="Wrap" />

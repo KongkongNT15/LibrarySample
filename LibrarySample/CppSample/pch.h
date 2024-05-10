@@ -5,11 +5,13 @@
 #define _USE_MATH_DEFINES
 
 #include <array>
+#include <bitset>
 #include <cmath>
 #include <cstring>
 #include <exception>
 #include <iostream>
 #include <string>
+#include <typeinfo>
 
 #define CPP14 2014
 #define CPP17 2017
@@ -49,6 +51,10 @@
 #include <any>
 #endif
 
+#if HAS_CPP20
+#include <bit>
+#endif
+
 #if HAS_CPP23
 #include <print>
 #endif
@@ -68,6 +74,13 @@ int any__class__run(FUNCNAME);
 int any__hpp__run(FUNCNAME);
 int array__class__run(FUNCNAME);
 int array__hpp__run(FUNCNAME);
+int bad_any_cast__class__run(FUNCNAME);
+int bad_cast__class__run(FUNCNAME);
+int bad_typeid__class__run(FUNCNAME);
+int bit__hpp__run(FUNCNAME);
+int bitset__class__run(FUNCNAME);
+int bitset__hpp__run(FUNCNAME);
 int exception__class__run(FUNCNAME);
+int type_info__class__run(FUNCNAME);
 
 #endif //!__PCH__
