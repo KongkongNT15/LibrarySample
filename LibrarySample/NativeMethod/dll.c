@@ -15,6 +15,7 @@ char pipeInputWritingError[] = "入力ストリームに書き込んでいる途中でエラーが発生
 char timeOutMessage[] = "接続がタイムアウトしました";
 char createProcessErrorMessage[] = "プロセスを開始できませんでした";
 char redirectErrorMessage[] = "出力ストリームのリダイレクトに失敗しました";
+char mallocError[] = "メモリの確保に失敗しました";
 
 const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsigned long wait, unsigned long* returnCode)
 {
@@ -130,10 +131,8 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 	}
 
 	//指定された時間だけ待つ
-	*returnCode = WaitForSingleObject(pInfo.hProcess, wait);
-
 	//実行中なら強制終了
-	if (*returnCode == STILL_ACTIVE) {
+	if (WaitForSingleObject(pInfo.hProcess, wait) == WAIT_TIMEOUT) {
 		TerminateProcess(pInfo.hProcess, (UINT)-1);
 		CloseHandle(hInputStdIn);
 		CloseHandle(hInputStdOut);
@@ -141,6 +140,8 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 		CloseHandle(hOutputStdOut);
 		CloseHandle(pInfo.hProcess);
 		CloseHandle(pInfo.hThread);
+
+		*returnCode = -1;
 
 		return timeOutMessage;
 	}
@@ -162,24 +163,12 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 		CloseHandle(hOutputStdOut);
 		CloseHandle(pInfo.hProcess);
 		CloseHandle(pInfo.hThread);
+		*returnCode = -1;
 
 		return redirectErrorMessage;
 	}
 
 	ptr = malloc(length + 1);
-
-	//
-	if (length == 0) {
-		CloseHandle(hInputStdIn);
-		CloseHandle(hInputStdOut);
-		CloseHandle(hOutputStdIn);
-		CloseHandle(hOutputStdOut);
-		CloseHandle(pInfo.hProcess);
-		CloseHandle(pInfo.hThread);
-
-		*ptr = '\0';
-		return ptr;
-	}
 
 	//メモリ確保に失敗
 	if (ptr == NULL) {
@@ -193,6 +182,22 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 		*returnCode = -1;
 
 		return redirectErrorMessage;
+	}
+
+	//戻り値を取得
+	GetExitCodeProcess(pInfo.hProcess, &returnCode);
+
+	//
+	if (length == 0) {
+		CloseHandle(hInputStdIn);
+		CloseHandle(hInputStdOut);
+		CloseHandle(hOutputStdIn);
+		CloseHandle(hOutputStdOut);
+		CloseHandle(pInfo.hProcess);
+		CloseHandle(pInfo.hThread);
+
+		*ptr = '\0';
+		return ptr;
 	}
 
 	//リダイレクト

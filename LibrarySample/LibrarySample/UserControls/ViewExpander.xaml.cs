@@ -41,6 +41,14 @@ namespace LibrarySample.UserControls
         public ViewExpander()
         {
             this.InitializeComponent();
+            this.Expanding += ViewExpander_Expanding;
+        }
+
+        //コントロールテンプレートの変更
+        private void ViewExpander_Expanding(Expander sender, ExpanderExpandingEventArgs args)
+        {
+            this.Expanding -= ViewExpander_Expanding;
+            this.Template = (ControlTemplate)App.Current.Resources["ViewExpanderTemplate"];
         }
     }
 }

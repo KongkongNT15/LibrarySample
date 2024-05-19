@@ -35,6 +35,7 @@ namespace LibrarySample.UserControls
         public DescriptionTextCard()
         {
             this.InitializeComponent();
+            RootGrid.Padding = new Thickness(Data.ControlPaddingHeight, 12, Data.ControlPaddingHeight, 12);
         }
     }
 }

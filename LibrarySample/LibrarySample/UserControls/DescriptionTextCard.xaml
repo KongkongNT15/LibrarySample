@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     MinHeight="{x:Bind root:Data.ControlHeight}">
 
-    <Grid Style="{StaticResource EGrid}" Padding="{x:Bind root:Data.ControlPadding}" >
+    <Grid x:Name="RootGrid" Style="{StaticResource EGrid}" >
         <StackPanel VerticalAlignment="Center" >
             <TextBlock x:Name="TitleText" />
             <TextBlock x:Name="DescriptionText" Foreground="{ThemeResource AppBarToggleButtonCheckedPointerOverBackgroundThemeBrush}" FontSize="12"/>

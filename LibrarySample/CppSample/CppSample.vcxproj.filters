@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="ヘッダー ファイル">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Sample">
+      <UniqueIdentifier>{cdce5e01-bc06-46f7-9ae1-6988546a3262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{20009745-e2f6-48b5-acf4-267d8d22c374}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -16,50 +18,59 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="samplerun.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="array.hpp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="array.class.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="exception.class.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="any.hpp.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="pch.cpp">
+      <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="any.class.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Sample</Filter>
     </ClCompile>
-    <ClCompile Include="bad_cast.class.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="any.hpp.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="array.class.cpp">
+      <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="bad_any_cast.class.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Sample</Filter>
     </ClCompile>
-    <ClCompile Include="bad_typeid.class.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="type_info.class.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="bad_cast.class.cpp">
+      <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="bit.hpp.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="bad_typeid.class.cpp">
+      <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="bitset.hpp.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="exception.class.cpp">
+      <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="bitset.class.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="array.hpp.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="type_info.class.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="samplerun.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="bitset.reference.class.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="hash.bitset.struct.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="charconv.hpp.cpp">
+      <Filter>Sample</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

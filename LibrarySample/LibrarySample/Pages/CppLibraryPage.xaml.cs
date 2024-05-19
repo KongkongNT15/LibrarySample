@@ -42,13 +42,8 @@ namespace LibrarySample.Pages
                 if (!ApplySupportedVersion()) return;
 
                 LibraryPageHelper.ApplyIncoplete(ContentsPanel, value);
-                ApplyTypeDefs();
-                ApplyConcepts();
-                ApplyClasses();
-                ApplyStructures();
-                ApplyEnums();
-                ApplyOperators();
-                ApplyFunctions();
+
+                ApplyContents();
             }
         }
 
@@ -58,6 +53,17 @@ namespace LibrarySample.Pages
         public CppLibraryPage()
         {
             this.InitializeComponent();
+        }
+
+        private async void ApplyContents()
+        {
+            ApplyTypeDefs();
+            await ApplyConcepts();
+            ApplyClasses();
+            ApplyStructures();
+            ApplyEnums();
+            await ApplyOperators();
+            await ApplyFunctions();
         }
 
         private bool ApplySupportedVersion()
@@ -95,9 +101,9 @@ namespace LibrarySample.Pages
             LibraryPageHelper.ApplyTypeDefs(ContentsPanel, XElement, "TypeDefinitions");
         }
 
-        private async void ApplyConcepts()
+        private async Task ApplyConcepts()
         {
-            await LibraryPageHelper.ApplyCppFunctions(ContentsPanel, XElement, "Concepts", "コンセプト", Category.Concept);
+            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "Concepts", "コンセプト", Category.Concept);
         }
 
         private void ApplyClasses()
@@ -115,14 +121,14 @@ namespace LibrarySample.Pages
             LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Enums", "列挙型", XmlPath.CppLibraryDirectory, CodeLanguage.Cpp, Category.Enum);
         }
 
-        private async void ApplyOperators()
+        private async Task ApplyOperators()
         {
-            await LibraryPageHelper.ApplyCppFunctions(ContentsPanel, XElement, "Operators", "演算子", Category.Operator);
+            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "Operators", "演算子", Category.Operator);
         }
 
-        private async void ApplyFunctions()
+        private async Task ApplyFunctions()
         {
-            await LibraryPageHelper.ApplyCppFunctions(ContentsPanel, XElement, "Functions", "関数", Category.Function);
+            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "Functions", "関数", Category.Function);
         }
 
     }

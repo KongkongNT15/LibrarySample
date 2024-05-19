@@ -10,7 +10,9 @@
 #include <cstring>
 #include <exception>
 #include <iostream>
+#include <limits>
 #include <string>
+#include <system_error>
 #include <typeinfo>
 
 #define CPP14 2014
@@ -49,6 +51,7 @@
 
 #if HAS_CPP17
 #include <any>
+#include <charconv>
 #endif
 
 #if HAS_CPP20
@@ -79,8 +82,11 @@ int bad_cast__class__run(FUNCNAME);
 int bad_typeid__class__run(FUNCNAME);
 int bit__hpp__run(FUNCNAME);
 int bitset__class__run(FUNCNAME);
+int bitset__reference__class__run(FUNCNAME);
 int bitset__hpp__run(FUNCNAME);
+int charconv__hpp__run(FUNCNAME);
 int exception__class__run(FUNCNAME);
+int hash__bitset__struct__run(FUNCNAME);
 int type_info__class__run(FUNCNAME);
 
 #endif //!__PCH__

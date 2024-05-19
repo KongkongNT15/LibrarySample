@@ -1,8 +1,16 @@
 #include <Windows.h>
 
+DWORD ShowMessageBox()
+{
+	MessageBox(NULL, L"アプリケーションの起動に失敗しました", L"LibrarySample", MB_OK | MB_ICONERROR);
+	return GetLastError();
+}
+
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
-	SetCurrentDirectory(L"bin");
+	if (SetCurrentDirectory(L"bin") == FALSE) {
+		return ShowMessageBox();
+	}
 
 	STARTUPINFO si;
 	PROCESS_INFORMATION pi;
@@ -14,8 +22,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	wchar_t cmdline[] = L"LibrarySampleApp";
 
 	if (!CreateProcess(NULL, cmdline, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
-		MessageBox(NULL, L"アプリケーションの起動に失敗しました", L"LibrarySample", MB_OK | MB_ICONERROR);
-		return GetLastError();
+		return ShowMessageBox();
 	}
 
 	CloseHandle(pi.hProcess);

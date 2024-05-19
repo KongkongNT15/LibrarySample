@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -36,14 +37,8 @@ namespace LibrarySample.Pages
             {
                 _xElement = value;
                 (Frame as ContentPageFrame).AddXElement(value);
-                StackPanel stackPanel = LibraryPageHelper.CreateHeaderPanel("メンバー");
-                stackPanel.Padding = Data.PageScrollViewerPadding;
-                RootViewer.Content = stackPanel;
                 
-                foreach (XElement xElement in value.Elements("Field"))
-                {
-                    stackPanel.Children.Add(new CFunctionExpander(xElement, Category.Field));
-                }
+                ApplyMembers();
             }
         }
 
@@ -53,6 +48,19 @@ namespace LibrarySample.Pages
         public CStructurePage()
         {
             this.InitializeComponent();
+        }
+
+        private async void ApplyMembers()
+        {
+            StackPanel stackPanel = LibraryPageHelper.CreateHeaderPanel("メンバー");
+            stackPanel.Padding = Data.PageScrollViewerPadding;
+            RootViewer.Content = stackPanel;
+
+            foreach (XElement xElement in XElement.Elements("Field"))
+            {
+                stackPanel.Children.Add(new CFunctionExpander(xElement, Category.Field));
+                await Task.Delay(1);
+            }
         }
     }
 }

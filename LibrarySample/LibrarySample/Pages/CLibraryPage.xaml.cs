@@ -39,11 +39,8 @@ namespace LibrarySample.Pages
                 _xElement = value;
                 (Frame as ContentPageFrame).AddXElement(value);
                 ContentsPanel.Children.Clear();
-                ApplyTypeDefs();
-                ApplyStructures();
-                ApplyFunctions();
-                ApplyFunctionMacros();
-                ApplyMacro();
+                
+                ApplyContents();
             }
         }
 
@@ -53,6 +50,15 @@ namespace LibrarySample.Pages
         public CLibraryPage()
         {
             this.InitializeComponent();
+        }
+
+        private async void ApplyContents()
+        {
+            ApplyTypeDefs();
+            ApplyStructures();
+            await ApplyFunctions();
+            await ApplyFunctionMacros();
+            await ApplyMacro();
         }
 
         private void ApplyTypeDefs()
@@ -76,7 +82,7 @@ namespace LibrarySample.Pages
             }
         }
 
-        private async void ApplyFunctions()
+        private async Task ApplyFunctions()
         {
             XElement xFuntions = XElement.Element("Functions");
 
@@ -95,7 +101,7 @@ namespace LibrarySample.Pages
             }
         }
 
-        private async void ApplyFunctionMacros()
+        private async Task ApplyFunctionMacros()
         {
             XElement xFuntions = XElement.Element("FunctionMacros");
 
@@ -114,7 +120,7 @@ namespace LibrarySample.Pages
             }
         }
 
-        private async void ApplyMacro()
+        private async Task ApplyMacro()
         {
 
             if (XElement.Attribute("HasMacros").Value == "True")

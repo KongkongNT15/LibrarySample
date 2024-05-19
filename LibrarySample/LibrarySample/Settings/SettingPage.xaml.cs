@@ -38,7 +38,13 @@ namespace LibrarySample.Settings
 
         private void WaitTimeNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
         {
-            SaveData.WaitTime = (uint)WaitTimeNumberBox.Value;
+            uint value = (uint)WaitTimeNumberBox.Value;
+            if (value != WaitTimeNumberBox.Value)
+            {
+                WaitTimeNumberBox.Value = value;
+                return;
+            }
+            SaveData.WaitTime = value;
         }
 
         private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

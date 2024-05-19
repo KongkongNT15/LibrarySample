@@ -25,6 +25,7 @@
     <None Remove="Pages\CppLibraryPage.xaml" />
     <None Remove="Pages\CStructurePage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
+    <None Remove="Resources\ExpanderStyles.xaml" />
     <None Remove="Settings\AboutAppPage.xaml" />
     <None Remove="Settings\AppInfoCard.xaml" />
     <None Remove="Settings\InnerInfoTextCard.xaml" />
@@ -244,6 +245,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="UserControls\SettingButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Resources\ExpanderStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

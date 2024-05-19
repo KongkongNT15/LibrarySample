@@ -84,12 +84,12 @@ namespace LibrarySample.Pages
             }
         }
 
-        public static async Task<StackPanel> ApplyCppFunctions(StackPanel rootPanel, XElement xElement, string elementName, string header, Category category)
+        public static async Task ApplyCppFunctionsAsync(StackPanel rootPanel, XElement xElement, string elementName, string header, Category category)
         {
             XElement xFunctions = xElement.Element(elementName);
 
             //なければ何もしない
-            if (xFunctions == null) return null;
+            if (xFunctions == null) return;
 
             StackPanel panel = CreateHeaderPanel(header);
             rootPanel.Children.Add(panel);
@@ -99,8 +99,6 @@ namespace LibrarySample.Pages
                 panel.Children.Add(new CppFunctionExpander(xFunction, category));
                 await Task.Delay(1);
             }
-
-            return panel;
         }
 
         public static void ApplyTypeDefs(StackPanel rootPanel, XElement xElement, string elementName, string header = "型名")

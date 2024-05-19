@@ -317,6 +317,10 @@ namespace LibrarySample.UserControls
             {
                 switch(xInput.Name.LocalName)
                 {
+                    case "ComboBox":
+                        _inputsPanel.Children.Add(new ComboBoxPane(xInput));
+                        break;
+
                     case "FileOpenPicker":
                         _inputsPanel.Children.Add(new FileOpenPane(xInput));
                         break;
@@ -324,6 +328,11 @@ namespace LibrarySample.UserControls
                     case "FileSavePicker":
                         _inputsPanel.Children.Add(new FileSavePane(xInput));
                         break;
+
+                    case "KeyValueComboBox":
+                        _inputsPanel.Children.Add(new KeyValueComboBoxPane(xInput));
+                        break;
+
                     case "TextBox":
                         _inputsPanel.Children.Add(new TextPane(xInput));
                         break;

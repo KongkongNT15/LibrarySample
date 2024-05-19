@@ -346,6 +346,7 @@ namespace LibrarySample
             ContentDialog contentDialog = new ContentDialog();
 
             contentDialog.XamlRoot = Content.XamlRoot;
+            contentDialog.RequestedTheme = RootGrid.RequestedTheme;
             contentDialog.Title = "準備しています";
 
             StackPanel panel = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
