@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="ヘッダー ファイル">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Sample">
+      <UniqueIdentifier>{8a184b6c-494c-4053-93a6-733044424555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{92b97940-ba3a-4c37-8c59-507983da9d6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -16,32 +18,41 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="stdio.h.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="main.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="samplerun.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="stdbool.h.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="iso646.h.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="assert.h.c">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="ctype.h.c">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="errno.h.c">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="iso646.h.c">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="stdbool.h.c">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="stdio.h.c">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.c">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="stdnoreturn.h.c">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="samplerun.c">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="inttypes.h.c">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="float.h.c">
+      <Filter>Sample</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

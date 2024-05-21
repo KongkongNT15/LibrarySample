@@ -22,9 +22,8 @@ namespace LibrarySample.Settings
 {
     public sealed class VersionInfoExpander : UserControl
     {
-        private ViewExpander ViewExpander { get; } = new ViewExpander();
-
-        private StackPanel RootPanel { get; } = new StackPanel();
+        private readonly ViewExpander ViewExpander = new ViewExpander();
+        private readonly StackPanel RootPanel = new StackPanel();
 
         public VersionInfoExpander(XElement xReleaseNote)
         {

@@ -20,8 +20,8 @@
         <FontIcon x:Name="FIcon" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Left" FontSize="24" Grid.Column="0" Margin="{x:Bind root:Data.IconMargin}"/>
 
         <StackPanel VerticalAlignment="Center" Grid.Column="1">
-            <TextBlock x:Name="TitleText" />
-            <TextBlock x:Name="DescriptionText" Foreground="{ThemeResource AppBarToggleButtonCheckedPointerOverBackgroundThemeBrush}" FontSize="12"/>
+            <TextBlock x:Name="TitleText" HorizontalAlignment="Left" />
+            <TextBlock x:Name="DescriptionText" Foreground="{ThemeResource AppBarToggleButtonCheckedPointerOverBackgroundThemeBrush}" FontSize="12" />
         </StackPanel>
 
         <TextBlock x:Name="ValueText" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" />

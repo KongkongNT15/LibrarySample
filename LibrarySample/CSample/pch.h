@@ -4,13 +4,18 @@
 #include <assert.h>
 #include <errno.h>
 #include <fenv.h>
+#include <float.h>
+#include <inttypes.h>
 #include <iso646.h>
+#include <locale.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdnoreturn.h>
 #include <string.h>
 #include <time.h>
+#include <wchar.h>
 
 #ifdef __MSVC__
 #include <Windows.h>
@@ -21,7 +26,8 @@
 
 int ExitFailure();
 
-void getline(char* buffer, size_t maxLength);
+size_t getline(char* buffer, size_t bufferLength);
+size_t getwcsline(wchar_t* buffer, size_t bufferLength);
 
 int IsEqual(const char* left, const char* right);
 
@@ -50,9 +56,12 @@ int GetUTF8MultiByteCharLength(int c);
 int assert__h__run(FUNCNAME);
 int ctype__h__run(FUNCNAME);
 int errno__h__run(FUNCNAME);
+int float__h__run(FUNCNAME);
+int inttypes__h__run(FUNCNAME);
 int iso646__h__run(FUNCNAME);
 int stdbool__h__run(FUNCNAME);
 int stdio__h__run(FUNCNAME);
+int stdnoreturn__h__run(FUNCNAME);
 
 /*
 ÉRÉsÅ[å≥
@@ -60,5 +69,7 @@ https://www.iar.com/jp/knowledge/learn/programming/advanced-preprocessor-tips-an
 */
 #define MacroHelper(x) #x
 #define Macro(x) MacroHelper(x)
+
+#define PutMacro(x, message) puts(#x); puts(MacroHelper(x)); puts(message)
 
 #endif //!__PCH__

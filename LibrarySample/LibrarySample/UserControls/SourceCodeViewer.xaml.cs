@@ -21,6 +21,19 @@ namespace LibrarySample.UserControls
 {
     public abstract partial class SourceCodeViewer : UserControl
     {
+        public static List<string> GetWords(string fileName)
+        {
+            using StreamReader sr = new StreamReader("../Words/" + fileName);
+            List<string> words = new List<string>();
+
+            while (!sr.EndOfStream)
+            {
+                words.Add(sr.ReadLine());
+            }
+
+            return words;
+        }
+
         public static SourceCodeViewer GetSourceCodeViewer(CodeLanguage language)
         {
             return language switch

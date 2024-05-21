@@ -20,6 +20,9 @@ namespace LibrarySample.Settings
 {
     public sealed partial class LinkCard : UserControl
     {
+        private static readonly Thickness IsFrontThickness = new Thickness(0);
+        private static readonly Thickness IsNotFrontThickness = new Thickness(0, 1, 0, 0);
+
         public string Title
         {
             get => LinkButton.Content as string;
@@ -30,6 +33,12 @@ namespace LibrarySample.Settings
         {
             get => LinkButton.NavigateUri;
             set => LinkButton.NavigateUri = value;
+        }
+
+        public bool IsFront
+        {
+            get => RootGrid.BorderThickness == IsFrontThickness;
+            set => RootGrid.BorderThickness = value ? IsFrontThickness : IsNotFrontThickness;
         }
 
         public LinkCard()

@@ -40,7 +40,8 @@ namespace LibrarySample
             }
 
             SetSelectedItem(contentPageFrame);
-            
+
+            GC.Collect();
         }
 
         /// <summary>

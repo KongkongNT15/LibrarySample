@@ -147,6 +147,8 @@ namespace LibrarySample.Pages
                     valueCard.Description = lines[i + 2];
 
                     panel.Children.Add(valueCard);
+
+                    await Task.Delay(1);
                 }
 
                 //ƒ}ƒNƒ‚ª‚È‚¯‚ê‚Îpanel‚ğíœ

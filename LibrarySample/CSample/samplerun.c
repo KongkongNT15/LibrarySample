@@ -2,10 +2,10 @@
 
 static int isConsole = 0;
 
-void getline(char* buffer, size_t maxLength)
+size_t getline(char* buffer, size_t bufferLength)
 {
     size_t i, length;
-    length = maxLength - 1;
+    length = bufferLength - 1;
     i = 0;
     int c;
 
@@ -18,6 +18,28 @@ void getline(char* buffer, size_t maxLength)
     }
 
     buffer[i] = '\0';
+
+    return i;
+}
+
+size_t getwcsline(wchar_t* buffer, size_t bufferLength)
+{
+    size_t i, length;
+    length = bufferLength - 1;
+    i = 0;
+    wint_t c;
+
+    while ((c = getwchar()) != L'\n' && c != WEOF) {
+
+        if (i == length) break;
+
+        buffer[i] = c;
+        i++;
+    }
+
+    buffer[i] = L'\0';
+
+    return i;
 }
 
 int IsEqual(const char* left, const char* right)
@@ -73,9 +95,12 @@ int RunSample(const char* folder, const char* func)
     if (IsEqualFolderName("assert.h")) return assert__h__run(func);
     if (IsEqualFolderName("ctype.h")) return ctype__h__run(func);
     if (IsEqualFolderName("errno.h")) return errno__h__run(func);
+    if (IsEqualFolderName("float.h")) return float__h__run(func);
+    if (IsEqualFolderName("inttypes.h")) return inttypes__h__run(func);
     if (IsEqualFolderName("iso646.h")) return iso646__h__run(func);
     if (IsEqualFolderName("stdbool.h")) return stdbool__h__run(func);
     if (IsEqualFolderName("stdio.h")) return stdio__h__run(func);
+    if (IsEqualFolderName("stdnoreturn.h")) return stdnoreturn__h__run(func);
 
     return ExitFailure();
 }

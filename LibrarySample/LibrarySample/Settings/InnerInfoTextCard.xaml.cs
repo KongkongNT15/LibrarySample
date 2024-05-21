@@ -20,6 +20,10 @@ namespace LibrarySample.Settings
 {
     public sealed partial class InnerInfoTextCard : UserControl
     {
+        private static readonly Thickness IsFrontThickness = new Thickness(0);
+        private static readonly Thickness IsNotFrontThickness = new Thickness(0, 1, 0, 0);
+
+
         public string Title
         {
             get => TitleText.Text;
@@ -30,6 +34,12 @@ namespace LibrarySample.Settings
         {
             get => ValueText.Text;
             set => ValueText.Text = value;
+        }
+
+        public bool IsFront
+        {
+            get => RootGrid.BorderThickness == IsFrontThickness;
+            set => RootGrid.BorderThickness = value ? IsFrontThickness : IsNotFrontThickness;
         }
 
         public InnerInfoTextCard()

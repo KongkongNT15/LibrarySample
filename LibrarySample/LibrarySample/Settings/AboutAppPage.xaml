@@ -12,19 +12,36 @@
 
     <StackPanel x:Name="RootPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
         <local:AppInfoCard />
-        
-        <local:SettingExpander Title="Visual C++ コンパイラ" >
-            <local:SettingExpander.Children >
-                <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (22621.0)" />
-                <local:InnerInfoTextCard Title="ターゲット最小バージョン" Value="Windows 11 21H2 (22000.1)" />
+
+        <local:SettingExpander Title="C言語" >
+            <local:SettingExpander.Children>
+                <local:InnerInfoTextCard Title="コンパイラ" Value="Visual C" IsFront="True" />
                 <local:InnerInfoTextCard Title="文字エンコード" Value="Shift-Jis" />
+            </local:SettingExpander.Children>
+        </local:SettingExpander>
+
+        <local:SettingExpander Title="C++" >
+            <local:SettingExpander.Children>
+                <local:InnerInfoTextCard Title="コンパイラ" Value="Visual C++" IsFront="True" />
+                <local:InnerInfoTextCard Title="文字エンコード" Value="Shift-Jis" />
+            </local:SettingExpander.Children>
+        </local:SettingExpander>
+
+        <local:SettingExpander Title="Win32 API" >
+            <local:SettingExpander.Children>
+                <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (22621.0)" IsFront="True" />
+                <local:InnerInfoTextCard Title="ターゲットOSバージョン" Value="Windows 11 22H2 (22621.1)" />
+                <local:InnerInfoTextCard Title="ターゲット最小OSバージョン" Value="Windows 11 21H2 (22000.1)" />
+                <local:InnerInfoTextCard Title="C言語バージョン" Value="C17" />
+                <local:InnerInfoTextCard Title="文字エンコード" Value="UTF-16" />
+                <local:InnerInfoTextCard Title="コンソールの文字エンコード" Value="Shift-Jis" />
             </local:SettingExpander.Children>
         </local:SettingExpander>
 
 
         <local:SettingExpander Title="リンク集" >
             <local:SettingExpander.Children >
-                <local:LinkCard Title="C++ 日本語リファレンス" NavigateUri="https://cpprefjp.github.io/" />
+                <local:LinkCard Title="C++ 日本語リファレンス" NavigateUri="https://cpprefjp.github.io/" IsFront="True" />
                 <local:LinkCard Title="C言語 標準ライブラリ" NavigateUri="http://www.c-lang.org/detail/lib_header.html" />
                 <local:LinkCard Title="アプリのGitHub" NavigateUri="https://github.com/KongkongNT15/LibrarySample/releases" />
                 <local:LinkCard Title="ソースコード" NavigateUri="https://github.com/KongkongNT15/LibrarySample" />
