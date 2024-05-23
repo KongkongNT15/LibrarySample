@@ -1,4 +1,5 @@
 ﻿using LibrarySample.Languages;
+using LibrarySample.Pages;
 using LibrarySample.SampleManagement;
 using Microsoft.UI.Xaml;
 using System;
@@ -60,16 +61,39 @@ namespace LibrarySample
             };
         }
 
-        public static LaunchType ToLaunchType(string value, LaunchType launchType = LaunchType.All)
+        public static LaunchType ToLaunchType(string value, LaunchType launchType = LaunchType.PipeConsole)
         {
             return value switch
             {
                 "NoSample" => LaunchType.NoSample,
                 "Console" => LaunchType.Console,
                 "Pipe" => LaunchType.Pipe,
-                "All" => LaunchType.All,
+                "PipeConsole" => LaunchType.PipeConsole,
+                "Graphical" => LaunchType.Graphical,
                 _ => launchType
             };
+        }
+
+        public static LibraryType ToLibraryType(Type pageType)
+        {
+            if (pageType == typeof(CLibraryPage) || pageType == typeof(CStructurePage))
+            {
+                return LibraryType.CLibrary;
+            }
+            if (pageType == typeof(CppLibraryPage) || pageType == typeof(CppClassPage) || pageType == typeof(CppEnumPage))
+            {
+                return LibraryType.CppLibrary;
+            }
+            if (pageType == typeof(Win32LibraryPage) || pageType == typeof(Win32StructurePage))
+            {
+                return LibraryType.Win32Library;
+            }
+            if (pageType == typeof(CppWinRTNamespacePage) || pageType == typeof(CppWinRTClassPage))
+            {
+                return LibraryType.CppWinRTNamespaceLibrary;
+            }
+
+            throw new ArgumentException();
         }
 
         public static string ToGlyph(Category sampleType)

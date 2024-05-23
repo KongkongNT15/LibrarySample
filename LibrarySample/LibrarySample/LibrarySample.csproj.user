@@ -11,6 +11,30 @@
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>
+    <Page Update="UserControls\Win32HeaderButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Win32StructurePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Win32LibraryPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Win32HomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CppWinRTNamespaceHomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CppWinRTClassPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\CppWinRTNamespaceHeaderButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\CppWinRTNamespacePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Resources\ExpanderStyles.xaml">
       <SubType>Designer</SubType>
     </Page>

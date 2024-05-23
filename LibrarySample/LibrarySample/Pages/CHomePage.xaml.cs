@@ -34,14 +34,7 @@ namespace LibrarySample.Pages
 
         private async void LoadLibrary()
         {
-            foreach (string path in Directory.GetFiles(XmlPath.CLibraryDirectory))
-            {
-                XElement xElement = XElement.Load(path);
-
-                ContentsPanel.Children.Add(new SlideButton(xElement, CodeLanguage.C));
-
-                await Task.Delay(1);
-            }
+            await HomePageHelper.LoadLibrary(ContentsPanel, LibraryType.CLibrary, XmlPath.CLibraryDirectory);
         }
     }
 }

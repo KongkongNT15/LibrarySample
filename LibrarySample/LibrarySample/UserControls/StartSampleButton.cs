@@ -17,7 +17,7 @@ namespace LibrarySample.UserControls
 
         private Button Button { get; } = new Button();
 
-        public StartSampleButton(string applicationName, string folder, string funcName)
+        public StartSampleButton(string applicationName, string folder, string funcName, LaunchType launchType = LaunchType.PipeConsole)
         {
             ApplicationName = applicationName;
             Folder = folder;
@@ -27,7 +27,12 @@ namespace LibrarySample.UserControls
             Button.Content = "起動";
             Button.Width = Data.DefaultButtonWidth;
 
-            Button.Click += ButtonClick;
+
+            Button.Click += launchType switch
+            {
+                LaunchType.Graphical => ButtonClickGraphical,
+                _ => ButtonClick
+            };
 
             Title = "サンプルを起動して動作確認";
         }
@@ -35,6 +40,11 @@ namespace LibrarySample.UserControls
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
             Process.Start("../Sample/SampleLauncher", $"{ApplicationName} {Folder} {FuncName} true");
+        }
+
+        private void ButtonClickGraphical(object sender, RoutedEventArgs e)
+        {
+            Process.Start(ApplicationName, $"{Folder} {FuncName}");
         }
     }
 }

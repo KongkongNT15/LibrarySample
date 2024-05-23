@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace LibrarySample.UserControls
 {
-    public class CFunctionExpander : FunctionExpander, ICHandler
+    public sealed class CFunctionExpander : FunctionExpander, ICHandler
     {
         private CVersion _actualCVersion = SaveData.CVersion;
 
@@ -99,14 +99,7 @@ namespace LibrarySample.UserControls
 
         public override async void Launch()
         {
-            if (_isWorking) return;
-            _isWorking = true;
-
-            var result = await SampleRunner.GetCSampleRunner(CVersion, ProcesserType).RunSampleAsync(Folder, FuncName, InputsPanel.CreateInputs());
-
-            OutputConsole.Output = result.Outputs;
-
-            _isWorking = false;
+            await LaunchAsync(SampleRunner.GetCSampleRunner(CVersion, ProcesserType));
         }
 
         private bool FindDefinition(CVersion cVersion)

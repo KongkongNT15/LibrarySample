@@ -26,33 +26,33 @@ namespace LibrarySample.UserControls
 
         private string Mae = string.Empty;
 
-        protected List<List<string>> KeyBlue { get; } = [];
-        protected List<List<string>> KeyPurple { get; } = [];
-        protected List<List<string>> KeyGreen { get; } = [];
-        protected List<List<string>> KeyDefine { get; } = [];
-        protected List<List<string>> KeyFunc { get; } = [];
-        protected List<List<string>> KeyYellow { get; } = [];
-        protected List<List<string>> KeyUserFunction { get; } = [];
-        protected List<List<string>> KeyGlobal { get; } = [];
-        protected List<List<string>> KeyStatic { get; } = [];
-        protected List<List<string>> KeyClassTemplate { get; } = [];
-        protected List<List<string>> KeyEnum { get; } = [];
-        protected List<List<string>> KeyConcept { get; } = [];
-        protected List<List<string>> KeyFunctionMacro { get; } = [];
+        protected List<IReadOnlyList<string>> KeyBlue { get; } = [];
+        protected List<IReadOnlyList<string>> KeyPurple { get; } = [];
+        protected List<IReadOnlyList<string>> KeyGreen { get; } = [];
+        protected List<IReadOnlyList<string>> KeyMacros { get; } = [];
+        protected List<IReadOnlyList<string>> KeyFunc { get; } = [];
+        protected List<IReadOnlyList<string>> KeyYellow { get; } = [];
+        protected List<IReadOnlyList<string>> KeyUserFunction { get; } = [];
+        protected List<IReadOnlyList<string>> KeyGlobal { get; } = [];
+        protected List<IReadOnlyList<string>> KeyStatic { get; } = [];
+        protected List<IReadOnlyList<string>> KeyClassTemplate { get; } = [];
+        protected List<IReadOnlyList<string>> KeyEnum { get; } = [];
+        protected List<IReadOnlyList<string>> KeyConcept { get; } = [];
+        protected List<IReadOnlyList<string>> KeyFunctionMacro { get; } = [];
 
-        private List<string> AddedDefine { get; } = [];
-        private List<string> AddedGreen { get; } = [];
+        private List<string> AddedMacro { get; } = [];
+        private List<string> AddedType { get; } = [];
         protected List<string> DeletedMacro { get; } = [];
 
         public bool AutoFunc = true;
 
         public CCodeViewerBase()
         {
-            KeyDefine.Add(AddedDefine);
-            KeyGreen.Add(AddedGreen);
+            KeyMacros.Add(AddedMacro);
+            KeyGreen.Add(AddedType);
         }
 
-        private bool Contains(List<List<string>> lists, string str, bool isMacro = false)
+        private bool Contains(List<IReadOnlyList<string>> lists, string str, bool isMacro = false)
         {
             //#undefで削除されたマクロ
             if (isMacro && DeletedMacro.Contains(str))
@@ -87,7 +87,7 @@ namespace LibrarySample.UserControls
 
         private bool SetColor(Run run, string tmp, string st, int i)
         {
-            if (Contains(KeyDefine, tmp, true))
+            if (Contains(KeyMacros, tmp, true))
             {
                 run.Foreground = MacroColorBrush;
                 return true;
@@ -198,7 +198,7 @@ namespace LibrarySample.UserControls
                             tmp += st[i];
                         }
                         Mae = string.Empty;
-                        AddedDefine.Add(tmp);
+                        AddedMacro.Add(tmp);
                         run.Text = tmp;
                         run.Foreground = MacroColorBrush;
                         CodeTextBlock.Inlines.Add(run);
@@ -210,7 +210,7 @@ namespace LibrarySample.UserControls
                         {
                             tmp += st[i];
                         }
-                        if (Contains(KeyDefine, tmp, true))
+                        if (Contains(KeyMacros, tmp, true))
                         {
                             run.Foreground = MacroColorBrush;
                         }
@@ -417,7 +417,7 @@ namespace LibrarySample.UserControls
                         if (StKey(st, i))
                         {
                             //マクロが最優先
-                            if (Contains(KeyDefine, tmp, true))
+                            if (Contains(KeyMacros, tmp, true))
                             {
                                 run.Foreground = MacroColorBrush;
                                 Mae = string.Empty;
@@ -548,7 +548,7 @@ namespace LibrarySample.UserControls
 
                                     if (tmp1 == "typename" || tmp1 == "class" || tmp1 == "struct" || tmp1 == "using" || tmp1 == "enum" || tmp1 == "union")
                                     {
-                                        AddedGreen.Add(tmp);
+                                        AddedType.Add(tmp);
 
                                         run.Foreground = GreenColorBrush;
                                         break;
@@ -556,7 +556,7 @@ namespace LibrarySample.UserControls
                                 }
                                 if (CodeTextBlock.Inlines[^2].Foreground == GreenColorBrush && Contains(KeyConcept, (CodeTextBlock.Inlines[^2] as Run).Text))
                                 {
-                                    AddedGreen.Add(tmp);
+                                    AddedType.Add(tmp);
 
                                     run.Foreground = GreenColorBrush;
                                     break;
@@ -566,7 +566,7 @@ namespace LibrarySample.UserControls
                             if (Mae == "Concept")
                             {
                                 run.Foreground = GreenColorBrush;
-                                AddedGreen.Add(tmp);
+                                AddedType.Add(tmp);
                                 if ((CodeTextBlock.Inlines[^1] as Run).Text == " ")
                                 {
                                     Mae = string.Empty;

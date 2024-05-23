@@ -1,4 +1,5 @@
 ﻿using LibrarySample.SampleManagement;
+using LibrarySample.Settings;
 using LibrarySample.UserControls;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
@@ -17,6 +18,7 @@ namespace LibrarySample.Pages
 {
     public static class LibraryPageHelper
     {
+
         public static StackPanel CreateHeaderPanel(string header)
         {
             StackPanel panel = new StackPanel();
@@ -66,7 +68,7 @@ namespace LibrarySample.Pages
             rootPanel.Children.Add(CreateIncompleteInfoBar());
         }
 
-        public static void ApplyClasses(StackPanel rootPanel, XElement xElement, string elementName, string header, string libraryPath, CodeLanguage codeLanguage, Category category)
+        public static void ApplyClasses(StackPanel rootPanel, XElement xElement, string elementName, string header, string libraryPath, LibraryType libraryType, Category category)
         {
             XElement xClasses = xElement.Element(elementName);
 
@@ -80,11 +82,11 @@ namespace LibrarySample.Pages
             {
                 XElement xClass = XElement.Load(libraryPath + xClassReference.Attribute("FileName").Value);
 
-                panel.Children.Add(new SlideButton(xClass, codeLanguage) { Glyph = EnumConverter.ToGlyph(category) });
+                panel.Children.Add(new SlideButton(xClass, libraryType) { Glyph = EnumConverter.ToGlyph(category) });
             }
         }
 
-        public static async Task ApplyCppFunctionsAsync(StackPanel rootPanel, XElement xElement, string elementName, string header, Category category)
+        public static async Task ApplyFunctionsAsync(StackPanel rootPanel, XElement xElement, string elementName, string header, LibraryType libraryType, Category category)
         {
             XElement xFunctions = xElement.Element(elementName);
 
@@ -96,7 +98,7 @@ namespace LibrarySample.Pages
 
             foreach (XElement xFunction in xFunctions.Elements())
             {
-                panel.Children.Add(new CppFunctionExpander(xFunction, category));
+                panel.Children.Add(FunctionExpander.Create(libraryType, xFunction, category));
                 await Task.Delay(1);
             }
         }
@@ -125,6 +127,87 @@ namespace LibrarySample.Pages
 
         }
 
+        public static void ApplyCStructures(StackPanel rootPanel, XElement xElement, LibraryType libraryType)
+        {
+            XElement xStructures = xElement.Element("Structures");
+
+            if (xStructures != null)
+            {
+                StackPanel panel = CreateHeaderPanel("構造体");
+                rootPanel.Children.Add(panel);
+
+                foreach (XElement xStructure in xStructures.Elements("Structure"))
+                {
+                    panel.Children.Add(new SlideButton(xStructure, libraryType) { Glyph = EnumConverter.ToGlyph(Category.Structure) });
+                }
+            }
+        }
+
+        public static async Task ApplyMacro(Page page, StackPanel rootPanel, XElement xElement, SampleRunner sampleRunner)
+        {
+
+            if (xElement.Attribute("HasMacros").Value == "True")
+            {
+                StackPanel panel = CreateHeaderPanel("マクロ");
+                rootPanel.Children.Add(panel);
+
+                string folderName = xElement.Attribute("Tag").Value;
+                var result = await sampleRunner.RunSampleAsync(folderName, "?macro");
+
+                var lines = result.Outputs.Split(Environment.NewLine);
+
+                //
+                for (int i = 0; i < lines.Length - 1; i += 3)
+                {
+                    if (lines[i] == lines[i + 1]) continue;
+
+                    ValueCard valueCard = new ValueCard();
+                    valueCard.IsTitleTextSelectionEnabled = true;
+                    valueCard.IsValueTextSelectionEnabled = true;
+                    valueCard.Glyph = EnumConverter.ToGlyph(Category.Macro);
+                    valueCard.Title = lines[i];
+                    valueCard.Value = lines[i + 1];
+                    valueCard.Description = lines[i + 2];
+
+                    panel.Children.Add(valueCard);
+
+                    await Task.Delay(1);
+                }
+
+                //マクロがなければpanelを削除
+                if (panel.Children.Count == 1)
+                {
+                    rootPanel.Children.Remove(panel);
+
+
+                }
+            }
+
+            //本当に何もなければ
+            if (rootPanel.Children.Count == 0)
+            {
+                page.Content = new TextBlock { Text = "なにも定義されていません", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
+            }
+        }
+
+        public static async Task ApplyClassMembers(StackPanel rootPanel, XElement xElement, string elementName, string header, LibraryType libraryType, Category category)
+        {
+            List<XElement> xFunctions = new List<XElement>();
+
+            await GetBaseClassFunctionsAsync(xFunctions, xElement, elementName);
+
+            if (xFunctions.Count == 0) return;
+
+            StackPanel panel = CreateHeaderPanel(header);
+            rootPanel.Children.Add(panel);
+
+            foreach (XElement xFunction in xFunctions)
+            {
+                panel.Children.Add(FunctionExpander.Create(libraryType, xFunction, category));
+
+                await Task.Delay(1);
+            }
+        }
 
         public static async Task GetBaseClassFunctionsAsync(List<XElement> xElements, XElement xPageRoot, string elementName, bool ignoreOperatorE = false)
         {
@@ -190,7 +273,7 @@ namespace LibrarySample.Pages
             }
         }
 
-        public static void ApplyCppBaseOrDerivedClasses(StackPanel rootPanel, XElement xElement, string elementName, string headerName)
+        public static void ApplyBaseOrDerivedClasses(StackPanel rootPanel, XElement xElement, string elementName, string headerName, string xmlPath, LibraryType libraryType)
         {
             XElement xDerivedClasses = xElement.Element(elementName);
 
@@ -203,9 +286,9 @@ namespace LibrarySample.Pages
             {
                 string fileName = xReference.Attribute("FileName").Value;
 
-                XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + fileName);
+                XElement xClass = XElement.Load(xmlPath + fileName);
 
-                panel.Children.Add(new SlideButton(xClass, CodeLanguage.Cpp) { Glyph = EnumConverter.ToGlyph(Category.Class) });
+                panel.Children.Add(new SlideButton(xClass, libraryType) { Glyph = EnumConverter.ToGlyph(Category.Class) });
             }
         }
     }

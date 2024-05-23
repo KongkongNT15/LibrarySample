@@ -12,10 +12,14 @@ namespace LibrarySample.Pages
 
         public static readonly string CHomePageTitle = "C言語";
         public static readonly string CHomePageDescription = "C11～C17の標準ライブラリ";
-        public static readonly string CHomePageGlyph = "\uF156";
 
         public static readonly string CppHomePageTitle = "C++";
         public static readonly string CppHomePageDescription = "C++ STL";
-        public static readonly string CppHomePageGlyph = "\uF156";
+
+        public static readonly string Win32HomePageTitle = "Win32 API";
+        public static readonly string Win32HomePageDescription = "WindowsデスクトップアプリのAPI";
+
+        public static readonly string CppWinRTNamespaceHomePageTitle = "winrt 名前空間 (C++/WinRT)";
+        public static readonly string CppWinRTNamespaceHomePageDescription = "C++/WinRTで使われる基本機能";
     }
 }

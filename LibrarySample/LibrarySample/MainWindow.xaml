@@ -25,7 +25,9 @@
                         <StaticResource x:Key="BreadcrumbBarNormalForegroundBrush" ResourceKey="TextFillColorSecondaryBrush" />
                         <StaticResource x:Key="BreadcrumbBarHoverForegroundBrush" ResourceKey="TextFillColorPrimaryBrush" />
                         <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
-                        <StaticResource x:Key="TabViewItemHeaderBackgroundSelected" ResourceKey="ApplicationPageBackgroundThemeBrush" />
+                        <SolidColorBrush x:Key="MainWindowBackgroundBrush" >#B0282828</SolidColorBrush>
+                        <StaticResource x:Key="TabViewItemHeaderBackgroundSelected" ResourceKey="MainWindowBackgroundBrush" />
+                        
                     </ResourceDictionary>
 
                     <ResourceDictionary x:Key="Light">
@@ -37,7 +39,9 @@
                         <StaticResource x:Key="BreadcrumbBarNormalForegroundBrush" ResourceKey="TextFillColorSecondaryBrush" />
                         <StaticResource x:Key="BreadcrumbBarHoverForegroundBrush" ResourceKey="TextFillColorPrimaryBrush" />
                         <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
-                        <StaticResource x:Key="TabViewItemHeaderBackgroundSelected" ResourceKey="ApplicationPageBackgroundThemeBrush" />
+                        <SolidColorBrush x:Key="MainWindowBackgroundBrush" >#A0FFFFFF</SolidColorBrush>
+                        <StaticResource x:Key="TabViewItemHeaderBackgroundSelected" ResourceKey="MainWindowBackgroundBrush" />
+                        
                     </ResourceDictionary>
                 </ResourceDictionary.ThemeDictionaries>
             </ResourceDictionary>
@@ -82,7 +86,7 @@
                         ItemInvoked="NavView_ItemInvoked"
                         SelectionChanged="NavView_SelectionChanged"
                         PointerPressed="NavView_PointerPressed"
-                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                        Background="{ThemeResource MainWindowBackgroundBrush}"
                         Grid.Row="1">
 
             <NavigationView.Header>

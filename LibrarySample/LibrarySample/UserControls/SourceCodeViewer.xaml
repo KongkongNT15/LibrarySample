@@ -7,17 +7,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    RequestedTheme="Dark"
     Loaded="UserControl_Loaded">
 
-    <StackPanel x:Name="RootPanel" CornerRadius="4" Background="#202020" >
-        <Grid>
+    <StackPanel x:Name="RootPanel" CornerRadius="4" Background="{ThemeResource SourceCodeViewerBackgroundBrush}" >
+        <Grid RequestedTheme="Dark">
             <TextBlock x:Name="LanguageText" FontSize="16" VerticalAlignment="Top" />
             <Button x:Name="CopyButton" Click="CopyButton_Click" HorizontalAlignment="Right" Margin="0,8,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                 <FontIcon Glyph="&#xE8C8;"/>
             </Button>
         </Grid>
-        <TextBlock x:Name="CodeText" FontFamily="Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+        <TextBlock x:Name="CodeText" FontFamily="Consolas" TextWrapping="Wrap" IsTextSelectionEnabled="True" RequestedTheme="Dark" />
     </StackPanel>
     
 </UserControl>

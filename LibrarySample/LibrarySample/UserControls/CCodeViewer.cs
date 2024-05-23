@@ -8,17 +8,17 @@ namespace LibrarySample.UserControls
 {
     public class CCodeViewer : CCodeViewerBase
     {
-        public static readonly List<string> KeywordsBlue = GetWords("C.Blue.db");
+        public static readonly IReadOnlyList<string> KeywordsBlue = LoadWords("C.Blue.db");
 
-        public static readonly List<string> KeywordsPurple = GetWords("C.Purple.db");
+        public static readonly IReadOnlyList<string> KeywordsPurple = LoadWords("C.Purple.db");
 
-        public static readonly List<string> KeywordsGreen = GetWords("C.Type.db");
+        public static readonly IReadOnlyList<string> Types = LoadWords("C.Type.db");
 
-        public static readonly List<string> KeywordsDefine = GetWords("C.Macro.db");
+        public static readonly IReadOnlyList<string> Macros = LoadWords("C.Macro.db");
 
-        public static readonly List<string> KeywordsFunctionMacro = GetWords("C.FunctionMacro.db");
+        public static readonly IReadOnlyList<string> FunctionMacros = LoadWords("C.FunctionMacro.db");
 
-        public static readonly List<string> KeywordsFunc = GetWords("C.Function.db");
+        public static readonly IReadOnlyList<string> Functions = LoadWords("C.Function.db");
 
         public CCodeViewer()
         {
@@ -30,10 +30,10 @@ namespace LibrarySample.UserControls
         {
             KeyBlue.Add(KeywordsBlue);
             KeyPurple.Add(KeywordsPurple);
-            KeyGreen.Add(KeywordsGreen);
-            KeyDefine.Add(KeywordsDefine);
-            KeyFunc.Add(KeywordsFunc);
-            KeyFunctionMacro.Add(KeywordsFunctionMacro);
+            KeyGreen.Add(Types);
+            KeyMacros.Add(Macros);
+            KeyFunc.Add(Functions);
+            KeyFunctionMacro.Add(FunctionMacros);
         }
     }
 }

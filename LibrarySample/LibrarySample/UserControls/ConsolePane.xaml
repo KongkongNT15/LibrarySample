@@ -8,10 +8,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    MinHeight="{x:Bind root:Data.MinControlHeight}"
-    RequestedTheme="Dark">
+    MinHeight="{x:Bind root:Data.MinControlHeight}">
 
-    <ScrollViewer x:Name="RootViewer" Background="#0C0C0C" CornerRadius="4" MaxHeight="512" >
+    <ScrollViewer x:Name="RootViewer" Background="{ThemeResource ConsolePaneBackgroundBrush}" CornerRadius="4" MaxHeight="512" >
         <TextBlock x:Name="OutputText" Foreground="#CCCCCC" TextWrapping="Wrap" FontFamily="MS Gothic" VerticalAlignment="Center" />
     </ScrollViewer>
 </UserControl>

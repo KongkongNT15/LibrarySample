@@ -41,28 +41,28 @@ namespace LibrarySample.UserControls
         }
 
         public XElement XElement { get; }
-        CodeLanguage LanguageType { get; }
+        LibraryType LibraryType { get; }
 
-        public SlideButton(XElement xElement, CodeLanguage languageType)
+        public SlideButton(XElement xElement, LibraryType libraryType)
         {
             this.InitializeComponent();
             Click += SlideButton_Click;
 
             XElement = xElement;
-            LanguageType = languageType;
+            LibraryType = libraryType;
 
             switch (xElement.Name.LocalName)
             {
+                case "Namespace":
                 case "Header":
                     Glyph = xElement.Attribute("Glyph").Value;
 
                     break;
             }
 
-            switch (languageType)
+            switch (libraryType)
             {
-                case CodeLanguage.Cpp:
-                case CodeLanguage.CppWinRT: Title = XElement.Attribute("Name").Value.Replace("::", " : : "); break;
+                case LibraryType.CppLibrary: Title = XElement.Attribute("Name").Value.Replace("::", " : : "); break;
                 default: Title = XElement.Attribute("Name").Value; break;
             }
             Description = xElement.Attribute("Description").Value;
@@ -71,41 +71,67 @@ namespace LibrarySample.UserControls
         private void SlideButton_Click(object sender, RoutedEventArgs e)
         {
             ContentPageFrame frame = GetParentFrame();
-            switch (LanguageType)
+            switch (LibraryType)
             {
-                case CodeLanguage.C:
+                case LibraryType.CLibrary:
                     switch(XElement.Name.LocalName)
                     {
                         case "Header":
                             frame.Navigate(typeof(CLibraryPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
-                            (frame.Content as CLibraryPage).XElement = XElement;
                             break;
 
                         case "Structure":
                             frame.Navigate(typeof(CStructurePage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
-                            (frame.Content as CStructurePage).XElement = XElement;
                             break;
 
                         default: throw new Exception();
                     }
                     break;
 
-                case CodeLanguage.Cpp:
+                case LibraryType.CppLibrary:
                     switch (XElement.Name.LocalName)
                     {
                         case "Header":
                             frame.Navigate(typeof(CppLibraryPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
-                            (frame.Content as CppLibraryPage).XElement = XElement;
                             break;
 
                         case "Class":
                             frame.Navigate(typeof(CppClassPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
-                            (frame.Content as CppClassPage).XElement = XElement;
                             break;
 
                         case "Enum":
                             frame.Navigate(typeof(CppEnumPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
-                            (frame.Content as CppEnumPage).XElement = XElement;
+                            break;
+
+                        default: throw new Exception();
+                    }
+                    break;
+
+                case LibraryType.Win32Library:
+                    switch (XElement.Name.LocalName)
+                    {
+                        case "Header":
+                            frame.Navigate(typeof(Win32LibraryPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
+                            break;
+
+                        case "Structure":
+                            frame.Navigate(typeof(Win32StructurePage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
+                            break;
+
+                        default: throw new Exception();
+                    }
+                    break;
+
+                case LibraryType.CppWinRTNamespaceLibrary:
+                    switch (XElement.Name.LocalName)
+                    {
+                        case "Namespace":
+                            frame.Navigate(typeof(CppWinRTNamespacePage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
+                            
+                            break;
+
+                        case "Class":
+                            frame.Navigate(typeof(CppWinRTClassPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
                             break;
 
                         default: throw new Exception();
@@ -114,6 +140,8 @@ namespace LibrarySample.UserControls
 
                 default: throw new Exception();
             }
+
+            (frame.Content as IXml).XElement = XElement;
         }
 
         private ContentPageFrame GetParentFrame()

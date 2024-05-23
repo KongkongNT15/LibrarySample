@@ -21,7 +21,7 @@ namespace LibrarySample.UserControls
 {
     public abstract partial class SourceCodeViewer : UserControl
     {
-        public static List<string> GetWords(string fileName)
+        public static IReadOnlyList<string> LoadWords(string fileName)
         {
             using StreamReader sr = new StreamReader("../Words/" + fileName);
             List<string> words = new List<string>();
@@ -40,6 +40,8 @@ namespace LibrarySample.UserControls
             {
                 CodeLanguage.C => new CCodeViewer(),
                 CodeLanguage.Cpp => new CppCodeViewer(),
+                CodeLanguage.CWin32 => new Win32CodeViewer(),
+                CodeLanguage.CppWinRT => new CppWinRTCodeViewer(),
                 _ => new TextViewer(),
             };
         }

@@ -17,6 +17,7 @@ using LibrarySample.SampleManagement;
 using LibrarySample.Settings;
 using System.Linq.Expressions;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -33,6 +34,18 @@ namespace LibrarySample.UserControls
             }
 
             return frameworkElement as FunctionExpander;
+        }
+
+        public static FunctionExpander Create(LibraryType libraryType, XElement xElement, Category category)
+        {
+            return libraryType switch 
+            {
+                LibraryType.CLibrary => new CFunctionExpander(xElement, category),
+                LibraryType.CppLibrary => new CppFunctionExpander(xElement, category),
+                LibraryType.Win32Library => new Win32FunctionExpander(xElement, category),
+                LibraryType.CppWinRTNamespaceLibrary => new CppWinRTFunctionExpander(xElement, category, true),
+                _ => throw new NotImplementedException(),
+            };
         }
 
         public string Title
@@ -75,7 +88,7 @@ namespace LibrarySample.UserControls
 
         public Expander Expander => EExpander;
 
-        public FunctionExpander(XElement xElement, Category category)
+        public FunctionExpander(XElement xElement, Category category, LaunchType defaultLaunchType = LaunchType.PipeConsole)
         {
             XElement = xElement;
 
@@ -95,7 +108,7 @@ namespace LibrarySample.UserControls
                 _ => xElement.Attribute("Description").Value,
             };
 
-            LaunchType = EnumConverter.ToLaunchType(XElement.Attribute("LaunchType")?.Value);
+            LaunchType = EnumConverter.ToLaunchType(XElement.Attribute("LaunchType")?.Value, defaultLaunchType);
 
             //未完成サンプル
             if (Description == "???")
@@ -187,6 +200,18 @@ namespace LibrarySample.UserControls
 
         //ConsoleButtonから起動
         protected abstract void LaunchByButton();
+
+        protected async Task LaunchAsync(SampleRunner sampleRunner)
+        {
+            if (_isWorking) return;
+            _isWorking = true;
+
+            var result = await sampleRunner.RunSampleAsync(Folder, FuncName, InputsPanel.CreateInputs());
+
+            OutputConsole.Output = result.Outputs;
+
+            _isWorking = false;
+        }
 
         //サンプルの実行
         public abstract void Launch();
@@ -294,6 +319,7 @@ namespace LibrarySample.UserControls
 
                     return;
 
+                case LaunchType.Graphical:
                 case LaunchType.Console:
                     ResultsPanel.Children.Remove(_inputsPanel);
                     ResultsPanel.Children.Remove(_outputConsole);

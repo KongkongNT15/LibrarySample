@@ -38,11 +38,25 @@
             </local:SettingExpander.Children>
         </local:SettingExpander>
 
+        <local:SettingExpander Title="C++/WinRT" >
+            <local:SettingExpander.Children>
+                <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (22621.0)" IsFront="True" />
+                <local:InnerInfoTextCard Title="C++/WinRTバージョン" Value="2.0.240405.15" />
+                <local:InnerInfoTextCard Title="ターゲットOSバージョン" Value="Windows 11 22H2 (22621.1)" />
+                <local:InnerInfoTextCard Title="ターゲット最小OSバージョン" Value="Windows 11 21H2 (22000.1)" />
+                <local:InnerInfoTextCard Title="C++言語バージョン" Value="C++20" />
+                <local:InnerInfoTextCard Title="文字エンコード" Value="UTF-16" />
+                <local:InnerInfoTextCard Title="コンソールの文字エンコード" Value="Shift-Jis" />
+            </local:SettingExpander.Children>
+        </local:SettingExpander>
+
 
         <local:SettingExpander Title="リンク集" >
             <local:SettingExpander.Children >
-                <local:LinkCard Title="C++ 日本語リファレンス" NavigateUri="https://cpprefjp.github.io/" IsFront="True" />
-                <local:LinkCard Title="C言語 標準ライブラリ" NavigateUri="http://www.c-lang.org/detail/lib_header.html" />
+                <local:LinkCard Title="C言語 標準ライブラリ" NavigateUri="http://www.c-lang.org/detail/lib_header.html" IsFront="True" />
+                <local:LinkCard Title="C++ 日本語リファレンス" NavigateUri="https://cpprefjp.github.io/" />
+                <local:LinkCard Title="Win32 API リファレンス" NavigateUri="https://learn.microsoft.com/ja-jp/windows/win32/api/" />
+                <local:LinkCard Title="winrt 名前空間 (C++/WinRT)" NavigateUri="https://learn.microsoft.com/ja-jp/uwp/cpp-ref-for-winrt/winrt" />
                 <local:LinkCard Title="アプリのGitHub" NavigateUri="https://github.com/KongkongNT15/LibrarySample/releases" />
                 <local:LinkCard Title="ソースコード" NavigateUri="https://github.com/KongkongNT15/LibrarySample" />
             </local:SettingExpander.Children>

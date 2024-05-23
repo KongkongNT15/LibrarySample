@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="PropertySheet.props" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="hstring.struct.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleManagement.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sample">
+      <UniqueIdentifier>{75234881-28b8-4c4d-a4a4-62435ed0a8f7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

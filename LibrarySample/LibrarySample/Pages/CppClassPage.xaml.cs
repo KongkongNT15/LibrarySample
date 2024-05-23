@@ -108,22 +108,22 @@ namespace LibrarySample.Pages
             StackPanel panel = LibraryPageHelper.CreateHeaderPanel("構文");
             ContentsPanel.Children.Add(panel);
 
-            panel.Children.Add(new GrammarExpander(XElement.Element("Grammar"), CodeLanguage.Cpp));
+            panel.Children.Add(new GrammarExpander(XElement.Element("Grammar"), LibraryType.CppLibrary, CodeLanguage.Cpp));
         }
 
         private void ApplyBaseClasses()
         {
-            LibraryPageHelper.ApplyCppBaseOrDerivedClasses(ContentsPanel, XElement, "BaseClasses", "基底");
+            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "BaseClasses", "基底", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary);
         }
 
         private void ApplyDerivedClasses()
         {
-            LibraryPageHelper.ApplyCppBaseOrDerivedClasses(ContentsPanel, XElement, "DerivedClasses", "派生");
+            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "DerivedClasses", "派生", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary);
         }
 
         private void ApplyInnerClasses()
         {
-            LibraryPageHelper.ApplyCppBaseOrDerivedClasses(ContentsPanel, XElement, "InnerClasses", "内部クラス");
+            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "InnerClasses", "内部クラス", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary);
         }
 
         private async Task ApplyStaticMethods()
@@ -152,7 +152,7 @@ namespace LibrarySample.Pages
 
         private async Task ApplyConstructors()
         {
-            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "Constructors", "コンストラクター", Category.Constructor);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Constructors", "コンストラクター", LibraryType.CppLibrary, Category.Constructor);
         }
 
         private async Task ApplyDestructor()
@@ -171,70 +171,27 @@ namespace LibrarySample.Pages
 
         private async Task ApplyFields()
         {
-            List<XElement> xFunctions = new List<XElement>();
-
-            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, "Fields");
-
-            if (xFunctions.Count == 0) return;
-
-            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("メンバー変数");
-            ContentsPanel.Children.Add(panel);
-
-            foreach (XElement xFunction in xFunctions)
-            {
-                panel.Children.Add(new CppFunctionExpander(xFunction, Category.Field));
-
-                await Task.Delay(1);
-            }
+            await LibraryPageHelper.ApplyClassMembers(ContentsPanel, XElement, "Fields", "メンバー変数", LibraryType.CppLibrary, Category.Field);
         }
 
         private async Task ApplyOperators()
         {
-            List<XElement> xFunctions = new List<XElement>();
-
-            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, "Operators");
-
-            if (xFunctions.Count == 0) return;
-
-            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("演算子");
-            ContentsPanel.Children.Add(panel);
-
-            foreach (XElement xFunction in xFunctions)
-            {
-                panel.Children.Add(new CppFunctionExpander(xFunction, Category.Operator));
-
-                await Task.Delay(1);
-            }
+            await LibraryPageHelper.ApplyClassMembers(ContentsPanel, XElement, "Operators", "演算子", LibraryType.CppLibrary, Category.Operator);
         }
 
         private async Task ApplyMethods()
         {
-            List<XElement> xFunctions = new List<XElement>();
-
-            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, "Methods");
-
-            if (xFunctions.Count == 0) return;
-
-            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("メンバー関数");
-            ContentsPanel.Children.Add(panel);
-
-            foreach (XElement xFunction in xFunctions)
-            {
-                panel.Children.Add(new CppFunctionExpander(xFunction, Category.Method));
-
-                await Task.Delay(1);
-            }
-
+            await LibraryPageHelper.ApplyClassMembers(ContentsPanel, XElement, "Methods", "メンバー関数", LibraryType.CppLibrary, Category.Method);
         }
 
         private async Task ApplyFriendOperators()
         {
-            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "FriendOperators", "friend 演算子", Category.Operator);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "FriendOperators", "friend 演算子", LibraryType.CppLibrary, Category.Operator);
         }
 
         private async Task ApplyFriendFunctions()
         {
-            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "FriendFunctions", "friend 関数", Category.Function);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "FriendFunctions", "friend 関数", LibraryType.CppLibrary, Category.Function);
         }
     }
 }

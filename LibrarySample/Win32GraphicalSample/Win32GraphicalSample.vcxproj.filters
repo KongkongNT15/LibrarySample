@@ -15,10 +15,22 @@
     <ClCompile Include="WinMain.c" />
     <ClCompile Include="pch.c" />
     <ClCompile Include="SampleManagement.c" />
-    <ClCompile Include="MessageBox.c">
+    <ClCompile Include="MessageBoxW.c">
       <Filter>Sample\WinUser</Filter>
     </ClCompile>
     <ClCompile Include="WinUser.Samples.c">
+      <Filter>Sample\WinUser</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageBeep.c">
+      <Filter>Sample\WinUser</Filter>
+    </ClCompile>
+    <ClCompile Include="CloseWindow.c">
+      <Filter>Sample\WinUser</Filter>
+    </ClCompile>
+    <ClCompile Include="IsZoomed.c">
+      <Filter>Sample\WinUser</Filter>
+    </ClCompile>
+    <ClCompile Include="GetWindowRect.c">
       <Filter>Sample\WinUser</Filter>
     </ClCompile>
   </ItemGroup>

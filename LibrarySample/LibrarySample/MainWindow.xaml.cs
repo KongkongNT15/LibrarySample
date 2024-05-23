@@ -129,6 +129,8 @@ namespace LibrarySample
 
             CHeaderButton.Instance.ItemSelectionChanged += Instance_ItemSelectionChanged;
             CppHeaderButton.Instance.ItemSelectionChanged += Instance_ItemSelectionChanged;
+            Win32HeaderButton.Instance.SelectionChanged += Instance_ItemSelectionChanged;
+            CppWinRTNamespaceHeaderButton.Instance.SelectionChanged += Instance_ItemSelectionChanged;
         }
 
         //リソースの変更
@@ -182,82 +184,17 @@ namespace LibrarySample
 
             AddHomePage();
 
-            //Cライブラリの追加
-            NavigationViewItem cHeaders = new NavigationViewItem { Content = HomePageData.CHomePageTitle, Icon = ImageSources.CImageSource.CreateIconElement() };
-            menuItems.Add(cHeaders);
-
-            foreach (string path in Directory.GetFiles(XmlPath.CLibraryDirectory))
-            {
-                XElement xElement = XElement.Load(path);
-
-                XmlNavigationViewItem item = new XmlNavigationViewItem(xElement, typeof(CLibraryPage));
-                item.Glyph = xElement.Attribute("Glyph").Value;
-                item.Content = xElement.Attribute("Name").Value;
-
-                //構造体を取得
-                XElement xStruct = xElement.Element("Structures");
-
-                if (xStruct != null)
-                {
-                    foreach (XElement element in xStruct.Elements("Structure"))
-                    {
-                        string name = element.Attribute("Name").Value;
-                        item.MenuItems.Add(new XmlNavigationViewItem(element, typeof(CStructurePage)) { Glyph = EnumConverter.ToGlyph(Category.Structure), Content = name });
-                        await Task.Delay(1);
-                    }
-                }
-
-                cHeaders.MenuItems.Add(item);
-
-                await Task.Delay(1);
-            }
+            await NavigationViewItemCreater.AddCLibrary(menuItems);
 
             //C++ライブラリの追加
-            NavigationViewItem cppHeaders = new NavigationViewItem { Content = HomePageData.CppHomePageTitle, Icon = ImageSources.CppImageSource.CreateIconElement() };
-            menuItems.Add(cppHeaders);
+            await NavigationViewItemCreater.AddCppLibrary(menuItems);
 
+            await NavigationViewItemCreater.AddWin32Library(menuItems);
 
-            static async Task createCppClassItem(NavigationViewItem item, XElement xElement, string elementName, Category category, Type pageType)
-            {
-                XElement xClasses = xElement.Element(elementName);
-
-                if (xClasses != null)
-                {
-                    foreach (XElement xClassReference in xClasses.Elements("ClassReference"))
-                    {
-                        XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + xClassReference.Attribute("FileName").Value);
-
-                        string name = xClass.Attribute("Name").Value.Replace("::", " : : ");
-
-                        item.MenuItems.Add(new XmlNavigationViewItem(xClass, pageType) { Glyph = EnumConverter.ToGlyph(category), Content = name });
-                        await Task.Delay(1);
-                    }
-
-                }
-            }
-
-            foreach (string path in Directory.GetFiles(XmlPath.CppLibraryDirectory))
-            {
-                //へだーのみ
-                if (!XmlPath.IsCppHeaderXmlFile(path)) continue;
-
-                XElement xElement = XElement.Load(path);
-
-                XmlNavigationViewItem item = new XmlNavigationViewItem(xElement, typeof(CppLibraryPage));
-                item.Glyph = xElement.Attribute("Glyph").Value;
-                item.Content = xElement.Attribute("Name").Value;
-
-                //クラスを取得
-                await createCppClassItem(item, xElement, "Classes", Category.Class, typeof(CppClassPage));
-                await createCppClassItem(item, xElement, "Structures", Category.Structure, typeof(CppClassPage));
-                await createCppClassItem(item, xElement, "Enums", Category.Enum, typeof(CppEnumPage));
-
-                cppHeaders.MenuItems.Add(item);
-                await Task.Delay(1);
-            }
-
-            
+            await NavigationViewItemCreater.AddWinRTNamespace(menuItems);
         }
+
+        
 
         private async void SetSelectedItem(ContentPageFrame contentPageFrame)
         {
@@ -270,6 +207,8 @@ namespace LibrarySample
                     "HomePage" => HomePageData.HomePageTitle,
                     "CHomePage" => HomePageData.CHomePageTitle,
                     "CppHomePage" => HomePageData.CppHomePageTitle,
+                    "Win32HomePage" => HomePageData.Win32HomePageTitle,
+                    "CppWinRTNamespaceHomePage" => HomePageData.CppWinRTNamespaceHomePageTitle,
                     _ => throw new Exception(),
                 };
 
@@ -308,6 +247,7 @@ namespace LibrarySample
                     foreach (object obj1 in item.MenuItems)
                     {
                         //Header
+                        //Namespace
                         if (obj1 is XmlNavigationViewItem item1)
                         {
                             if (item1.XElement.ToString() == xElementString)
@@ -442,8 +382,10 @@ namespace LibrarySample
 
             tabViewItem.IconSource = frame.CurrentLanguage switch
             {
-                CodeLanguage.C => ImageSources.CImageSource,
-                CodeLanguage.Cpp => ImageSources.CppImageSource,
+                LibraryType.CLibrary => ImageSources.CImageSource,
+                LibraryType.CppLibrary => ImageSources.CppImageSource,
+                LibraryType.Win32Library => ImageSources.Win32ImageSource,
+                LibraryType.CppWinRTNamespaceLibrary => ImageSources.CppWinRTNamespaceImageSource,
                 _ => null,
             };
 
@@ -466,6 +408,18 @@ namespace LibrarySample
             {
                 tabViewItem.IconSource = ImageSources.CppImageSource;
                 tabViewItem.Header = HomePageData.CppHomePageTitle;
+                return;
+            }
+            if (frame.CurrentSourcePageType == typeof(Win32HomePage))
+            {
+                tabViewItem.IconSource = ImageSources.Win32ImageSource;
+                tabViewItem.Header = HomePageData.Win32HomePageTitle;
+                return;
+            }
+            if (frame.CurrentSourcePageType == typeof(CppWinRTNamespaceHomePage))
+            {
+                tabViewItem.IconSource = ImageSources.CppWinRTNamespaceImageSource;
+                tabViewItem.Header = HomePageData.CppWinRTNamespaceHomePageTitle;
                 return;
             }
             throw new NotImplementedException();
@@ -500,7 +454,9 @@ namespace LibrarySample
 
                 if (content == HomePageData.HomePageTitle) frame.Navigate(typeof(HomePage), null, navigationTransitionInfo);
                 else if (content == HomePageData.CHomePageTitle) frame.Navigate(typeof(CHomePage), null, navigationTransitionInfo);
-                else if(content == HomePageData.CppHomePageTitle) frame.Navigate(typeof(CppHomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.CppHomePageTitle) frame.Navigate(typeof(CppHomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.Win32HomePageTitle) frame.Navigate(typeof(Win32HomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.CppWinRTNamespaceHomePageTitle) frame.Navigate(typeof(CppWinRTNamespaceHomePage), null, navigationTransitionInfo);
                 else throw new Exception();
 
                 return;

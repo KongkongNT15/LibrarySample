@@ -2,6 +2,8 @@
 
 #include "Windows.h"
 
+#define IDC_STATIC -1
+
 #ifdef _AMD64_
 #define __X64__
 #elif defined(_ARM64_)
@@ -15,8 +17,16 @@ typedef WNDPROC WindowProcedure;
 int IsEqualStringA(const char* left, const char* right);
 int IsEqualStringW(const wchar_t* left, const wchar_t* right);
 
+extern HFONT font;
+
+BOOL GetArgs(wchar_t** pHeaderTag, wchar_t** pSampleTag);
+
 BOOL GetRegistoryDWORDW(HKEY hKeyParent, const wchar_t* key, const wchar_t* name, DWORD* pData);
 BOOL IsLightTheme();
+
+BOOL CALLBACK ChangeToModernStyle(HWND hwnd, LPARAM lParam);
+
+BOOL SetAsCenter(HWND hChild, HWND hParent, int x, int y);
 
 HRESULT SetTitleBarTheme(HWND hwnd, BOOL isLightTheme);
 

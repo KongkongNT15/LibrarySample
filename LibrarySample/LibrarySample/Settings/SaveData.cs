@@ -39,6 +39,20 @@ namespace LibrarySample.Settings
             set => Instance._cppProcesserType = value;
         }
 
+        private ProcesserType _win32ProcesserType = ProcesserType.X64;
+        public static ProcesserType Win32ProcesserType
+        {
+            get => Instance._win32ProcesserType;
+            set => Instance._win32ProcesserType= value;
+        }
+
+        private ProcesserType _cppWinRTNamespaceProcesserType = ProcesserType.X64;
+        public static ProcesserType CppWinRTNamespaceProcesserType
+        {
+            get => Instance._cppWinRTNamespaceProcesserType;
+            set => Instance._cppWinRTNamespaceProcesserType= value;
+        }
+
         private uint _waitTime = 400;
         public static uint WaitTime
         {
@@ -73,6 +87,8 @@ namespace LibrarySample.Settings
             WriteData(streamWriter, "CProcesserType", CProcesserType.ToString());
             WriteData(streamWriter, "CppVersion", CppVersion.ToString());
             WriteData(streamWriter, "CppProcesserType", CppProcesserType.ToString());
+            WriteData(streamWriter, "Win32ProcesserType", Win32ProcesserType.ToString());
+            WriteData(streamWriter, "CppWinRTNamespaceProcesserType", CppWinRTNamespaceProcesserType.ToString());
             WriteData(streamWriter, "WaitTime", WaitTime.ToString());
             WriteData(streamWriter, "RequestedTheme", RequestedTheme.ToString());
         }
@@ -110,6 +126,14 @@ namespace LibrarySample.Settings
 
                     case "CppProcesserType":
                         _cppProcesserType = EnumConverter.ToProcesserType(value[1]);
+                        break;
+
+                    case "Win32ProcesserType":
+                        _win32ProcesserType = EnumConverter.ToProcesserType(value[1]);
+                        break;
+
+                    case "CppWinRTNamespaceProcesserType":
+                        _cppWinRTNamespaceProcesserType = EnumConverter.ToProcesserType(value[1]);
                         break;
 
                     case "WaitTime":

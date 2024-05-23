@@ -42,14 +42,16 @@ namespace LibrarySample.Pages
             }
         }
 
-        public CodeLanguage CurrentLanguage
+        public LibraryType CurrentLanguage
         {
             get
             {
-                if (Content is ICHandler) return CodeLanguage.C;
-                if (Content is ICppHandler) return CodeLanguage.Cpp;
+                if (Content is ICHandler) return LibraryType.CLibrary;
+                if (Content is ICppHandler) return LibraryType.CppLibrary;
+                if (Content is IWin32Handler) return LibraryType.Win32Library;
+                if (Content is ICppWinRTHandler) return LibraryType.CppWinRTNamespaceLibrary;
 
-                return CodeLanguage.None;
+                return LibraryType.None;
             }
         }
     }

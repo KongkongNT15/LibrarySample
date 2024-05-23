@@ -1,0 +1,14 @@
+namespace CppWinRTGraphicalSample
+{
+    [bindable]
+    [default_interface]
+    runtimeclass ErrorTextBlock : Windows.UI.Xaml.Controls.UserControl
+    {
+        ErrorTextBlock();
+        Int32 MyProperty;
+
+        String Text{ get; set; };
+
+        Boolean IsError{ get; set; };
+    }
+}

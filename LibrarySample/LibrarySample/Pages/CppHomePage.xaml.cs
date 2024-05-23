@@ -41,7 +41,7 @@ namespace LibrarySample.Pages
                 
                 XElement xElement = XElement.Load(path);
 
-                ContentsPanel.Children.Add(new SlideButton(xElement, CodeLanguage.Cpp));
+                ContentsPanel.Children.Add(new SlideButton(xElement, LibraryType.CppLibrary));
 
                 await Task.Delay(1);
             }

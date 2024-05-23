@@ -13,6 +13,21 @@
                 <!-- Other merged dictionaries here -->
 
                 <ResourceDictionary Source="/Resources/ExpanderStyles.xaml" />
+
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Default">
+                            <SolidColorBrush x:Key="SourceCodeViewerBackgroundBrush" >#60050505</SolidColorBrush>
+                            <SolidColorBrush x:Key="ConsolePaneBackgroundBrush" >#C0000000</SolidColorBrush>
+
+                        </ResourceDictionary>
+
+                        <ResourceDictionary x:Key="Light">
+                            <SolidColorBrush x:Key="SourceCodeViewerBackgroundBrush" >#202020</SolidColorBrush>
+                            <SolidColorBrush x:Key="ConsolePaneBackgroundBrush" >#0C0C0C</SolidColorBrush>
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
 

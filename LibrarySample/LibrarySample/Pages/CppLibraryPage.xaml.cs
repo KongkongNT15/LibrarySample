@@ -103,32 +103,32 @@ namespace LibrarySample.Pages
 
         private async Task ApplyConcepts()
         {
-            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "Concepts", "コンセプト", Category.Concept);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Concepts", "コンセプト", LibraryType.CppLibrary, Category.Concept);
         }
 
         private void ApplyClasses()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Classes", "クラス", XmlPath.CppLibraryDirectory, CodeLanguage.Cpp, Category.Class);
+            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Classes", "クラス", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary, Category.Class);
         }
 
         private void ApplyStructures()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Structures", "構造体", XmlPath.CppLibraryDirectory, CodeLanguage.Cpp, Category.Class);
+            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Structures", "構造体", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary, Category.Structure);
         }
 
         private void ApplyEnums()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Enums", "列挙型", XmlPath.CppLibraryDirectory, CodeLanguage.Cpp, Category.Enum);
+            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Enums", "列挙型", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary, Category.Enum);
         }
 
         private async Task ApplyOperators()
         {
-            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "Operators", "演算子", Category.Operator);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Operators", "演算子", LibraryType.CppLibrary, Category.Operator);
         }
 
         private async Task ApplyFunctions()
         {
-            await LibraryPageHelper.ApplyCppFunctionsAsync(ContentsPanel, XElement, "Functions", "関数", Category.Function);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Functions", "関数", LibraryType.CppLibrary, Category.Function);
         }
 
     }

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Kongkong.SampleManager.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Kongkong.MainWindow.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.UI.ColorsSample.ColorsPage.cpp">
+      <Filter>Sample\Windows.UI\Colors</Filter>
+    </ClCompile>
+    <ClCompile Include="Kongkong.SamplePage.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Kongkong.NotFoundPage.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.UI.ColorsSample.cpp">
+      <Filter>Sample\Windows.UI\Colors</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="AllSamples.h" />
+    <ClInclude Include="Windows.UI.ColorsSample.ColorsPage.h">
+      <Filter>Sample\Windows.UI\Colors</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.UI.ColorsSample.h">
+      <Filter>Sample\Windows.UI\Colors</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Kongkong">
+      <UniqueIdentifier>{f35bd656-e557-4059-9aaa-87ad13afbaf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample">
+      <UniqueIdentifier>{64aab527-219a-4a36-8fbe-fd68cdf8c988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\Windows.UI">
+      <UniqueIdentifier>{bbf3349c-0eb7-4538-949f-75beff2a00ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\Windows.UI\Colors">
+      <UniqueIdentifier>{57eca3b9-9d6e-4a1c-9f30-15950a608b5d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="ErrorTextBlock.idl" />
+  </ItemGroup>
+</Project>

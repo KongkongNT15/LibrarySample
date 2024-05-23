@@ -41,12 +41,14 @@ namespace LibrarySample.UserControls
             this.InitializeComponent();
         }
 
-        public void SetOtherOptions(CodeLanguage languageType)
+        public void SetOtherOptions(LibraryType libraryType)
         {
-            OtherOptionsArea.Content = languageType switch
+            OtherOptionsArea.Content = libraryType switch
             {
-                CodeLanguage.C => CHeaderButton.Instance,
-                CodeLanguage.Cpp => CppHeaderButton.Instance,
+                LibraryType.CLibrary => CHeaderButton.Instance,
+                LibraryType.CppLibrary => CppHeaderButton.Instance,
+                LibraryType.Win32Library => Win32HeaderButton.Instance,
+                LibraryType.CppWinRTNamespaceLibrary => CppWinRTNamespaceHeaderButton.Instance,
                 _ => null,
             };
         }

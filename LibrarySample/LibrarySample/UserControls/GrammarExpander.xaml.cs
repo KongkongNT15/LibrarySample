@@ -21,16 +21,19 @@ namespace LibrarySample.UserControls
 {
     public sealed partial class GrammarExpander : Expander
     {
-        public CodeLanguage CodeLanguage { get; }
+        public LibraryType LibraryType { get; }
 
         public XElement XElement { get; }
 
-        public GrammarExpander(XElement xElement, CodeLanguage codeLanguage)
+        public CodeLanguage CodeLanguage { get; }
+
+        public GrammarExpander(XElement xElement, LibraryType libraryType, CodeLanguage codeLanguage)
         {
             this.InitializeComponent();
             FIcon.Margin = new Thickness((Data.ControlHeight - 24.0) / 2.0, 0, (Data.ControlHeight - 24.0) / 2.0, 0);
 
             XElement = xElement;
+            LibraryType = libraryType;
             CodeLanguage = codeLanguage;
 
             ApplyDefinition();
@@ -39,12 +42,17 @@ namespace LibrarySample.UserControls
 
         private void ApplyDefinition()
         {
-            string fileName = XElement.Element("Definition").Element("DefinitionFile").Value;
+            string fileName = LibraryType switch
+            {
+                LibraryType.CppWinRTNamespaceLibrary => XElement.Element("CppWinRTDefinition").Element("DefinitionFile").Value,
+                _ => XElement.Element("Definition").Element("DefinitionFile").Value,
+            };
 
             SourceCodeViewer sourceCodeViewer = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage);
-            sourceCodeViewer.FilePath = CodeLanguage switch
+            sourceCodeViewer.FilePath = LibraryType switch
             {
-                CodeLanguage.Cpp => XmlPath.CppLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
+                LibraryType.CppLibrary => XmlPath.CppLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
+                LibraryType.CppWinRTNamespaceLibrary=> XmlPath.CppWinRTNamespaceLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
 
                 _ => throw new NotImplementedException(),
             };

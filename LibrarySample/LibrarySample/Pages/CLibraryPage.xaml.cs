@@ -39,6 +39,8 @@ namespace LibrarySample.Pages
                 _xElement = value;
                 (Frame as ContentPageFrame).AddXElement(value);
                 ContentsPanel.Children.Clear();
+
+                LibraryPageHelper.ApplyIncoplete(ContentsPanel, value);
                 
                 ApplyContents();
             }
@@ -68,102 +70,22 @@ namespace LibrarySample.Pages
 
         private void ApplyStructures()
         {
-            XElement xStructures = XElement.Element("Structures");
-
-            if (xStructures != null)
-            {
-                StackPanel panel = LibraryPageHelper.CreateHeaderPanel("構造体");
-                ContentsPanel.Children.Add(panel);
-
-                foreach(XElement xStructure in xStructures.Elements("Structure"))
-                {
-                    panel.Children.Add(new SlideButton(xStructure, CodeLanguage.C) { Glyph = EnumConverter.ToGlyph(Category.Field) });
-                }
-            }
+            LibraryPageHelper.ApplyCStructures(ContentsPanel, XElement, LibraryType.CLibrary);
         }
 
         private async Task ApplyFunctions()
         {
-            XElement xFuntions = XElement.Element("Functions");
-
-            if (xFuntions != null)
-            {
-                StackPanel panel = LibraryPageHelper.CreateHeaderPanel("関数");
-                ContentsPanel.Children.Add(panel);
-
-                foreach (XElement xFunction in xFuntions.Elements("Function"))
-                {
-                    panel.Children.Add(new CFunctionExpander(xFunction, Category.Function));
-
-                    await Task.Delay(1);
-                }
-
-            }
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Functions", "関数", LibraryType.CLibrary, Category.Function);
         }
 
         private async Task ApplyFunctionMacros()
         {
-            XElement xFuntions = XElement.Element("FunctionMacros");
-
-            if (xFuntions != null)
-            {
-                StackPanel panel = LibraryPageHelper.CreateHeaderPanel("関数マクロ");
-                ContentsPanel.Children.Add(panel);
-
-                foreach (XElement xFunction in xFuntions.Elements("Function"))
-                {
-                    panel.Children.Add(new CFunctionExpander(xFunction, Category.Macro));
-
-                    await Task.Delay(1);
-                }
-
-            }
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "FunctionMacros", "関数マクロ", LibraryType.CLibrary, Category.Macro);
         }
 
         private async Task ApplyMacro()
         {
-
-            if (XElement.Attribute("HasMacros").Value == "True")
-            {
-                StackPanel panel = LibraryPageHelper.CreateHeaderPanel("マクロ");
-                ContentsPanel.Children.Add(panel);
-
-                string folderName = XElement.Attribute("Tag").Value;
-                var result = await SampleRunner.GetCSampleRunner(SaveData.CVersion, SaveData.CProcesserType).RunSampleAsync(folderName, "?macro");
-
-                var lines = result.Outputs.Split(Environment.NewLine);
-
-                //
-                for (int i = 0; i < lines.Length - 1; i += 3)
-                {
-                    if (lines[i] == lines[i + 1]) continue;
-
-                    ValueCard valueCard = new ValueCard();
-                    valueCard.IsTitleTextSelectionEnabled = true;
-                    valueCard.IsValueTextSelectionEnabled = true;
-                    valueCard.Glyph = EnumConverter.ToGlyph(Category.Macro);
-                    valueCard.Title = lines[i];
-                    valueCard.Value = lines[i + 1];
-                    valueCard.Description = lines[i + 2];
-
-                    panel.Children.Add(valueCard);
-
-                    await Task.Delay(1);
-                }
-
-                //マクロがなければpanelを削除
-                if (panel.Children.Count == 1)
-                {
-                    ContentsPanel.Children.Remove(panel);
-
-                    //本当に何もなければ
-                    if (ContentsPanel.Children.Count == 0)
-                    {
-                        this.Content = new TextBlock { Text = "なにも定義されていません", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center };
-                    }
-                }
-            }
-
+            await LibraryPageHelper.ApplyMacro(this, ContentsPanel, XElement, SampleRunner.GetCSampleRunner(CVersion, ProcesserType));
         }
 
     }

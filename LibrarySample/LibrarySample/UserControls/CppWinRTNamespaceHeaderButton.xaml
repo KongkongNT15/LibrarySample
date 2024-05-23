@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="LibrarySample.UserControls.CppWinRTNamespaceHeaderButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LibrarySample.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Width="92">
+
+    <ComboBox x:Name="ComboBox">
+        <x:String>x64</x:String>
+        <x:String>x86</x:String>
+    </ComboBox>
+    
+    
+</UserControl>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibrarySample
 {
-    internal class SampleRunner(string _applicationName)
+    public class SampleRunner(string _applicationName)
     {
 
         public string ApplicationName => _applicationName;
@@ -29,6 +29,18 @@ namespace LibrarySample
         private const string _cpp20x86SampleName = "../Sample/CppSample-Cpp20-x86";
         private const string _cpp23x86SampleName = "../Sample/CppSample-Cpp23-x86";
 
+        private const string _win32x64ConsoleSampleName = "../Sample/Win32-ConsoleSample-x64";
+        private const string _win32x64GraphicalSampleName = "../Sample/Win32-GraphicalSample-x64";
+
+        private const string _win32x86ConsoleSampleName = "../Sample/Win32-ConsoleSample-x86";
+        private const string _win32x86GraphicalSampleName = "../Sample/Win32-GraphicalSample-x86";
+
+        private const string _cppWinRTx64ConsoleSampleName = "../Sample/CppWinRT-ConsoleSample-x64";
+        private const string _cppWinRTx64GraphicalSampleName = "../Sample/CppWinRT-GraphicalSample-x64";
+
+        private const string _cppWinRTx86ConsoleSampleName = "../Sample/CppWinRT-ConsoleSample-x86";
+        private const string _cppWinRTx86GraphicalSampleName = "../Sample/CppWinRT-GraphicalSample-x86";
+
         private static SampleRunner _c11x64Sample;
         private static SampleRunner _c17x64Sample;
 
@@ -45,6 +57,18 @@ namespace LibrarySample
         private static SampleRunner _cpp20x86Sample;
         private static SampleRunner _cpp23x86Sample;
 
+        private static SampleRunner _win32x64ConsoleSample;
+        private static SampleRunner _win32x64GraphicalSample;
+
+        private static SampleRunner _win32x86ConsoleSample;
+        private static SampleRunner _win32x86GraphicalSample;
+
+        private static SampleRunner _cppWinRTx64ConsoleSample;
+        private static SampleRunner _cppWinRTx64GraphicalSample;
+
+        private static SampleRunner _cppWinRTx86ConsoleSample;
+        private static SampleRunner _cppWinRTx86GraphicalSample;
+        
         public static SampleRunner C11x64Sample => _c11x64Sample;
         public static SampleRunner C17x64Sample => _c17x64Sample;
 
@@ -60,6 +84,18 @@ namespace LibrarySample
         private static SampleRunner Cpp17x86Sample => _cpp17x86Sample;
         private static SampleRunner Cpp20x86Sample => _cpp20x86Sample;
         private static SampleRunner Cpp23x86Sample => _cpp23x86Sample;
+
+        public static SampleRunner Win32x64ConsoleSample => _win32x64ConsoleSample;
+        public static SampleRunner Win32x64GraphicalSample => _win32x64GraphicalSample;
+
+        public static SampleRunner Win32x86ConsoleSample => _win32x86ConsoleSample;
+        public static SampleRunner Win32x86GraphicalSample => _win32x86GraphicalSample;
+
+        public static SampleRunner CppWinRTx64ConsoleSample => _cppWinRTx64ConsoleSample;
+        public static SampleRunner CppWinRTx64GraphicalSample => _cppWinRTx64GraphicalSample;
+
+        public static SampleRunner CppWinRTx86ConsoleSample => _cppWinRTx86ConsoleSample;
+        public static SampleRunner CppWinRTx86GraphicalSample => _cppWinRTx86GraphicalSample;
 
         //コンソールのパス
         public static readonly string SampleLauncherPath = @"../Sample/SampleLauncher";
@@ -81,6 +117,18 @@ namespace LibrarySample
             _cpp17x86Sample = new SampleRunner(_cpp17x86SampleName);
             _cpp20x86Sample = new SampleRunner(_cpp20x86SampleName);
             _cpp23x86Sample = new SampleRunner(_cpp23x86SampleName);
+
+            _win32x64ConsoleSample = new SampleRunner(_win32x64ConsoleSampleName);
+            _win32x64GraphicalSample = new SampleRunner(_win32x64GraphicalSampleName);
+
+            _win32x86ConsoleSample = new SampleRunner(_win32x86ConsoleSampleName);
+            _win32x86GraphicalSample = new SampleRunner(_win32x86GraphicalSampleName);
+
+            _cppWinRTx64ConsoleSample = new SampleRunner(_cppWinRTx64ConsoleSampleName);
+            _cppWinRTx64GraphicalSample = new SampleRunner(_cppWinRTx64GraphicalSampleName);
+
+            _cppWinRTx86ConsoleSample = new SampleRunner(_cppWinRTx86ConsoleSampleName);
+            _cppWinRTx86GraphicalSample = new SampleRunner(_cppWinRTx86GraphicalSampleName);
         }
 
         public static SampleRunner GetCSampleRunner(CVersion cLanguage, ProcesserType processerType)
@@ -131,6 +179,46 @@ namespace LibrarySample
                 {
                     ProcesserType.X86 => Cpp23x86Sample,
                     ProcesserType.X64 => Cpp23x64Sample,
+                    _ => throw new NotImplementedException(),
+                },
+                _ => throw new NotImplementedException(),
+            };
+        }
+
+        public static SampleRunner GetWin32SampleRunner(LaunchType launchType, ProcesserType processerType)
+        {
+            return launchType switch
+            {
+                LaunchType.Graphical => processerType switch
+                {
+                    ProcesserType.X64 => Win32x64GraphicalSample,
+                    ProcesserType.X86 => Win32x86GraphicalSample,
+                    _ => throw new NotImplementedException(),
+                },
+                LaunchType.PipeConsole or LaunchType.Console => processerType switch
+                {
+                    ProcesserType.X64 => Win32x64ConsoleSample,
+                    ProcesserType.X86 => Win32x86ConsoleSample,
+                    _ => throw new NotImplementedException(),
+                },
+                _ => throw new NotImplementedException(),
+            };
+        }
+
+        public static SampleRunner GetCppWinRTSampleRunner(LaunchType launchType, ProcesserType processerType)
+        {
+            return launchType switch
+            {
+                LaunchType.Graphical => processerType switch
+                {
+                    ProcesserType.X64 => CppWinRTx64GraphicalSample,
+                    ProcesserType.X86 => CppWinRTx86GraphicalSample,
+                    _ => throw new NotImplementedException(),
+                },
+                LaunchType.PipeConsole or LaunchType.Console => processerType switch
+                {
+                    ProcesserType.X64 => CppWinRTx64ConsoleSample,
+                    ProcesserType.X86 => CppWinRTx86ConsoleSample,
                     _ => throw new NotImplementedException(),
                 },
                 _ => throw new NotImplementedException(),

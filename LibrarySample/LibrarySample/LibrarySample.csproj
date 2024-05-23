@@ -23,8 +23,14 @@
     <None Remove="Pages\CppEnumPage.xaml" />
     <None Remove="Pages\CppHomePage.xaml" />
     <None Remove="Pages\CppLibraryPage.xaml" />
+    <None Remove="Pages\CppWinRTClassPage.xaml" />
+    <None Remove="Pages\CppWinRTNamespaceHomePage.xaml" />
+    <None Remove="Pages\CppWinRTNamespacePage.xaml" />
     <None Remove="Pages\CStructurePage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
+    <None Remove="Pages\Win32HomePage.xaml" />
+    <None Remove="Pages\Win32LibraryPage.xaml" />
+    <None Remove="Pages\Win32StructurePage.xaml" />
     <None Remove="Resources\ExpanderStyles.xaml" />
     <None Remove="Settings\AboutAppPage.xaml" />
     <None Remove="Settings\AppInfoCard.xaml" />
@@ -37,6 +43,7 @@
     <None Remove="UserControls\CHeaderButton.xaml" />
     <None Remove="UserControls\ConsolePane.xaml" />
     <None Remove="UserControls\CppHeaderButton.xaml" />
+    <None Remove="UserControls\CppWinRTNamespaceHeaderButton.xaml" />
     <None Remove="UserControls\DescriptionSettingCard.xaml" />
     <None Remove="UserControls\DescriptionTextCard.xaml" />
     <None Remove="UserControls\FunctionExpander.xaml" />
@@ -51,6 +58,7 @@
     <None Remove="UserControls\TextCard.xaml" />
     <None Remove="UserControls\ValueCard.xaml" />
     <None Remove="UserControls\ViewExpander.xaml" />
+    <None Remove="UserControls\Win32HeaderButton.xaml" />
     <None Remove="UserControls\XmlNavigationViewItem.xaml" />
   </ItemGroup>
 
@@ -62,6 +70,9 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\cppwinrt.png" />
+    <Content Include="Assets\Win32.png" />
+    <Content Include="Assets\UWP.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,6 +88,46 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UserControls\Win32HeaderButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Win32StructurePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Win32LibraryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Win32HomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\CppWinRTNamespaceHomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\CppWinRTClassPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UserControls\CppWinRTNamespaceHeaderButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\CppWinRTNamespacePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Settings\AppInfoCard.xaml">

@@ -11,6 +11,7 @@ namespace LibrarySample
         NoSample,
         Console,
         Pipe,
-        All,
+        Graphical,
+        PipeConsole,
     }
 }

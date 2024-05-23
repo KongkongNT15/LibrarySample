@@ -40,15 +40,12 @@ namespace LibrarySample.UserControls
             set => FIcon.Source = value;
         }
 
-        public CodeLanguage LanguageType { get; }
+        public LibraryType LibraryType { get; }
 
-        public string Folder { get; }
-
-        public HomePageButton(string folder, CodeLanguage languageType)
+        public HomePageButton(LibraryType libraryType)
         {
             this.InitializeComponent();
-            Folder = folder;
-            LanguageType = languageType;
+            LibraryType = libraryType;
 
             Click += HomePageButton_Click;
         }
@@ -65,10 +62,12 @@ namespace LibrarySample.UserControls
 
             frame = dependencyObject as ContentPageFrame;
 
-            Type pageType = LanguageType switch
+            Type pageType = LibraryType switch
             {
-                CodeLanguage.C => typeof(CHomePage),
-                CodeLanguage.Cpp => typeof(CppHomePage),
+                LibraryType.CLibrary => typeof(CHomePage),
+                LibraryType.CppLibrary => typeof(CppHomePage),
+                LibraryType.Win32Library => typeof(Win32HomePage),
+                LibraryType.CppWinRTNamespaceLibrary => typeof(CppWinRTNamespaceHomePage),
                 _ => typeof(Page),
             };
 

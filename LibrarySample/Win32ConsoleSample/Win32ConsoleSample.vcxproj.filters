@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="SampleManagement.c" />
+    <ClCompile Include="Winuser.h.c">
+      <Filter>Sample</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sample">
+      <UniqueIdentifier>{566c5d5c-1c19-4dd1-ac6c-67bc6164150d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
