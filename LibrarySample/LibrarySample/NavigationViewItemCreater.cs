@@ -17,26 +17,26 @@ namespace LibrarySample
         //Cライブラリの追加
         public static async Task AddCLibrary(IList<object> menuItems)
         {
-            await AddCWin32Library(menuItems, HomePageData.CHomePageTitle, XmlPath.CLibraryDirectory, ImageSources.CImageSource, typeof(CLibraryPage), typeof(CStructurePage));
+            await AddCWin32Library(menuItems, HomePageData.CHomePageTitle, LibraryType.CLibrary, ImageSources.CImageSource, typeof(CLibraryPage), typeof(CStructurePage));
         }
 
         //Win32ライブラリの追加
         public static async Task AddWin32Library(IList<object> menuItems)
         {
-            await AddCWin32Library(menuItems, HomePageData.Win32HomePageTitle, XmlPath.Win32LibraryDirectory, ImageSources.Win32ImageSource, typeof(Win32LibraryPage), typeof(Win32StructurePage));
+            await AddCWin32Library(menuItems, HomePageData.Win32HomePageTitle, LibraryType.Win32Library, ImageSources.Win32ImageSource, typeof(Win32LibraryPage), typeof(Win32StructurePage));
         }
 
         //C
         //Win32
-        private static async Task AddCWin32Library(IList<object> menuItems, string homePageTitle, string xmlPath, IconSource iconSource, Type libraryPageType, Type StructurePageType)
+        private static async Task AddCWin32Library(IList<object> menuItems, string homePageTitle, LibraryType libraryType, IconSource iconSource, Type libraryPageType, Type StructurePageType)
         {
             //Cライブラリの追加
             NavigationViewItem headers = new NavigationViewItem { Content = homePageTitle, Icon = iconSource.CreateIconElement() };
             menuItems.Add(headers);
 
-            foreach (string path in Directory.GetFiles(xmlPath))
+            foreach (var pair in XmlDocuments.GetDocuments(libraryType))
             {
-                XElement xElement = XElement.Load(path);
+                XElement xElement = pair.Value;
 
                 XmlNavigationViewItem item = new XmlNavigationViewItem(xElement, libraryPageType);
                 item.Glyph = xElement.Attribute("Glyph").Value;
@@ -50,7 +50,7 @@ namespace LibrarySample
                     foreach (XElement element in xStruct.Elements("Structure"))
                     {
                         string name = element.Attribute("Name").Value;
-                        item.MenuItems.Add(new XmlNavigationViewItem(element, StructurePageType) { Glyph = EnumConverter.ToGlyph(Category.Structure), Content = name });
+                        item.MenuItems.Add(new XmlNavigationViewItem(element, StructurePageType) { Glyph = Category.Structure.ToGlyph(), Content = name });
                         await Task.Delay(1);
                     }
                 }
@@ -76,23 +76,23 @@ namespace LibrarySample
                 {
                     foreach (XElement xClassReference in xClasses.Elements("ClassReference"))
                     {
-                        XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + xClassReference.Attribute("FileName").Value);
+                        XElement xClass = XmlDocuments.CppLibraryDocuments[XmlPath.CppLibraryDirectory + xClassReference.Attribute("FileName").Value];
 
                         string name = xClass.Attribute("Name").Value.Replace("::", " : : ");
 
-                        item.MenuItems.Add(new XmlNavigationViewItem(xClass, pageType) { Glyph = EnumConverter.ToGlyph(category), Content = name });
+                        item.MenuItems.Add(new XmlNavigationViewItem(xClass, pageType) { Glyph = category.ToGlyph(), Content = name });
                         await Task.Delay(1);
                     }
 
                 }
             }
 
-            foreach (string path in Directory.GetFiles(XmlPath.CppLibraryDirectory))
+            foreach (var pair in XmlDocuments.CppLibraryDocuments)
             {
                 //へだーのみ
-                if (!XmlPath.IsCppHeaderXmlFile(path)) continue;
+                if (!XmlPath.IsCppHeaderXmlFile(pair.Key)) continue;
 
-                XElement xElement = XElement.Load(path);
+                XElement xElement = pair.Value;
 
                 XmlNavigationViewItem item = new XmlNavigationViewItem(xElement, typeof(CppLibraryPage));
                 item.Glyph = xElement.Attribute("Glyph").Value;
@@ -123,22 +123,22 @@ namespace LibrarySample
 
                 foreach (XElement xClassReference in xClasses.Elements("ClassReference"))
                 {
-                    XElement xClass = XElement.Load(XmlPath.CppWinRTNamespaceLibraryDirectory + xClassReference.Attribute("FileName").Value);
+                    XElement xClass = XmlDocuments.CppWinRTNamespaceLibraryDocuments[XmlPath.CppWinRTNamespaceLibraryDirectory + xClassReference.Attribute("FileName").Value];
 
                     string name = xClass.Attribute("Name").Value;
 
-                    item.MenuItems.Add(new XmlNavigationViewItem(xClass, pageType) { Glyph = EnumConverter.ToGlyph(category), Content = name });
+                    item.MenuItems.Add(new XmlNavigationViewItem(xClass, pageType) { Glyph = category.ToGlyph(), Content = name });
                     await Task.Delay(1);
                 }
 
             }
 
-            foreach (string path in Directory.GetFiles(XmlPath.CppWinRTNamespaceLibraryDirectory))
+            foreach (var pair in XmlDocuments.CppWinRTNamespaceLibraryDocuments)
             {
                 //へだーのみ
-                if (!XmlPath.IsCppWinRTNamespaceXmlFile(path)) continue;
+                if (!XmlPath.IsCppWinRTNamespaceXmlFile(pair.Key)) continue;
 
-                XElement xElement = XElement.Load(path);
+                XElement xElement = pair.Value;
 
                 XmlNavigationViewItem item = new XmlNavigationViewItem(xElement, typeof(CppWinRTNamespacePage));
                 item.Glyph = xElement.Attribute("Glyph").Value;

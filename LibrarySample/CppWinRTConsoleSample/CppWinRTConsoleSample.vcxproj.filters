@@ -7,10 +7,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="hstring.struct.cpp">
+    <ClCompile Include="winrt.hstring.struct.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="SampleManagement.cpp" />
+    <ClCompile Include="winrt.namespace.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

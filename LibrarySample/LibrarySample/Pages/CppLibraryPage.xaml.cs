@@ -62,6 +62,8 @@ namespace LibrarySample.Pages
             ApplyClasses();
             ApplyStructures();
             ApplyEnums();
+            ApplySpesializations();
+            await ApplyLiterals();
             await ApplyOperators();
             await ApplyFunctions();
         }
@@ -108,17 +110,47 @@ namespace LibrarySample.Pages
 
         private void ApplyClasses()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Classes", "クラス", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary, Category.Class);
+            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Classes", "クラス", LibraryType.CppLibrary, Category.Class);
         }
 
         private void ApplyStructures()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Structures", "構造体", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary, Category.Structure);
+            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Structures", "構造体", LibraryType.CppLibrary, Category.Structure);
         }
 
         private void ApplyEnums()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Enums", "列挙型", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary, Category.Enum);
+            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Enums", "列挙型", LibraryType.CppLibrary, Category.Enum);
+        }
+
+        private void ApplySpesializations()
+        {
+            XElement xSpesializations = XElement.Element("Specializations");
+
+            if (xSpesializations == null) return;
+
+            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("特殊化");
+            ContentsPanel.Children.Add(panel);
+
+            foreach (XElement xSpesialization in xSpesializations.Elements())
+            {
+                string className = xSpesialization.Attribute("ClassName").Value;
+                string type = xSpesialization.Attribute("Type").Value;
+
+                panel.Children.Add(
+                    new ValueCard()
+                    {
+                        Title = $"{className}<{type}>",
+                        Description = $"{className}を{type}に特殊化した型",
+                        Glyph = Category.Specialization.ToGlyph(),
+                    }
+                );
+            }
+        }
+
+        private async Task ApplyLiterals()
+        {
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Literals", "リテラル", LibraryType.CppLibrary, Category.Literal);
         }
 
         private async Task ApplyOperators()

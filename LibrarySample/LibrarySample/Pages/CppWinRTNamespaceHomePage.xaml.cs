@@ -1,3 +1,4 @@
+using LibrarySample.SampleManagement;
 using LibrarySample.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -12,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -34,12 +36,12 @@ namespace LibrarySample.Pages
 
         private async void LoadLibrary()
         {
-            foreach (string path in Directory.GetFiles(XmlPath.CppWinRTNamespaceLibraryDirectory))
+            foreach (var pair in XmlDocuments.CppWinRTNamespaceLibraryDocuments)
             {
                 //ÉwÉbÉ_Å[ÇÃÇ›
-                if (!XmlPath.IsCppWinRTNamespaceXmlFile(path)) continue;
+                if (!XmlPath.IsCppWinRTNamespaceXmlFile(pair.Key)) continue;
 
-                XElement xElement = XElement.Load(path);
+                XElement xElement = pair.Value;
 
                 RootPanel.Children.Add(new SlideButton(xElement, LibraryType.CppWinRTNamespaceLibrary));
 

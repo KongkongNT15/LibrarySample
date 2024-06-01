@@ -96,25 +96,7 @@ namespace LibrarySample
             throw new ArgumentException();
         }
 
-        public static string ToGlyph(Category sampleType)
-        {
-            return sampleType switch
-            {
-                Category.Class => "\uEA86",
-                Category.Concept => "\uEA86",
-                Category.Constructor => "\uF158",
-                Category.Destructor => "\uF158",
-                Category.Enum => "\uEA86",
-                Category.Field => "\uEA86",
-                Category.Function => "\uF158",
-                Category.Macro => "\uE71A",
-                Category.Method => "\uF158",
-                Category.Operator => "\uE710",
-                Category.Structure => "\uEA86",
-                Category.TypeDefinition => "\uEA86",
-                _ => throw new Exception()
-            };
-        }
+        
 
         public static string ToNormalCppVersionName(CppVersion cppVersion)
         {

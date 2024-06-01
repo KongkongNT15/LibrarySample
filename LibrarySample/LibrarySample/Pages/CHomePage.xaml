@@ -9,8 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <ScrollViewer Padding="{x:Bind root:Data.PageScrollViewerPadding}" >
-        <StackPanel x:Name="ContentsPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" />
+    <ScrollViewer >
+        <StackPanel x:Name="ContentsPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" Padding="{x:Bind root:Data.PageScrollViewerPadding}" />
     </ScrollViewer>
     
 </Page>

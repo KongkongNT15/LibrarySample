@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace LibrarySample.Pages
 {
-    internal class ContentPageFrame : Frame
+    public class ContentPageFrame : Frame
     {
         public static NavigationTransitionInfo DrillInNavigationTransitionInfo { get; } = new DrillInNavigationTransitionInfo();
         public static NavigationTransitionInfo SlideFromLeftNavigationTransitionInfo { get; } = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft };
@@ -53,6 +53,23 @@ namespace LibrarySample.Pages
 
                 return LibraryType.None;
             }
+        }
+
+        public void Reload()
+        {
+
+            if (Content is IXml xml)
+            {
+                XElement xElement = xml.XElement;
+
+                Navigate(CurrentSourcePageType, null, DrillInNavigationTransitionInfo);
+
+                (Content as IXml).XElement = xElement;
+
+                return;
+            }
+
+            Navigate(CurrentSourcePageType, null, DrillInNavigationTransitionInfo);
         }
     }
 }

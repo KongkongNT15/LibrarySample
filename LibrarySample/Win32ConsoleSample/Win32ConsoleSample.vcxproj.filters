@@ -10,6 +10,9 @@
     <ClCompile Include="Winuser.h.c">
       <Filter>Sample</Filter>
     </ClCompile>
+    <ClCompile Include="handleapi.h.c">
+      <Filter>Sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sample">

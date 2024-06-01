@@ -31,6 +31,7 @@ int NotFound(const char* tag)
 
 int RunSample(const char* headerTag, const char* sampleTag)
 {
+    if (IsEqualStringA(headerTag, "handleapi.h")) return RunHandleapiSample(sampleTag);
     if (IsEqualStringA(headerTag, "Winuser.h")) return RunWinuserSample(sampleTag);
 
     return NotFound(headerTag);

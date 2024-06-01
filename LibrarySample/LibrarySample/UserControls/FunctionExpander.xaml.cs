@@ -96,10 +96,15 @@ namespace LibrarySample.UserControls
 
             Category = category;
 
-            Glyph = EnumConverter.ToGlyph(Category);
+            Glyph = Category.ToGlyph();
 
             //
-            Title = (Category == Category.Operator ? "operator" : "") + xElement.Attribute("Name").Value;
+            Title = Category switch
+            {
+                Category.Operator => "operator",
+                Category.Literal => "operator\"\"",
+                _ => ""
+            } + xElement.Attribute("Name").Value;
 
             Description = Category switch
             {
@@ -226,7 +231,7 @@ namespace LibrarySample.UserControls
             }
 
             //関数形式以外はパラメータなし
-            if (Category != Category.Function && Category != Category.Method && Category != Category.Operator && Category != Category.Constructor)
+            if (!Category.IsFunctionType())
             {
                 RootPanel.Children.Remove(ParameterPanel);
                 return;
@@ -259,7 +264,7 @@ namespace LibrarySample.UserControls
                 return;
             }
 
-            if (Category != Category.Function && Category != Category.Method && Category != Category.Operator)
+            if (!Category.IsFunctionType())
             {
                 RootPanel.Children.Remove(ReturnsPanel);
                 return;
@@ -272,6 +277,10 @@ namespace LibrarySample.UserControls
                 {
                     case Category.Operator:
                         ReturnsPanel.Children.Add(new TextCard { Text = "*this" });
+                        break;
+
+                    case Category.Literal:
+                        ReturnsPanel.Children.Add(new TextCard { Text = "作成されたオブジェクト" });
                         break;
 
                     default:

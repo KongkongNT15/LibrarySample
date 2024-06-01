@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <wchar.h>
+#include <locale.h>
 #include <Windows.h>
 
 int wmain(int argc, wchar_t** argv)
@@ -9,6 +10,18 @@ int wmain(int argc, wchar_t** argv)
     if (argc != 5) {
         fputs("コマンドライン引数の数が正しくありません\n", stderr);
         return 1;
+    }
+
+    setlocale(LC_ALL, "");
+
+    wchar_t absolutePath[MAX_PATH];
+
+    if (!GetFullPathName(argv[1], MAX_PATH, absolutePath, NULL)) {
+
+        fputs("指定されたパスが見つかりませんでした\n", stderr);
+        fprintf(stderr, "パス: %ls\n", argv[1]);
+
+        return GetLastError();
     }
 
     //argv[1]~argv[4]の文字列の長さの合計 + 3 + 1
@@ -67,7 +80,7 @@ int wmain(int argc, wchar_t** argv)
     GetExitCodeProcess(pi.hProcess, &returns);
 
     putchar('\n');
-    printf("%ls (プロセス %u) は、コード %d で終了しました。\n", argv[1], pi.dwProcessId, returns);
+    printf("%ls (プロセス %u) は、コード %d で終了しました。\n", absolutePath, pi.dwProcessId, returns);
     printf("このウィンドウを閉じるには、任意のキーを押してください...");
 
     (void)_getch();

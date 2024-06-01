@@ -35,10 +35,10 @@ namespace LibrarySample.UserControls
             XElement def = xDefinition.Element("DefinitionFile");
             XElement source = xDefinition.Element("SourceCodeFile");
 
-            string xmlPath = _iswinrtNamespaceSample ? XmlPath.CppWinRTNamespaceLibraryDirectory : throw new NotImplementedException();
+            string xmlPath = _iswinrtNamespaceSample ? XmlPath.CppWinRTNamespaceLibrarySourceCodeDirectory : throw new NotImplementedException();
 
             SourceCodeViewer defCode = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.CppWinRT);
-            defCode.FilePath = xmlPath + def.Value;
+            defCode.FilePath = xmlPath + Folder + "/" + def.Value;
             AddDefinitionCode(defCode);
 
             //ソースコードがない
@@ -49,7 +49,7 @@ namespace LibrarySample.UserControls
             }
 
             SourceCodeViewer sourceCodeViewer = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.CppWinRT);
-            sourceCodeViewer.FilePath = xmlPath + source.Value;
+            sourceCodeViewer.FilePath = xmlPath + Folder + "/" + source.Value;
 
 
             AddSourceCode(sourceCodeViewer);
@@ -68,7 +68,7 @@ namespace LibrarySample.UserControls
 
         protected override void LaunchByButton()
         {
-            Process.Start(SampleRunner.SampleLauncherPath, $"{SampleRunner.GetCppWinRTSampleRunner(LaunchType, ProcesserType)} {Folder} {FuncName} true");
+            Process.Start(SampleRunner.SampleLauncherPath, $"{SampleRunner.GetCppWinRTSampleRunner(LaunchType, ProcesserType).ApplicationName} {Folder} {FuncName} true");
         }
     }
 }

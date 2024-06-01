@@ -38,6 +38,18 @@ namespace LibrarySample.UserControls
             set => FIcon.Glyph = value;
         }
 
+        public FontFamily TitleFontFamily
+        {
+            get => TitleTextBlock.FontFamily;
+            set => TitleTextBlock.FontFamily = value;
+        }
+
+        public FontFamily DescriptionFontFamily
+        {
+            get => DescriptionTextBlock.FontFamily;
+            set => DescriptionTextBlock.FontFamily = value;
+        }
+
         public ViewExpander()
         {
             this.InitializeComponent();

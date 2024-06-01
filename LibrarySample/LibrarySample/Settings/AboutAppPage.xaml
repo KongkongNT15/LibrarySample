@@ -29,9 +29,9 @@
 
         <local:SettingExpander Title="Win32 API" >
             <local:SettingExpander.Children>
-                <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (22621.0)" IsFront="True" />
-                <local:InnerInfoTextCard Title="ターゲットOSバージョン" Value="Windows 11 22H2 (22621.1)" />
-                <local:InnerInfoTextCard Title="ターゲット最小OSバージョン" Value="Windows 11 21H2 (22000.1)" />
+                <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (10.0.22621.0)" IsFront="True" />
+                <local:InnerInfoTextCard Title="ターゲットOSバージョン" Value="Windows 11 22H2 (10.0.22621.1)" />
+                <local:InnerInfoTextCard Title="ターゲット最小OSバージョン" Value="Windows 11 21H2 (10.0.22000.1)" />
                 <local:InnerInfoTextCard Title="C言語バージョン" Value="C17" />
                 <local:InnerInfoTextCard Title="文字エンコード" Value="UTF-16" />
                 <local:InnerInfoTextCard Title="コンソールの文字エンコード" Value="Shift-Jis" />
@@ -40,10 +40,10 @@
 
         <local:SettingExpander Title="C++/WinRT" >
             <local:SettingExpander.Children>
-                <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (22621.0)" IsFront="True" />
+                <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (10.0.22621.0)" IsFront="True" />
                 <local:InnerInfoTextCard Title="C++/WinRTバージョン" Value="2.0.240405.15" />
-                <local:InnerInfoTextCard Title="ターゲットOSバージョン" Value="Windows 11 22H2 (22621.1)" />
-                <local:InnerInfoTextCard Title="ターゲット最小OSバージョン" Value="Windows 11 21H2 (22000.1)" />
+                <local:InnerInfoTextCard Title="ターゲットOSバージョン" Value="Windows 11 22H2 (10.0.22621.1)" />
+                <local:InnerInfoTextCard Title="ターゲット最小OSバージョン" Value="Windows 11 21H2 (10.0.22000.1)" />
                 <local:InnerInfoTextCard Title="C++言語バージョン" Value="C++20" />
                 <local:InnerInfoTextCard Title="文字エンコード" Value="UTF-16" />
                 <local:InnerInfoTextCard Title="コンソールの文字エンコード" Value="Shift-Jis" />

@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -56,16 +57,22 @@ namespace LibrarySample.Pages
         {
             ApplyClasses();
             ApplyStructures();
+            await ApplyFunctions();
         }
 
         private void ApplyClasses()
         {
-            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Classes", "クラス", XmlPath.CppWinRTNamespaceLibraryDirectory, LibraryType.CppWinRTNamespaceLibrary, Category.Class);
+            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Classes", "クラス", LibraryType.CppWinRTNamespaceLibrary, Category.Class);
         }
 
         private void ApplyStructures()
         {
-            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Structures", "構造体", XmlPath.CppWinRTNamespaceLibraryDirectory, LibraryType.CppWinRTNamespaceLibrary, Category.Structure);
+            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Structures", "構造体", LibraryType.CppWinRTNamespaceLibrary, Category.Structure);
+        }
+
+        private async Task ApplyFunctions()
+        {
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Functions", "関数", LibraryType.CppWinRTNamespaceLibrary, Category.Function);
         }
     }
 }

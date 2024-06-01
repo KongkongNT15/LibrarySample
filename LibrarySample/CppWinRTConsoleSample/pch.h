@@ -1,11 +1,11 @@
 ﻿#pragma once
 
 #include <cstring>
+#include <locale>
 #include <iostream>
 
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
-
 
 
 namespace Kongkong
@@ -17,6 +17,6 @@ namespace Kongkong
 
 	int NotFound(const char* tag);
 
-	int hstring__struct__run(const char* functionTag);
+	int winrt__hstring__struct__run(const char* functionTag);
 }
 

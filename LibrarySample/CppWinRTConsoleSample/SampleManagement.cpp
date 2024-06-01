@@ -20,7 +20,7 @@ namespace Kongkong
 
 	int RunSample(const char* rootTag, const char* functionTag)
 	{
-
+		if (IsEqualString(rootTag, "winrt.hstring.struct")) return winrt__hstring__struct__run(functionTag);
 		return NotFound(rootTag);
 	}
 }

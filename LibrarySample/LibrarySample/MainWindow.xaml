@@ -102,6 +102,10 @@
                 </Grid>
             </NavigationView.Header>
 
+            <NavigationView.AutoSuggestBox >
+                
+            </NavigationView.AutoSuggestBox>
+
             <Grid x:Name="ContentsGrid" />
 
         </NavigationView>

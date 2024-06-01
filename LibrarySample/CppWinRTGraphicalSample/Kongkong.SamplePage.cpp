@@ -47,6 +47,10 @@ namespace Kongkong
 	{
 		_content.Loaded({ this, &SamplePage::Loaded });
 		_content.ActualThemeChanged({ this, &SamplePage::ActualThemeChanged });
+
+		//動きません！！！
+		//ふぁ！？っく
+		_content.Resources(Microsoft::UI::Xaml::Controls::XamlControlsResources());
 	}
 
 	void SamplePage::Loaded(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& args)

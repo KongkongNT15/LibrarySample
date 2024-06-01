@@ -1,3 +1,4 @@
+using LibrarySample.SampleManagement;
 using LibrarySample.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -34,12 +35,12 @@ namespace LibrarySample.Pages
 
         private async void LoadLibrary()
         {
-            foreach (string path in Directory.GetFiles(XmlPath.CppLibraryDirectory))
+            foreach (var pair in XmlDocuments.CppLibraryDocuments)
             {
                 //ÉwÉbÉ_Å[ÇÃÇ›
-                if (!XmlPath.IsCppHeaderXmlFile(path)) continue;
+                if (!XmlPath.IsCppHeaderXmlFile(pair.Key)) continue;
                 
-                XElement xElement = XElement.Load(path);
+                XElement xElement = pair.Value;
 
                 ContentsPanel.Children.Add(new SlideButton(xElement, LibraryType.CppLibrary));
 

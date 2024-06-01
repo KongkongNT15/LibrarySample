@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibrarySample
+namespace LibrarySample.SampleManagement
 {
     public static class XmlPath
     {
+
         public static readonly string CLibraryDirectory = "../Xml/C/";
         public static readonly string CLibrarySourceCodeDirectory = "../Xml/C/Code/";
 

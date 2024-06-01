@@ -80,7 +80,7 @@ namespace LibrarySample.Pages
 
         private async Task ApplyFunctionMacros()
         {
-            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "FunctionMacros", "関数マクロ", LibraryType.CLibrary, Category.Macro);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "FunctionMacros", "関数マクロ", LibraryType.CLibrary, Category.FunctionMacro);
         }
 
         private async Task ApplyMacro()

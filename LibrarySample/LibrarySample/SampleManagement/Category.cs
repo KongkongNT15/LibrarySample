@@ -16,9 +16,11 @@ namespace LibrarySample.SampleManagement
         Field,
         Function,
         FunctionMacro,
+        Literal,
         Macro,
         Method,
         Operator,
+        Specialization,
         Structure,
         TypeDefinition,
     }

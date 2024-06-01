@@ -10,7 +10,7 @@
 #include <vector>
 #include <winrt/base.h>
 #include <hstring.h>
-#include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>    //DesktopWindowXamlSource
+#include <windows.UI.xaml.hosting.desktopwindowxamlsource.h>    //DesktopWindowXamlSource
 
 //ñºèÃÇ©Ç‘ÇËëŒçÙÅiëOîºÅjÇ±Ç±Ç©ÇÁ
 #pragma push_macro("GetCurrentTime")
@@ -23,16 +23,16 @@
 #include <winrt/Windows.ApplicationModel.Activation.h>
 #include <winrt/Windows.Devices.Enumeration.h>
 #include <winrt/Windows.Devices.Power.h>
-#include <winrt/windows.foundation.h>   //IAsyncAction
+#include <winrt/Windows.Foundation.h>   //IAsyncAction
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.Globalization.h>
 #include <winrt/Windows.Globalization.Fonts.h>
 #include <winrt/Windows.Globalization.NumberFormatting.h>
 #include <winrt/Windows.Graphics.Display.h>
-#include <winrt/windows.security.cryptography.h>    //CryptographicBuffer
+#include <winrt/Windows.Security.Cryptography.h>    //CryptographicBuffer
 #include <winrt/Windows.Storage.Pickers.h>
 #include <winrt/Windows.Storage.h>
-#include <winrt/Windows.system.h>
+#include <winrt/Windows.System.h>
 #include <winrt/Windows.System.Display.h>
 #include <winrt/Windows.System.Inventory.h>
 #include <winrt/Windows.System.Power.h>
@@ -42,17 +42,19 @@
 #include <winrt/Windows.UI.Text.h>
 #include <winrt/Windows.UI.ViewManagement.h>
 #include <winrt/Windows.UI.Xaml.h>
-#include <winrt/windows.ui.xaml.controls.h>
-#include <winrt/windows.ui.xaml.controls.primitives.h>  //Click
+#include <winrt/Windows.UI.Xaml.Controls.h>
+#include <winrt/Windows.UI.Xaml.Controls.Primitives.h>  //Click
 #include <winrt/Windows.UI.Xaml.Data.h>
 #include <winrt/Windows.UI.Xaml.Documents.h>
 #include <winrt/Windows.UI.Xaml.Hosting.h>
-#include <winrt/windows.ui.xaml.interop.h>
-#include <winrt/windows.ui.xaml.markup.h>   //XamlReader
-#include <winrt/windows.ui.xaml.media.h>    //SolidColorBrush
+#include <winrt/Windows.UI.Xaml.Interop.h>
+#include <winrt/Windows.UI.Xaml.Markup.h>   //XamlReader
+#include <winrt/Windows.UI.Xaml.Media.h>    //SolidColorBrush
 #include <winrt/Windows.UI.Xaml.Media.Animation.h>
 #include <winrt/Windows.UI.Xaml.Navigation.h>
 #include <winrt/Windows.UI.Xaml.Shapes.h>
+
+#include <winrt/Microsoft.UI.Xaml.Controls.h>
 
 #include <winrt/CppWinRTGraphicalSample.h>
 

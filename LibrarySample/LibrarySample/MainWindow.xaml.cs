@@ -139,39 +139,6 @@ namespace LibrarySample
             RootGrid.Resources["NavigationViewHeaderMargin"] = new Thickness(Data.NavigationViewContentPadding, Data.NavigationViewContentPadding - 14, Data.NavigationViewContentPadding, 0);
         }
 
-        private static object SearchMenuItem(XElement element, IList<object> objects)
-        {
-            foreach (object obj in objects)
-            {
-                if (obj is XmlNavigationViewItem item)
-                {
-                    if (item.XElement.ToString() == element.ToString()) return obj;
-
-                    object ret = SearchMenuItem(element, item.MenuItems);
-                    if (ret != null) return ret;
-                }
-            }
-            return null;
-        }
-
-        private void ReloadPage()
-        {
-            ContentPageFrame frame = ActiveFrame;
-
-            if (frame.Content is IXml xml)
-            {
-                XElement xElement = xml.XElement;
-
-                frame.Navigate(frame.CurrentSourcePageType, null, ContentPageFrame.DrillInNavigationTransitionInfo);
-
-                (frame.Content as IXml).XElement = xElement;
-
-                return;
-            }
-
-            frame.Navigate(frame.CurrentSourcePageType, null, ContentPageFrame.DrillInNavigationTransitionInfo);
-        }
-
         //左のメニューに項目を追加
         //ホームを表示
         private async Task SetNavViewItem()
@@ -183,6 +150,8 @@ namespace LibrarySample
             menuItems.Add(new NavigationViewItemSeparator());
 
             AddHomePage();
+
+            await XmlDocuments.LoadDocumentsAsync();
 
             await NavigationViewItemCreater.AddCLibrary(menuItems);
 
@@ -237,8 +206,6 @@ namespace LibrarySample
                 await Task.Delay(1);
             }
 
-            string xElementString = xElement.ToString();
-
             foreach (object obj in NavView.MenuItems)
             {
                 //
@@ -250,7 +217,7 @@ namespace LibrarySample
                         //Namespace
                         if (obj1 is XmlNavigationViewItem item1)
                         {
-                            if (item1.XElement.ToString() == xElementString)
+                            if (item1.XElement == xElement)
                             {
                                 item.IsExpanded = true;
                                 NavView.SelectedItem = obj1;
@@ -263,7 +230,7 @@ namespace LibrarySample
                             {
                                 if(obj2 is XmlNavigationViewItem item2)
                                 {
-                                    if (item2.XElement.ToString() == xElementString)
+                                    if (item2.XElement == xElement)
                                     {
                                         item.IsExpanded = true;
                                         item1.IsExpanded = true;
@@ -447,7 +414,7 @@ namespace LibrarySample
         }
 
         //ItemInvoked()からナビゲート
-        private void NavigateFrame(string content, ContentPageFrame frame, NavigationTransitionInfo navigationTransitionInfo)
+        public void NavigateFrame(string content, ContentPageFrame frame, NavigationTransitionInfo navigationTransitionInfo)
         {
             if (NavView.SelectedItem is not XmlNavigationViewItem)
             {

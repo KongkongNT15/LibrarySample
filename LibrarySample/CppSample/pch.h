@@ -7,6 +7,7 @@
 #include <array>
 #include <bitset>
 #include <cmath>
+#include <complex>
 #include <cstring>
 #include <exception>
 #include <iostream>
@@ -85,6 +86,8 @@ int bitset__class__run(FUNCNAME);
 int bitset__reference__class__run(FUNCNAME);
 int bitset__hpp__run(FUNCNAME);
 int charconv__hpp__run(FUNCNAME);
+int complex__class__run(FUNCNAME);
+int complex__hpp__run(FUNCNAME);
 int exception__class__run(FUNCNAME);
 int hash__bitset__struct__run(FUNCNAME);
 int type_info__class__run(FUNCNAME);

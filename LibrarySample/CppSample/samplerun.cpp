@@ -28,6 +28,8 @@ int RunSample(const char* folder, const char* func)
     if (IsEqualFolderName("bitset.reference.class")) return bitset__reference__class__run(func);
     if (IsEqualFolderName("bitset.hpp")) return bitset__hpp__run(func);
     if (IsEqualFolderName("charconv.hpp")) return charconv__hpp__run(func);
+    if (IsEqualFolderName("complex.class")) return complex__class__run(func);
+    if (IsEqualFolderName("complex.hpp")) return complex__hpp__run(func);
     if (IsEqualFolderName("exception.class")) return exception__class__run(func);
     if (IsEqualFolderName("hash.bitset.struct")) return hash__bitset__struct__run(func);
     if (IsEqualFolderName("type_info.class")) return type_info__class__run(func);

@@ -73,8 +73,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
     EnumChildWindows(hwnd, ChangeToModernStyle, MAKELPARAM(FALSE, 0));
 
-    ShowWindow(hwnd, nCmdShow);
     SetTitleBarTheme(hwnd, IsLightTheme());
+    ShowWindow(hwnd, nCmdShow);
+    
 
     // Run the message loop.
 

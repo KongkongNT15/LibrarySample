@@ -1,3 +1,6 @@
+using LibrarySample.Languages;
+using LibrarySample.SampleManagement;
+using LibrarySample.Settings;
 using LibrarySample.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -26,6 +29,7 @@ namespace LibrarySample.Pages
     /// </summary>
     public sealed partial class CHomePage : Page
     {
+
         public CHomePage()
         {
             this.InitializeComponent();

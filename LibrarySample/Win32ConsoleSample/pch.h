@@ -25,4 +25,6 @@ int RunSample(const char* headerTag, const char* sampleTag);
 
 int NotFound(const char* tag);
 
+
+int RunHandleapiSample(const char* tag);
 int RunWinuserSample(const char* tag);

@@ -68,7 +68,7 @@ namespace LibrarySample.Pages
             rootPanel.Children.Add(CreateIncompleteInfoBar());
         }
 
-        public static void ApplyClasses(StackPanel rootPanel, XElement xElement, string elementName, string header, string libraryPath, LibraryType libraryType, Category category)
+        public static void ApplyClasses(StackPanel rootPanel, XElement xElement, string elementName, string header, LibraryType libraryType, Category category)
         {
             XElement xClasses = xElement.Element(elementName);
 
@@ -80,9 +80,9 @@ namespace LibrarySample.Pages
 
             foreach (XElement xClassReference in xClasses.Elements())
             {
-                XElement xClass = XElement.Load(libraryPath + xClassReference.Attribute("FileName").Value);
+                XElement xClass = XmlDocuments.GetDocuments(libraryType)[libraryType.LibraryDirectory() + xClassReference.Attribute("FileName").Value];
 
-                panel.Children.Add(new SlideButton(xClass, libraryType) { Glyph = EnumConverter.ToGlyph(category) });
+                panel.Children.Add(new SlideButton(xClass, libraryType) { Glyph = category.ToGlyph() });
             }
         }
 
@@ -117,7 +117,7 @@ namespace LibrarySample.Pages
             {
                 ValueCard valueCard = new ValueCard();
 
-                valueCard.Glyph = EnumConverter.ToGlyph(Category.TypeDefinition);
+                valueCard.Glyph = Category.TypeDefinition.ToGlyph();
                 valueCard.Title = xTypedef.Attribute("Name").Value;
                 valueCard.Description = xTypedef.Attribute("Description").Value;
                 valueCard.Value = xTypedef.Attribute("Type")?.Value;
@@ -138,7 +138,7 @@ namespace LibrarySample.Pages
 
                 foreach (XElement xStructure in xStructures.Elements("Structure"))
                 {
-                    panel.Children.Add(new SlideButton(xStructure, libraryType) { Glyph = EnumConverter.ToGlyph(Category.Structure) });
+                    panel.Children.Add(new SlideButton(xStructure, libraryType) { Glyph = Category.Structure.ToGlyph() });
                 }
             }
         }
@@ -164,7 +164,7 @@ namespace LibrarySample.Pages
                     ValueCard valueCard = new ValueCard();
                     valueCard.IsTitleTextSelectionEnabled = true;
                     valueCard.IsValueTextSelectionEnabled = true;
-                    valueCard.Glyph = EnumConverter.ToGlyph(Category.Macro);
+                    valueCard.Glyph = Category.Macro.ToGlyph();
                     valueCard.Title = lines[i];
                     valueCard.Value = lines[i + 1];
                     valueCard.Description = lines[i + 2];
@@ -194,7 +194,7 @@ namespace LibrarySample.Pages
         {
             List<XElement> xFunctions = new List<XElement>();
 
-            await GetBaseClassFunctionsAsync(xFunctions, xElement, elementName);
+            await GetBaseClassFunctionsAsync(xFunctions, xElement, libraryType, elementName);
 
             if (xFunctions.Count == 0) return;
 
@@ -209,16 +209,16 @@ namespace LibrarySample.Pages
             }
         }
 
-        public static async Task GetBaseClassFunctionsAsync(List<XElement> xElements, XElement xPageRoot, string elementName, bool ignoreOperatorE = false)
+        public static async Task GetBaseClassFunctionsAsync(List<XElement> xElements, XElement xPageRoot, LibraryType libraryType, string elementName, bool ignoreOperatorE = false)
         {
             await Task.Run(() =>
             {
-                GetBaseClassFunctions(xElements, xPageRoot, elementName, ignoreOperatorE);
+                GetBaseClassFunctions(xElements, xPageRoot, libraryType, elementName, ignoreOperatorE);
             });
         }
 
         //
-        private static void GetBaseClassFunctions(List<XElement> xElements, XElement xPageRoot, string elementName, bool ignoreOperatorE)
+        private static void GetBaseClassFunctions(List<XElement> xElements, XElement xPageRoot, LibraryType libraryType, string elementName, bool ignoreOperatorE)
         {
             XElement xBaseClasses = xPageRoot.Element("BaseClasses");
             //基底クラスがあれば再起関数
@@ -227,8 +227,8 @@ namespace LibrarySample.Pages
                 foreach (XElement xClassReference in  xBaseClasses.Elements())
                 {
                     string fileName = xClassReference.Attribute("FileName").Value;
-                    XElement xClass = XElement.Load(XmlPath.CppLibraryDirectory + fileName);
-                    GetBaseClassFunctions(xElements, xClass, elementName, true);
+                    XElement xClass = XmlDocuments.GetDocuments(libraryType)[libraryType.LibraryDirectory() + fileName];
+                    GetBaseClassFunctions(xElements, xClass, libraryType, elementName, true);
                 }
             }
 
@@ -273,7 +273,7 @@ namespace LibrarySample.Pages
             }
         }
 
-        public static void ApplyBaseOrDerivedClasses(StackPanel rootPanel, XElement xElement, string elementName, string headerName, string xmlPath, LibraryType libraryType)
+        public static void ApplyBaseOrDerivedClasses(StackPanel rootPanel, XElement xElement, string elementName, string headerName, LibraryType libraryType)
         {
             XElement xDerivedClasses = xElement.Element(elementName);
 
@@ -286,9 +286,9 @@ namespace LibrarySample.Pages
             {
                 string fileName = xReference.Attribute("FileName").Value;
 
-                XElement xClass = XElement.Load(xmlPath + fileName);
+                XElement xClass = XmlDocuments.GetDocuments(libraryType)[libraryType.LibraryDirectory() + fileName];
 
-                panel.Children.Add(new SlideButton(xClass, libraryType) { Glyph = EnumConverter.ToGlyph(Category.Class) });
+                panel.Children.Add(new SlideButton(xClass, libraryType) { Glyph = Category.Class.ToGlyph() });
             }
         }
     }

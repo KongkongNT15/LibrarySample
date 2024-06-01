@@ -113,24 +113,24 @@ namespace LibrarySample.Pages
 
         private void ApplyBaseClasses()
         {
-            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "BaseClasses", "基底", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary);
+            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "BaseClasses", "基底", LibraryType.CppLibrary);
         }
 
         private void ApplyDerivedClasses()
         {
-            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "DerivedClasses", "派生", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary);
+            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "DerivedClasses", "派生", LibraryType.CppLibrary);
         }
 
         private void ApplyInnerClasses()
         {
-            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "InnerClasses", "内部クラス", XmlPath.CppLibraryDirectory, LibraryType.CppLibrary);
+            LibraryPageHelper.ApplyBaseOrDerivedClasses(ContentsPanel, XElement, "InnerClasses", "内部クラス", LibraryType.CppLibrary);
         }
 
         private async Task ApplyStaticMethods()
         {
             List<XElement> xFunctions = new List<XElement>();
 
-            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, "StaticMethods");
+            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, LibraryType.CppLibrary, "StaticMethods");
 
             if (xFunctions.Count == 0) return;
 

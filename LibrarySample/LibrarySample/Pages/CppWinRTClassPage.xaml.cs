@@ -56,6 +56,8 @@ namespace LibrarySample.Pages
         private async void ApplyContents()
         {
             ApplyGrammar();
+            await ApplyConstructors();
+            await ApplyOperators();
             await ApplyMethods();
         }
 
@@ -67,23 +69,19 @@ namespace LibrarySample.Pages
             panel.Children.Add(new GrammarExpander(XElement.Element("Grammar"), LibraryType.CppWinRTNamespaceLibrary, CodeLanguage.CppWinRT));
         }
 
+        private async Task ApplyConstructors()
+        {
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Constructors", "コンストラクター", LibraryType.CppWinRTNamespaceLibrary, Category.Constructor);
+        }
+
+        private async Task ApplyOperators()
+        {
+            await LibraryPageHelper.ApplyClassMembers(RootPanel, XElement, "Operators", "演算子", LibraryType.CppWinRTNamespaceLibrary, Category.Operator);
+        }
+
         private async Task ApplyMethods()
         {
-            List<XElement> xFunctions = new List<XElement>();
-
-            await LibraryPageHelper.GetBaseClassFunctionsAsync(xFunctions, XElement, "Methods");
-
-            if (xFunctions.Count == 0) return;
-
-            StackPanel panel = LibraryPageHelper.CreateHeaderPanel("メンバー関数");
-            RootPanel.Children.Add(panel);
-
-            foreach (XElement xFunction in xFunctions)
-            {
-                panel.Children.Add(new CppWinRTFunctionExpander(xFunction, Category.Method, true));
-
-                await Task.Delay(1);
-            }
+            await LibraryPageHelper.ApplyClassMembers(RootPanel, XElement, "Methods", "メンバー関数", LibraryType.CppWinRTNamespaceLibrary, Category.Method);
         }
     }
 }

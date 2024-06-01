@@ -1,29 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Sample">
       <UniqueIdentifier>{cdce5e01-bc06-46f7-9ae1-6988546a3262}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System">
-      <UniqueIdentifier>{20009745-e2f6-48b5-acf4-267d8d22c374}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="any.class.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
@@ -60,9 +42,6 @@
     <ClCompile Include="type_info.class.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
-    <ClCompile Include="samplerun.cpp">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="bitset.reference.class.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
@@ -72,5 +51,17 @@
     <ClCompile Include="charconv.hpp.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
+    <ClCompile Include="complex.hpp.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="samplerun.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="complex.class.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
 </Project>

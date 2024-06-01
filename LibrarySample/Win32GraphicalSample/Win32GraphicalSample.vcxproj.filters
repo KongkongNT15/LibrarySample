@@ -4,11 +4,11 @@
     <Filter Include="Sample">
       <UniqueIdentifier>{ab04f8ad-18d9-429d-bd36-945f4b119d0a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sample\WinUser">
-      <UniqueIdentifier>{db8ec477-45b2-4433-ae3f-8d1532888b26}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sample\NewFilter1">
       <UniqueIdentifier>{e5fd07c4-5487-45d7-b59e-efbdbe9414e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\Winuser.h">
+      <UniqueIdentifier>{db8ec477-45b2-4433-ae3f-8d1532888b26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -16,29 +16,29 @@
     <ClCompile Include="pch.c" />
     <ClCompile Include="SampleManagement.c" />
     <ClCompile Include="MessageBoxW.c">
-      <Filter>Sample\WinUser</Filter>
+      <Filter>Sample\Winuser.h</Filter>
     </ClCompile>
     <ClCompile Include="WinUser.Samples.c">
-      <Filter>Sample\WinUser</Filter>
+      <Filter>Sample\Winuser.h</Filter>
     </ClCompile>
     <ClCompile Include="MessageBeep.c">
-      <Filter>Sample\WinUser</Filter>
+      <Filter>Sample\Winuser.h</Filter>
     </ClCompile>
     <ClCompile Include="CloseWindow.c">
-      <Filter>Sample\WinUser</Filter>
+      <Filter>Sample\Winuser.h</Filter>
     </ClCompile>
     <ClCompile Include="IsZoomed.c">
-      <Filter>Sample\WinUser</Filter>
+      <Filter>Sample\Winuser.h</Filter>
     </ClCompile>
     <ClCompile Include="GetWindowRect.c">
-      <Filter>Sample\WinUser</Filter>
+      <Filter>Sample\Winuser.h</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="SampleManagement.h" />
     <ClInclude Include="WinUser.Samples.h">
-      <Filter>Sample\WinUser</Filter>
+      <Filter>Sample\Winuser.h</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

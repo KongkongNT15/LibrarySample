@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System.Xml.Linq;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Input;
+using LibrarySample.SampleManagement;
 
 namespace LibrarySample
 {
@@ -23,7 +24,7 @@ namespace LibrarySample
 
         private void Buttons_Click(object sender, RoutedEventArgs e)
         {
-            ReloadPage();
+            ActiveFrame.Reload();
         }
 
         //ヘッダーボタンの変更
@@ -106,7 +107,7 @@ namespace LibrarySample
 
         private void Instance_ItemSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ReloadPage();
+            ActiveFrame.Reload();
         }
 
         private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
@@ -267,7 +268,7 @@ namespace LibrarySample
                     ICHandler cHandler = frame.Content as ICHandler;
                     if (cHandler.CVersion != SaveData.CVersion || cHandler.ProcesserType != SaveData.CProcesserType)
                     {
-                        ReloadPage();
+                        ActiveFrame.Reload();
                     }
                     break;
 
@@ -275,7 +276,7 @@ namespace LibrarySample
                     ICppHandler cppHandler = frame.Content as ICppHandler;
                     if (cppHandler.CppVersion != SaveData.CppVersion || cppHandler.ProcesserType != SaveData.CppProcesserType)
                     {
-                        ReloadPage();
+                        ActiveFrame.Reload();
                     }
                     break;
 
@@ -283,14 +284,14 @@ namespace LibrarySample
                     IWin32Handler win32Handler = frame.Content as IWin32Handler;
                     if (win32Handler.ProcesserType != SaveData.Win32ProcesserType)
                     {
-                        ReloadPage();
+                        ActiveFrame.Reload();
                     }
                     break;
                 case LibraryType.CppWinRTNamespaceLibrary:
                     ICppWinRTHandler cppwinrtHandler = frame.Content as ICppWinRTHandler;
                     if (cppwinrtHandler.ProcesserType != SaveData.CppWinRTNamespaceProcesserType)
                     {
-                        ReloadPage();
+                        ActiveFrame.Reload();
                     }
                     break;
             }
