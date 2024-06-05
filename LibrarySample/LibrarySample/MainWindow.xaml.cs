@@ -131,6 +131,7 @@ namespace LibrarySample
             CppHeaderButton.Instance.ItemSelectionChanged += Instance_ItemSelectionChanged;
             Win32HeaderButton.Instance.SelectionChanged += Instance_ItemSelectionChanged;
             CppWinRTNamespaceHeaderButton.Instance.SelectionChanged += Instance_ItemSelectionChanged;
+            UwpHeaderButton.Instance.ItemSelectionChanged += Instance_ItemSelectionChanged;
         }
 
         //リソースの変更
@@ -160,7 +161,9 @@ namespace LibrarySample
 
             await NavigationViewItemCreater.AddWin32Library(menuItems);
 
-            await NavigationViewItemCreater.AddWinRTNamespace(menuItems);
+            await NavigationViewItemCreater.AddCppWinRTNamespace(menuItems);
+
+            await NavigationViewItemCreater.AddUwpNamespace(menuItems);
         }
 
         
@@ -174,10 +177,11 @@ namespace LibrarySample
                 string header = contentPageFrame.SourcePageType.Name switch
                 {
                     "HomePage" => HomePageData.HomePageTitle,
-                    "CHomePage" => HomePageData.CHomePageTitle,
-                    "CppHomePage" => HomePageData.CppHomePageTitle,
-                    "Win32HomePage" => HomePageData.Win32HomePageTitle,
-                    "CppWinRTNamespaceHomePage" => HomePageData.CppWinRTNamespaceHomePageTitle,
+                    "CHomePage" => HomePageData.CTitle,
+                    "CppHomePage" => HomePageData.CppTitle,
+                    "Win32HomePage" => HomePageData.Win32Title,
+                    "CppWinRTNamespaceHomePage" => HomePageData.CppWinRTNamespaceTitle,
+                    "UwpHomePage" => HomePageData.UwpTitle,
                     _ => throw new Exception(),
                 };
 
@@ -343,21 +347,19 @@ namespace LibrarySample
                 }
 
                 tabViewItem.Header = xElement.Attribute("Name").Value;
+
+                tabViewItem.IconSource = frame.CurrentLanguage switch
+                {
+                    Library.C => ImageSources.CImageSource,
+                    Library.Cpp => ImageSources.CppImageSource,
+                    Library.Win32 => ImageSources.Win32ImageSource,
+                    Library.CppWinRTNamespace => ImageSources.CppWinRTNamespaceImageSource,
+                    Library.Uwp => ImageSources.UwpImageSource,
+                    _ => null,
+                };
+
+                return;
             }
-
-            
-
-            tabViewItem.IconSource = frame.CurrentLanguage switch
-            {
-                LibraryType.CLibrary => ImageSources.CImageSource,
-                LibraryType.CppLibrary => ImageSources.CppImageSource,
-                LibraryType.Win32Library => ImageSources.Win32ImageSource,
-                LibraryType.CppWinRTNamespaceLibrary => ImageSources.CppWinRTNamespaceImageSource,
-                _ => null,
-            };
-
-            //上のswitch文でアイコンが設定されていればreturn
-            if (tabViewItem.IconSource != null) return;
 
             if (frame.CurrentSourcePageType == typeof(HomePage))
             {
@@ -368,25 +370,31 @@ namespace LibrarySample
             if (frame.CurrentSourcePageType == typeof(CHomePage))
             {
                 tabViewItem.IconSource = ImageSources.CImageSource;
-                tabViewItem.Header = HomePageData.CHomePageTitle;
+                tabViewItem.Header = HomePageData.CTitle;
                 return;
             }
             if (frame.CurrentSourcePageType == typeof(CppHomePage))
             {
                 tabViewItem.IconSource = ImageSources.CppImageSource;
-                tabViewItem.Header = HomePageData.CppHomePageTitle;
+                tabViewItem.Header = HomePageData.CppTitle;
                 return;
             }
             if (frame.CurrentSourcePageType == typeof(Win32HomePage))
             {
                 tabViewItem.IconSource = ImageSources.Win32ImageSource;
-                tabViewItem.Header = HomePageData.Win32HomePageTitle;
+                tabViewItem.Header = HomePageData.Win32Title;
                 return;
             }
             if (frame.CurrentSourcePageType == typeof(CppWinRTNamespaceHomePage))
             {
                 tabViewItem.IconSource = ImageSources.CppWinRTNamespaceImageSource;
-                tabViewItem.Header = HomePageData.CppWinRTNamespaceHomePageTitle;
+                tabViewItem.Header = HomePageData.CppWinRTNamespaceTitle;
+                return;
+            }
+            if (frame.CurrentSourcePageType == typeof(UwpHomePage))
+            {
+                tabViewItem.IconSource = ImageSources.UwpImageSource;
+                tabViewItem.Header = HomePageData.UwpTitle;
                 return;
             }
             throw new NotImplementedException();
@@ -420,10 +428,11 @@ namespace LibrarySample
             {
 
                 if (content == HomePageData.HomePageTitle) frame.Navigate(typeof(HomePage), null, navigationTransitionInfo);
-                else if (content == HomePageData.CHomePageTitle) frame.Navigate(typeof(CHomePage), null, navigationTransitionInfo);
-                else if (content == HomePageData.CppHomePageTitle) frame.Navigate(typeof(CppHomePage), null, navigationTransitionInfo);
-                else if (content == HomePageData.Win32HomePageTitle) frame.Navigate(typeof(Win32HomePage), null, navigationTransitionInfo);
-                else if (content == HomePageData.CppWinRTNamespaceHomePageTitle) frame.Navigate(typeof(CppWinRTNamespaceHomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.CTitle) frame.Navigate(typeof(CHomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.CppTitle) frame.Navigate(typeof(CppHomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.Win32Title) frame.Navigate(typeof(Win32HomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.CppWinRTNamespaceTitle) frame.Navigate(typeof(CppWinRTNamespaceHomePage), null, navigationTransitionInfo);
+                else if (content == HomePageData.UwpTitle) frame.Navigate(typeof(UwpHomePage), null, navigationTransitionInfo);
                 else throw new Exception();
 
                 return;

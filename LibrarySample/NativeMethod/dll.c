@@ -5,7 +5,7 @@
 #define PIPE_INPUT_LENGTH 1024
 #define PIPE_OUTPUT_LENGTH 16384
 
-__declspec(dllexport) const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsigned long wait, unsigned long* returnCode);
+__declspec(dllexport) const char* StartSample(const wchar_t* commandLine, const wchar_t* curentDirectory, const wchar_t* input, unsigned long wait, unsigned long* returnCode);
 
 char* ptr = NULL;
 
@@ -17,7 +17,7 @@ char createProcessErrorMessage[] = "プロセスを開始できませんでした";
 char redirectErrorMessage[] = "出力ストリームのリダイレクトに失敗しました";
 char mallocError[] = "メモリの確保に失敗しました";
 
-const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsigned long wait, unsigned long* returnCode)
+const char* StartSample(const wchar_t* commandLine, const wchar_t* curentDirectory, const wchar_t* input, unsigned long wait, unsigned long* returnCode)
 {
 	SECURITY_ATTRIBUTES securityAttributes = { 0 };
 	securityAttributes.nLength = sizeof(SECURITY_ATTRIBUTES);
@@ -120,7 +120,7 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 	PROCESS_INFORMATION pInfo = { 0 };
 
 	//プロセスを作成して実行
-	if (!CreateProcess(NULL, (wchar_t*)commandLine, &securityAttributes, &securityAttributes, TRUE, CREATE_NO_WINDOW, NULL, NULL, &sInfo, &pInfo)) {
+	if (!CreateProcess(NULL, (wchar_t*)commandLine, &securityAttributes, &securityAttributes, TRUE, CREATE_NO_WINDOW, NULL, curentDirectory, &sInfo, &pInfo)) {
 		*returnCode = GetLastError();
 		CloseHandle(hInputStdIn);
 		CloseHandle(hInputStdOut);
@@ -185,7 +185,7 @@ const char* StartSample(const wchar_t* commandLine, const wchar_t* input, unsign
 	}
 
 	//戻り値を取得
-	GetExitCodeProcess(pInfo.hProcess, &returnCode);
+	GetExitCodeProcess(pInfo.hProcess, returnCode);
 
 	//
 	if (length == 0) {

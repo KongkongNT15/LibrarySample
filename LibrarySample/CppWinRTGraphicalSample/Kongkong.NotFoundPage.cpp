@@ -7,11 +7,19 @@ namespace Kongkong
 
 	NotFoundPage::NotFoundPage()
 	{
-		TextBlock textBlock;
+		StackPanel panel;
+		TextBlock textBlock1, textBlock2;
 
-		SetAsCenter(textBlock);
-		textBlock.Text(L"サンプルが見つかりませんでした");
+		panel.Children().Append(textBlock1);
+		panel.Children().Append(textBlock2);
 
-		Content(textBlock);
+		SetAsCenter(panel);
+		SetAsCenter(textBlock1);
+		SetAsCenter(textBlock2);
+
+		textBlock1.Text(L"サンプルが見つかりませんでした");
+		textBlock2.Text(L"ふぁ！？っく");
+
+		Content(panel);
 	}
 }

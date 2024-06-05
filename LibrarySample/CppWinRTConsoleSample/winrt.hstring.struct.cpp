@@ -71,7 +71,7 @@ static int f4(void)
 
 namespace Kongkong
 {
-    int winrt__hstring__struct__run(const char* functionTag)
+    int Run_winrt_hstring_struct(const char* functionTag)
     {
         if (IsEqualString(functionTag, "hstring1")) return f0();
         if (IsEqualString(functionTag, "hstring4")) return f1();

@@ -36,14 +36,16 @@ namespace LibrarySample.UserControls
             return frameworkElement as FunctionExpander;
         }
 
-        public static FunctionExpander Create(LibraryType libraryType, XElement xElement, Category category)
+        public static FunctionExpander Create(Library libraryType, XElement xElement, Category category)
         {
             return libraryType switch 
             {
-                LibraryType.CLibrary => new CFunctionExpander(xElement, category),
-                LibraryType.CppLibrary => new CppFunctionExpander(xElement, category),
-                LibraryType.Win32Library => new Win32FunctionExpander(xElement, category),
-                LibraryType.CppWinRTNamespaceLibrary => new CppWinRTFunctionExpander(xElement, category, true),
+                Library.C => new CFunctionExpander(xElement, category),
+                Library.Cpp => new CppFunctionExpander(xElement, category),
+                Library.Win32 => new Win32FunctionExpander(xElement, category),
+                Library.CppWinRTNamespace => new CppWinRTNamespaceFunctionExpander(xElement, category),
+                Library.Uwp => new UwpFunctionExpander(xElement, category),
+                Library.DotNet => new CSharpFunctionExpander(xElement, category),
                 _ => throw new NotImplementedException(),
             };
         }
@@ -70,9 +72,9 @@ namespace LibrarySample.UserControls
         public LaunchType LaunchType { get; }
 
         private string _folder;
-        protected string Folder => _folder;
+        public string Folder => _folder;
         private string _funcName;
-        protected string FuncName => _funcName;
+        public string FuncName => _funcName;
 
         public InputsPanel InputsPanel => _inputsPanel;
         public ConsolePane OutputConsole => _outputConsole;
@@ -317,7 +319,7 @@ namespace LibrarySample.UserControls
             return xElement.Attribute("Tag").Value;
         }
 
-        protected abstract StartSampleButton GetSampleButton();
+        protected abstract UIElement GetSampleButton();
 
         private void ApplyLaunchType()
         {
@@ -402,22 +404,21 @@ namespace LibrarySample.UserControls
         {
             Expander.Expanding -= ViewExpander_Expanding;
             SetAsDeletedFunction();
-            
+
 
             ApplyDefinition();
-            if (!_isNotSupported)
+            if (_isNotSupported) return;
+            ApplyFolder();
+            ApplyParameters();
+            ApplyReturns();
+            ApplySourceCode();
+
+            if (RootPanel.Children.Contains(ResultsPanel))
             {
-                ApplyFolder();
-                ApplyParameters();
-                ApplyReturns();
-                ApplySourceCode();
-
-                if (RootPanel.Children.Contains(ResultsPanel))
-                {
-                    ApplyLaunchType();
-                }
-
+                ApplyLaunchType();
             }
+
+
             if (RootPanel.Children.Contains(ResultsPanel) && ResultsInnerGrid.Children.Contains(LaunchButtons) && !_inputsPanel.HasFilePicker)
             {
                 Launch();

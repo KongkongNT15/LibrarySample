@@ -21,7 +21,7 @@ namespace LibrarySample
             {
                 CodeLanguage.C => "C言語",
                 CodeLanguage.Cpp => "C++",
-                CodeLanguage.Cs => "C#",
+                CodeLanguage.CSharp => "C#",
                 CodeLanguage.Java => "Java",
                 _ => "Unknown",
             };

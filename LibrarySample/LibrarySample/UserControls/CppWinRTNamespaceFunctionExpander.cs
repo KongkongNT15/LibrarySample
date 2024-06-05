@@ -12,15 +12,13 @@ using System.Xml.Linq;
 
 namespace LibrarySample.UserControls
 {
-    public sealed class CppWinRTFunctionExpander : FunctionExpander, ICppWinRTHandler
+    public sealed class CppWinRTNamespaceFunctionExpander : FunctionExpander, ICppWinRTHandler
     {
         public ProcesserType ProcesserType { get; } = SaveData.CppWinRTNamespaceProcesserType;
 
-        private readonly bool _iswinrtNamespaceSample;
-
-        public CppWinRTFunctionExpander(XElement xElement, Category category, bool iswinrtNamespaceSample) : base (xElement, category, LaunchType.Graphical)
+        public CppWinRTNamespaceFunctionExpander(XElement xElement, Category category) : base (xElement, category, LaunchType.Graphical)
         {
-            _iswinrtNamespaceSample = iswinrtNamespaceSample;
+
         }
 
         protected override void ApplyDefinition()
@@ -35,9 +33,9 @@ namespace LibrarySample.UserControls
             XElement def = xDefinition.Element("DefinitionFile");
             XElement source = xDefinition.Element("SourceCodeFile");
 
-            string xmlPath = _iswinrtNamespaceSample ? XmlPath.CppWinRTNamespaceLibrarySourceCodeDirectory : throw new NotImplementedException();
+            string xmlPath = XmlPath.CppWinRTNamespaceLibrarySourceCodeDirectory;
 
-            SourceCodeViewer defCode = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.CppWinRT);
+            SourceCodeViewer defCode = SourceCodeViewer.Create(CodeLanguage.CppWinRT);
             defCode.FilePath = xmlPath + Folder + "/" + def.Value;
             AddDefinitionCode(defCode);
 
@@ -48,7 +46,7 @@ namespace LibrarySample.UserControls
                 return;
             }
 
-            SourceCodeViewer sourceCodeViewer = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.CppWinRT);
+            SourceCodeViewer sourceCodeViewer = SourceCodeViewer.Create(CodeLanguage.CppWinRT);
             sourceCodeViewer.FilePath = xmlPath + Folder + "/" + source.Value;
 
 

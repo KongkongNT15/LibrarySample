@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace LibrarySample
 {
-    public enum LibraryType
+    public enum Library
     {
         None,
-        CLibrary,
-        Win32Library,
-        CppLibrary,
-        CppWinRTNamespaceLibrary,
+        C,
+        Win32,
+        Cpp,
+        CppWinRTNamespace,
+        Uwp,
+        DotNet,
     }
 }

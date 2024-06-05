@@ -41,14 +41,15 @@ namespace LibrarySample.UserControls
             this.InitializeComponent();
         }
 
-        public void SetOtherOptions(LibraryType libraryType)
+        public void SetOtherOptions(Library libraryType)
         {
             OtherOptionsArea.Content = libraryType switch
             {
-                LibraryType.CLibrary => CHeaderButton.Instance,
-                LibraryType.CppLibrary => CppHeaderButton.Instance,
-                LibraryType.Win32Library => Win32HeaderButton.Instance,
-                LibraryType.CppWinRTNamespaceLibrary => CppWinRTNamespaceHeaderButton.Instance,
+                Library.C => CHeaderButton.Instance,
+                Library.Cpp => CppHeaderButton.Instance,
+                Library.Win32 => Win32HeaderButton.Instance,
+                Library.CppWinRTNamespace => CppWinRTNamespaceHeaderButton.Instance,
+                Library.Uwp => UwpHeaderButton.Instance,
                 _ => null,
             };
         }

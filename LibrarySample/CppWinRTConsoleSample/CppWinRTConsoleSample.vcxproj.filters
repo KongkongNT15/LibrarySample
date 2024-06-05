@@ -14,6 +14,9 @@
     <ClCompile Include="winrt.namespace.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
+    <ClCompile Include="winrt.Windows.Data.Html.HtmlUtilities.class.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

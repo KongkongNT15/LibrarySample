@@ -37,11 +37,11 @@ namespace LibrarySample.Pages
             {
                 _xElement = value;
                 (Frame as ContentPageFrame).AddXElement(value);
-                ContentsPanel.Children.Clear();
+                RootPanel.Children.Clear();
 
                 if (!ApplySupportedVersion()) return;
 
-                LibraryPageHelper.ApplyIncoplete(ContentsPanel, value);
+                LibraryPageHelper.ApplyIncoplete(RootPanel, value);
 
                 ApplyContents();
             }
@@ -100,27 +100,27 @@ namespace LibrarySample.Pages
 
         private void ApplyTypeDefs()
         {
-            LibraryPageHelper.ApplyTypeDefs(ContentsPanel, XElement, "TypeDefinitions");
+            LibraryPageHelper.ApplyTypeDefs(RootPanel, XElement, "TypeDefinitions");
         }
 
         private async Task ApplyConcepts()
         {
-            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Concepts", "コンセプト", LibraryType.CppLibrary, Category.Concept);
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Concepts", "コンセプト", Library.Cpp, Category.Concept);
         }
 
         private void ApplyClasses()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Classes", "クラス", LibraryType.CppLibrary, Category.Class);
+            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Classes", "クラス", Library.Cpp, Category.Class);
         }
 
         private void ApplyStructures()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Structures", "構造体", LibraryType.CppLibrary, Category.Structure);
+            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Structures", "構造体", Library.Cpp, Category.Structure);
         }
 
         private void ApplyEnums()
         {
-            LibraryPageHelper.ApplyClasses(ContentsPanel, XElement, "Enums", "列挙型", LibraryType.CppLibrary, Category.Enum);
+            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Enums", "列挙型", Library.Cpp, Category.Enum);
         }
 
         private void ApplySpesializations()
@@ -130,7 +130,7 @@ namespace LibrarySample.Pages
             if (xSpesializations == null) return;
 
             StackPanel panel = LibraryPageHelper.CreateHeaderPanel("特殊化");
-            ContentsPanel.Children.Add(panel);
+            RootPanel.Children.Add(panel);
 
             foreach (XElement xSpesialization in xSpesializations.Elements())
             {
@@ -150,17 +150,17 @@ namespace LibrarySample.Pages
 
         private async Task ApplyLiterals()
         {
-            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Literals", "リテラル", LibraryType.CppLibrary, Category.Literal);
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Literals", "リテラル", Library.Cpp, Category.Literal);
         }
 
         private async Task ApplyOperators()
         {
-            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Operators", "演算子", LibraryType.CppLibrary, Category.Operator);
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Operators", "演算子", Library.Cpp, Category.Operator);
         }
 
         private async Task ApplyFunctions()
         {
-            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Functions", "関数", LibraryType.CppLibrary, Category.Function);
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Functions", "関数", Library.Cpp, Category.Function);
         }
 
     }

@@ -17,18 +17,18 @@ namespace LibrarySample
         //Cライブラリの追加
         public static async Task AddCLibrary(IList<object> menuItems)
         {
-            await AddCWin32Library(menuItems, HomePageData.CHomePageTitle, LibraryType.CLibrary, ImageSources.CImageSource, typeof(CLibraryPage), typeof(CStructurePage));
+            await AddCWin32Library(menuItems, HomePageData.CTitle, Library.C, ImageSources.CImageSource, typeof(CLibraryPage), typeof(CStructurePage));
         }
 
         //Win32ライブラリの追加
         public static async Task AddWin32Library(IList<object> menuItems)
         {
-            await AddCWin32Library(menuItems, HomePageData.Win32HomePageTitle, LibraryType.Win32Library, ImageSources.Win32ImageSource, typeof(Win32LibraryPage), typeof(Win32StructurePage));
+            await AddCWin32Library(menuItems, HomePageData.Win32Title, Library.Win32, ImageSources.Win32ImageSource, typeof(Win32LibraryPage), typeof(Win32StructurePage));
         }
 
         //C
         //Win32
-        private static async Task AddCWin32Library(IList<object> menuItems, string homePageTitle, LibraryType libraryType, IconSource iconSource, Type libraryPageType, Type StructurePageType)
+        private static async Task AddCWin32Library(IList<object> menuItems, string homePageTitle, Library libraryType, IconSource iconSource, Type libraryPageType, Type StructurePageType)
         {
             //Cライブラリの追加
             NavigationViewItem headers = new NavigationViewItem { Content = homePageTitle, Icon = iconSource.CreateIconElement() };
@@ -64,7 +64,7 @@ namespace LibrarySample
         //C++
         public static async Task AddCppLibrary(IList<object> menuItems)
         {
-            NavigationViewItem cppHeaders = new NavigationViewItem { Content = HomePageData.CppHomePageTitle, Icon = ImageSources.CppImageSource.CreateIconElement() };
+            NavigationViewItem cppHeaders = new NavigationViewItem { Content = HomePageData.CppTitle, Icon = ImageSources.CppImageSource.CreateIconElement() };
             menuItems.Add(cppHeaders);
 
 
@@ -108,14 +108,24 @@ namespace LibrarySample
             }
         }
 
-        //winrt名前空間の追加
-        public static async Task AddWinRTNamespace(IList<object> menuItems)
+        public static async Task AddCppWinRTNamespace(IList<object> menuItems)
         {
-            NavigationViewItem winrtHeaders = new NavigationViewItem { Content = HomePageData.CppWinRTNamespaceHomePageTitle, Icon = ImageSources.CppWinRTNamespaceImageSource.CreateIconElement() };
+            await AddWinRTNamespace(menuItems, HomePageData.CppWinRTNamespaceTitle, XmlPath.CppWinRTNamespaceLibraryDirectory, Library.CppWinRTNamespace, ImageSources.CppWinRTNamespaceImageSource, typeof(CppWinRTNamespacePage), typeof(CppWinRTClassPage), null);
+        }
+
+        public static async Task AddUwpNamespace(IList<object> menuItems)
+        {
+            await AddWinRTNamespace(menuItems, HomePageData.UwpTitle, XmlPath.UwpLibraryDirectory, Library.Uwp, ImageSources.UwpImageSource, typeof(UwpNamespacePage), typeof(UwpClassPage), typeof(UwpEnumPage));
+        }
+
+        //winrt名前空間の追加
+        private static async Task AddWinRTNamespace(IList<object> menuItems, string title, string xmlPath, Library libraryType, IconSource iconSource, Type namespaceType, Type classType, Type enumType)
+        {
+            NavigationViewItem winrtHeaders = new NavigationViewItem { Content = title, Icon = iconSource.CreateIconElement() };
             menuItems.Add(winrtHeaders);
 
 
-            static async Task createClassItem(NavigationViewItem item, XElement xElement, string elementName, Category category, Type pageType)
+            async Task createClassItem(NavigationViewItem item, XElement xElement, string elementName, Category category, Type pageType)
             {
                 XElement xClasses = xElement.Element(elementName);
 
@@ -123,7 +133,7 @@ namespace LibrarySample
 
                 foreach (XElement xClassReference in xClasses.Elements("ClassReference"))
                 {
-                    XElement xClass = XmlDocuments.CppWinRTNamespaceLibraryDocuments[XmlPath.CppWinRTNamespaceLibraryDirectory + xClassReference.Attribute("FileName").Value];
+                    XElement xClass = XmlDocuments.GetDocuments(libraryType)[xmlPath + xClassReference.Attribute("FileName").Value];
 
                     string name = xClass.Attribute("Name").Value;
 
@@ -133,21 +143,22 @@ namespace LibrarySample
 
             }
 
-            foreach (var pair in XmlDocuments.CppWinRTNamespaceLibraryDocuments)
+            foreach (var pair in XmlDocuments.GetDocuments(libraryType))
             {
                 //へだーのみ
-                if (!XmlPath.IsCppWinRTNamespaceXmlFile(pair.Key)) continue;
+                if (!XmlPath.IsNamespaceXmlFile(pair.Key)) continue;
 
                 XElement xElement = pair.Value;
 
-                XmlNavigationViewItem item = new XmlNavigationViewItem(xElement, typeof(CppWinRTNamespacePage));
+                XmlNavigationViewItem item = new XmlNavigationViewItem(xElement, namespaceType);
                 item.Glyph = xElement.Attribute("Glyph").Value;
                 item.Content = xElement.Attribute("Name").Value;
 
                 //クラスを取得
-                await createClassItem(item, xElement, "Classes", Category.Class, typeof(CppWinRTClassPage));
-                await createClassItem(item, xElement, "Structures", Category.Structure, typeof(CppWinRTClassPage));
-                //await createClassItem(item, xElement, "Enums", Category.Enum, typeof(CppEnumPage));
+                await createClassItem(item, xElement, "Classes", Category.Class, classType);
+                await createClassItem(item, xElement, "Structures", Category.Structure, classType);
+                await createClassItem(item, xElement, "Interfaces", Category.Interface, classType);
+                await createClassItem(item, xElement, "Enums", Category.Enum, enumType);
 
                 winrtHeaders.MenuItems.Add(item);
                 await Task.Delay(1);

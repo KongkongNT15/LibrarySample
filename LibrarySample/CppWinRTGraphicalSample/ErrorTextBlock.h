@@ -20,6 +20,9 @@ namespace winrt::CppWinRTGraphicalSample::implementation
         void IsError(bool value);
 
         bool _isError = false;
+
+        static Windows::UI::Color _errorDark;
+        static Windows::UI::Color _errorLight;
     };
 }
 

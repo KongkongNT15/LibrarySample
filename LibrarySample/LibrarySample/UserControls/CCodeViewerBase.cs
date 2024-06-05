@@ -530,7 +530,8 @@ namespace LibrarySample.UserControls
                                     }
                                     else
                                     {
-                                        run.Foreground = LocalParameterColorBrush;
+                                        if (!SetColor(run, tmp, st, i)) run.Foreground = LocalParameterColorBrush;
+
                                     }
                                     Mae = string.Empty;
 
@@ -588,11 +589,6 @@ namespace LibrarySample.UserControls
                                         }
                                     }
 
-                                    run.Foreground = YellowColorBrush;
-                                    break;
-                                }
-                                else if (Contains(KeyUserFunction, tmp))
-                                {
                                     run.Foreground = YellowColorBrush;
                                     break;
                                 }

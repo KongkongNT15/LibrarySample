@@ -1,4 +1,5 @@
 ﻿using LibrarySample.Languages;
+using LibrarySample.SampleManagement;
 using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,27 @@ namespace LibrarySample.Settings
             set => Instance._cppWinRTNamespaceProcesserType= value;
         }
 
+        private CodeLanguage _uwpCodeLanguage = CodeLanguage.CSharp;
+        public static CodeLanguage UwpCodeLanguage
+        {
+            get => Instance._uwpCodeLanguage;
+            set => Instance._uwpCodeLanguage = value;
+        }
+
+        private WinRTDesign _uwpCodeDesign = WinRTDesign.XAML;
+        public static WinRTDesign UwpCodeDesign
+        {
+            get => Instance._uwpCodeDesign;
+            set => Instance._uwpCodeDesign = value;
+        }
+
+        private ProcesserType _uwpProcesserType = ProcesserType.X64;
+        public static ProcesserType UwpProcesserType
+        {
+            get => Instance._uwpProcesserType;
+            set => Instance._uwpProcesserType = value;
+        }
+
         private uint _waitTime = 400;
         public static uint WaitTime
         {
@@ -89,6 +111,9 @@ namespace LibrarySample.Settings
             WriteData(streamWriter, "CppProcesserType", CppProcesserType.ToString());
             WriteData(streamWriter, "Win32ProcesserType", Win32ProcesserType.ToString());
             WriteData(streamWriter, "CppWinRTNamespaceProcesserType", CppWinRTNamespaceProcesserType.ToString());
+            WriteData(streamWriter, "UwpCodeLanguage", UwpCodeLanguage.ToString());
+            WriteData(streamWriter, "UwpCodeDesign", UwpCodeDesign.ToString());
+            WriteData(streamWriter, "UwpProcesserType", UwpProcesserType.ToString());
             WriteData(streamWriter, "WaitTime", WaitTime.ToString());
             WriteData(streamWriter, "RequestedTheme", RequestedTheme.ToString());
         }
@@ -134,6 +159,18 @@ namespace LibrarySample.Settings
 
                     case "CppWinRTNamespaceProcesserType":
                         _cppWinRTNamespaceProcesserType = EnumConverter.ToProcesserType(value[1]);
+                        break;
+
+                    case "UwpCodeLanguage":
+                        _uwpCodeLanguage = EnumConverter.ToCodeLanguage(value[1]);
+                        break;
+
+                    case "UwpCodeDesign":
+                        _uwpCodeDesign = EnumConverter.ToWinRTDesign(value[1]);
+                        break;
+
+                    case "UwpProcesserType":
+                        _uwpProcesserType = EnumConverter.ToProcesserType(value[1]);
                         break;
 
                     case "WaitTime":

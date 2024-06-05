@@ -28,6 +28,10 @@
     <None Remove="Pages\CppWinRTNamespacePage.xaml" />
     <None Remove="Pages\CStructurePage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
+    <None Remove="Pages\UwpClassPage.xaml" />
+    <None Remove="Pages\UwpEnumPage.xaml" />
+    <None Remove="Pages\UwpHomePage.xaml" />
+    <None Remove="Pages\UwpNamespacePage.xaml" />
     <None Remove="Pages\Win32HomePage.xaml" />
     <None Remove="Pages\Win32LibraryPage.xaml" />
     <None Remove="Pages\Win32StructurePage.xaml" />
@@ -56,6 +60,7 @@
     <None Remove="UserControls\SlideButton.xaml" />
     <None Remove="UserControls\SourceCodeViewer.xaml" />
     <None Remove="UserControls\TextCard.xaml" />
+    <None Remove="UserControls\UWPHeaderButton.xaml" />
     <None Remove="UserControls\ValueCard.xaml" />
     <None Remove="UserControls\ViewExpander.xaml" />
     <None Remove="UserControls\Win32HeaderButton.xaml" />
@@ -72,7 +77,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\cppwinrt.png" />
     <Content Include="Assets\Win32.png" />
-    <Content Include="Assets\UWP.png" />
+    <Content Include="Assets\Uwp.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -88,6 +93,31 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\UwpEnumPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\UwpClassPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\UwpHomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\UwpNamespacePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UserControls\UwpHeaderButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="UserControls\Win32HeaderButton.xaml">

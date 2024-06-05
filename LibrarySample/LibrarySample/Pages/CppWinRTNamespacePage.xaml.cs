@@ -62,17 +62,17 @@ namespace LibrarySample.Pages
 
         private void ApplyClasses()
         {
-            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Classes", "クラス", LibraryType.CppWinRTNamespaceLibrary, Category.Class);
+            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Classes", "クラス", Library.CppWinRTNamespace, Category.Class);
         }
 
         private void ApplyStructures()
         {
-            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Structures", "構造体", LibraryType.CppWinRTNamespaceLibrary, Category.Structure);
+            LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Structures", "構造体", Library.CppWinRTNamespace, Category.Structure);
         }
 
         private async Task ApplyFunctions()
         {
-            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Functions", "関数", LibraryType.CppWinRTNamespaceLibrary, Category.Function);
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Functions", "関数", Library.CppWinRTNamespace, Category.Function);
         }
     }
 }

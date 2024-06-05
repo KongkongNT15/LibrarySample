@@ -40,9 +40,9 @@ namespace LibrarySample.UserControls
             set => FIcon.Source = value;
         }
 
-        public LibraryType LibraryType { get; }
+        public Library LibraryType { get; }
 
-        public HomePageButton(LibraryType libraryType)
+        public HomePageButton(Library libraryType)
         {
             this.InitializeComponent();
             LibraryType = libraryType;
@@ -64,10 +64,11 @@ namespace LibrarySample.UserControls
 
             Type pageType = LibraryType switch
             {
-                LibraryType.CLibrary => typeof(CHomePage),
-                LibraryType.CppLibrary => typeof(CppHomePage),
-                LibraryType.Win32Library => typeof(Win32HomePage),
-                LibraryType.CppWinRTNamespaceLibrary => typeof(CppWinRTNamespaceHomePage),
+                Library.C => typeof(CHomePage),
+                Library.Cpp => typeof(CppHomePage),
+                Library.Win32 => typeof(Win32HomePage),
+                Library.CppWinRTNamespace => typeof(CppWinRTNamespaceHomePage),
+                Library.Uwp => typeof(UwpHomePage),
                 _ => typeof(Page),
             };
 

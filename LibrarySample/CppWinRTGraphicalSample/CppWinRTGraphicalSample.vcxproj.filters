@@ -21,6 +21,21 @@
     <ClCompile Include="Windows.UI.ColorsSample.cpp">
       <Filter>Sample\Windows.UI\Colors</Filter>
     </ClCompile>
+    <ClCompile Include="Windows.UI.ColorHelperSample.FromArgbPage.cpp">
+      <Filter>Sample\Windows.UI\ColorHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.UI.ColorHelperSample.cpp">
+      <Filter>Sample\Windows.UI\ColorHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.UI.ColorHelperSample.ToDisplayNamePage.cpp">
+      <Filter>Sample\Windows.UI\ColorHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.System.Display.DisplayRequestSample.DisplayRequestPage.cpp">
+      <Filter>Sample\Windows.System.Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.System.Display.DisplayRequestSample.cpp">
+      <Filter>Sample\Windows.System.Display</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -30,6 +45,21 @@
     </ClInclude>
     <ClInclude Include="Windows.UI.ColorsSample.h">
       <Filter>Sample\Windows.UI\Colors</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.UI.ColorHelperSample.FromArgbPage.h">
+      <Filter>Sample\Windows.UI\ColorHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.UI.ColorHelperSample.h">
+      <Filter>Sample\Windows.UI\ColorHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.UI.ColorHelperSample.ToDisplayNamePage.h">
+      <Filter>Sample\Windows.UI\ColorHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.System.Display.DisplayRequestSample.DisplayRequestPage.h">
+      <Filter>Sample\Windows.System.Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.System.Display.DisplayRequestSample.h">
+      <Filter>Sample\Windows.System.Display</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +77,12 @@
     </Filter>
     <Filter Include="Sample\Windows.UI\Colors">
       <UniqueIdentifier>{57eca3b9-9d6e-4a1c-9f30-15950a608b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\Windows.UI\ColorHelper">
+      <UniqueIdentifier>{144fbf9c-c40f-461e-b796-9855ff92d46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\Windows.System.Display">
+      <UniqueIdentifier>{8e7e161c-9323-4b14-bed4-01129636b814}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

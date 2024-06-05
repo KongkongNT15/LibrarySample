@@ -140,8 +140,6 @@ namespace LibrarySample
         private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             NavViewPreviusSelectedItem = sender.SelectedItem;
-            //Tabのヘッダー設定
-            //(Tabs.SelectedItem as TabViewItem).Header = (NavView.SelectedItem as NavigationViewItem).Content;
 
             //ホームページの時
             //それぞれの言語のライブラリ一覧の時
@@ -202,10 +200,11 @@ namespace LibrarySample
 
             switch (EnumConverter.ToLibraryType(item.PageType))
             {
-                case LibraryType.CLibrary: func(HomePageData.CHomePageTitle); break;
-                case LibraryType.CppLibrary: func(HomePageData.CppHomePageTitle); break;
-                case LibraryType.Win32Library: func(HomePageData.Win32HomePageTitle); break;
-                case LibraryType.CppWinRTNamespaceLibrary: func(HomePageData.CppWinRTNamespaceHomePageTitle); break;
+                case Library.C: func(HomePageData.CTitle); break;
+                case Library.Cpp: func(HomePageData.CppTitle); break;
+                case Library.Win32: func(HomePageData.Win32Title); break;
+                case Library.CppWinRTNamespace: func(HomePageData.CppWinRTNamespaceTitle); break;
+                case Library.Uwp: func(HomePageData.UwpTitle); break;
             }
 
             HeaderBar.ItemsSource = headerItems.ToArray();
@@ -264,7 +263,7 @@ namespace LibrarySample
             //タブを変更したときにアプリの設定とページの設定が一致していなければリロード
             switch (frame.CurrentLanguage)
             {
-                case LibraryType.CLibrary:
+                case Library.C:
                     ICHandler cHandler = frame.Content as ICHandler;
                     if (cHandler.CVersion != SaveData.CVersion || cHandler.ProcesserType != SaveData.CProcesserType)
                     {
@@ -272,7 +271,7 @@ namespace LibrarySample
                     }
                     break;
 
-                case LibraryType.CppLibrary:
+                case Library.Cpp:
                     ICppHandler cppHandler = frame.Content as ICppHandler;
                     if (cppHandler.CppVersion != SaveData.CppVersion || cppHandler.ProcesserType != SaveData.CppProcesserType)
                     {
@@ -280,16 +279,23 @@ namespace LibrarySample
                     }
                     break;
 
-                case LibraryType.Win32Library:
+                case Library.Win32:
                     IWin32Handler win32Handler = frame.Content as IWin32Handler;
                     if (win32Handler.ProcesserType != SaveData.Win32ProcesserType)
                     {
                         ActiveFrame.Reload();
                     }
                     break;
-                case LibraryType.CppWinRTNamespaceLibrary:
+                case Library.CppWinRTNamespace:
                     ICppWinRTHandler cppwinrtHandler = frame.Content as ICppWinRTHandler;
                     if (cppwinrtHandler.ProcesserType != SaveData.CppWinRTNamespaceProcesserType)
+                    {
+                        ActiveFrame.Reload();
+                    }
+                    break;
+                case Library.Uwp:
+                    IUwpHandler uwpHandler = frame.Content as IUwpHandler;
+                    if (uwpHandler.CodeLanguage != SaveData.UwpCodeLanguage || uwpHandler.Design != SaveData.UwpCodeDesign || uwpHandler.ProcesserType != SaveData.UwpProcesserType)
                     {
                         ActiveFrame.Reload();
                     }
@@ -324,6 +330,7 @@ namespace LibrarySample
             CppHeaderButton.Instance.ItemSelectionChanged -= Instance_ItemSelectionChanged;
             Win32HeaderButton.Instance.SelectionChanged -= Instance_ItemSelectionChanged;
             CppWinRTNamespaceHeaderButton.Instance.SelectionChanged -= Instance_ItemSelectionChanged;
+            UwpHeaderButton.Instance.ItemSelectionChanged -= Instance_ItemSelectionChanged;
 
             if (MainWindows.Count == 0)
             {

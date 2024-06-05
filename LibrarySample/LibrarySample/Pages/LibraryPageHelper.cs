@@ -68,7 +68,7 @@ namespace LibrarySample.Pages
             rootPanel.Children.Add(CreateIncompleteInfoBar());
         }
 
-        public static void ApplyClasses(StackPanel rootPanel, XElement xElement, string elementName, string header, LibraryType libraryType, Category category)
+        public static void ApplyClasses(StackPanel rootPanel, XElement xElement, string elementName, string header, Library libraryType, Category category)
         {
             XElement xClasses = xElement.Element(elementName);
 
@@ -86,7 +86,7 @@ namespace LibrarySample.Pages
             }
         }
 
-        public static async Task ApplyFunctionsAsync(StackPanel rootPanel, XElement xElement, string elementName, string header, LibraryType libraryType, Category category)
+        public static async Task ApplyFunctionsAsync(StackPanel rootPanel, XElement xElement, string elementName, string header, Library libraryType, Category category)
         {
             XElement xFunctions = xElement.Element(elementName);
 
@@ -127,7 +127,7 @@ namespace LibrarySample.Pages
 
         }
 
-        public static void ApplyCStructures(StackPanel rootPanel, XElement xElement, LibraryType libraryType)
+        public static void ApplyCStructures(StackPanel rootPanel, XElement xElement, Library libraryType)
         {
             XElement xStructures = xElement.Element("Structures");
 
@@ -190,9 +190,9 @@ namespace LibrarySample.Pages
             }
         }
 
-        public static async Task ApplyClassMembers(StackPanel rootPanel, XElement xElement, string elementName, string header, LibraryType libraryType, Category category)
+        public static async Task ApplyClassMembersAsync(StackPanel rootPanel, XElement xElement, string elementName, string header, Library libraryType, Category category)
         {
-            List<XElement> xFunctions = new List<XElement>();
+            List<KeyValuePair<XElement, Library>> xFunctions = new List<KeyValuePair<XElement, Library>>();
 
             await GetBaseClassFunctionsAsync(xFunctions, xElement, libraryType, elementName);
 
@@ -201,15 +201,37 @@ namespace LibrarySample.Pages
             StackPanel panel = CreateHeaderPanel(header);
             rootPanel.Children.Add(panel);
 
-            foreach (XElement xFunction in xFunctions)
+            foreach (var pair in xFunctions)
             {
-                panel.Children.Add(FunctionExpander.Create(libraryType, xFunction, category));
+                panel.Children.Add(FunctionExpander.Create(pair.Value, pair.Key, category));
 
                 await Task.Delay(1);
             }
         }
 
-        public static async Task GetBaseClassFunctionsAsync(List<XElement> xElements, XElement xPageRoot, LibraryType libraryType, string elementName, bool ignoreOperatorE = false)
+        public static async Task ApplyClassMembersWinRTAsync(StackPanel rootPanel, XElement xElement, string elementName, string header, Library libraryType, Category category, CodeLanguage codeLanguage)
+        {
+            List<KeyValuePair<XElement, Library>> xFunctions = new List<KeyValuePair<XElement, Library>>();
+
+            await Task.Run(() =>
+            {
+                GetBaseClassFunctionsWinRT(xFunctions, xElement, libraryType, elementName, codeLanguage);
+            });
+
+            if (xFunctions.Count == 0) return;
+
+            StackPanel panel = CreateHeaderPanel(header);
+            rootPanel.Children.Add(panel);
+
+            foreach (var pair in xFunctions)
+            {
+                panel.Children.Add(FunctionExpander.Create(pair.Value, pair.Key, category));
+
+                await Task.Delay(1);
+            }
+        }
+
+        public static async Task GetBaseClassFunctionsAsync(List<KeyValuePair<XElement, Library>> xElements, XElement xPageRoot, Library libraryType, string elementName, bool ignoreOperatorE = false)
         {
             await Task.Run(() =>
             {
@@ -218,19 +240,31 @@ namespace LibrarySample.Pages
         }
 
         //
-        private static void GetBaseClassFunctions(List<XElement> xElements, XElement xPageRoot, LibraryType libraryType, string elementName, bool ignoreOperatorE)
+        private static void GetBaseClassFunctions(List<KeyValuePair<XElement, Library>> xElements, XElement xPageRoot, Library libraryType, string elementName, bool ignoreOperatorE)
         {
-            XElement xBaseClasses = xPageRoot.Element("BaseClasses");
-            //基底クラスがあれば再起関数
-            if (xBaseClasses != null)
+
+            void applyBase(string cName)
             {
-                foreach (XElement xClassReference in  xBaseClasses.Elements())
+                XElement xBaseClasses = xPageRoot.Element(cName);
+                //基底クラスがあれば再起関数
+                if (xBaseClasses != null)
                 {
-                    string fileName = xClassReference.Attribute("FileName").Value;
-                    XElement xClass = XmlDocuments.GetDocuments(libraryType)[libraryType.LibraryDirectory() + fileName];
-                    GetBaseClassFunctions(xElements, xClass, libraryType, elementName, true);
+                    foreach (XElement xClassReference in xBaseClasses.Elements())
+                    {
+                        string fileName = xClassReference.Attribute("FileName").Value;
+
+                        //別のライブラリ
+                        XAttribute xLibraryType = xClassReference.Attribute("Library");
+
+                        Library classLibraryType = xLibraryType != null ? EnumConverter.ToLibraryType(xLibraryType.Value) : libraryType;
+
+                        XElement xClass = XmlDocuments.GetDocuments(classLibraryType)[classLibraryType.LibraryDirectory() + fileName];
+                        GetBaseClassFunctions(xElements, xClass, classLibraryType, elementName, true);
+                    }
                 }
             }
+
+            applyBase("BaseClasses");
 
             XElement xFunctuions = xPageRoot.Element(elementName);
 
@@ -241,18 +275,18 @@ namespace LibrarySample.Pages
             {
                 for (int i = 0; i < xElements.Count; i++)
                 {
-                    string listName = xElements[i].Attribute("Name").Value;
+                    string listName = xElements[i].Key.Attribute("Name").Value;
 
                     //同じメソッドがあれば派生クラスのを使う
                     if (listName == name)
                     {
-                        xElements[i] = xFunction;
+                        xElements[i] = new KeyValuePair<XElement, Library>(xFunction, libraryType);
                         return true;
                     }
 
                     if (string.Compare(listName, name) > 0)
                     {
-                        xElements.Insert(i, xFunction);
+                        xElements.Insert(i, new KeyValuePair<XElement, Library>(xFunction, libraryType));
                         return true;
                     }
                 }
@@ -269,11 +303,85 @@ namespace LibrarySample.Pages
                 //operator=は継承しない
                 if (ignoreOperatorE && xFunction.Attribute("Name").Value.StartsWith("=(")) continue;
 
-                xElements.Add(xFunction);
+                xElements.Add(new KeyValuePair<XElement, Library>(xFunction, libraryType));
             }
         }
 
-        public static void ApplyBaseOrDerivedClasses(StackPanel rootPanel, XElement xElement, string elementName, string headerName, LibraryType libraryType)
+        private static void GetBaseClassFunctionsWinRT(List<KeyValuePair<XElement, Library>> xElements, XElement xPageRoot, Library libraryType, string elementName, CodeLanguage codeLanguage)
+        {
+
+            void applyBase(string cName)
+            {
+                string cName2 = codeLanguage == CodeLanguage.CppWinRT ? "CppWinRTClass" : "CSharpClass";
+                XElement xBaseClasses = xPageRoot.Element(cName)?.Element(cName2);
+                //基底クラスがあれば再起関数
+                if (xBaseClasses != null)
+                {
+                    foreach (XElement xClassReference in xBaseClasses.Elements())
+                    {
+                        string fileName = xClassReference.Attribute("FileName").Value;
+
+                        //別のライブラリ
+                        XAttribute xLibraryType = xClassReference.Attribute("Library");
+
+                        Library classLibraryType = xLibraryType != null ? EnumConverter.ToLibraryType(xLibraryType.Value) : libraryType;
+
+                        XElement xClass = XmlDocuments.GetDocuments(classLibraryType)[classLibraryType.LibraryDirectory() + fileName];
+
+                        switch (classLibraryType)
+                        {
+                            case Library.Uwp: GetBaseClassFunctionsWinRT(xElements, xClass, classLibraryType, elementName, codeLanguage); break;
+                            default: GetBaseClassFunctions(xElements, xClass, classLibraryType, elementName, true); break;
+                        }
+                        
+                    }
+                }
+            }
+
+            applyBase("Implements");
+            applyBase("BaseClasses");
+
+            XElement xFunctuions = xPageRoot.Element(elementName);
+
+            //なければなにもしない
+            if (xFunctuions == null) return;
+
+            bool func(XElement xFunction, string name)
+            {
+                for (int i = 0; i < xElements.Count; i++)
+                {
+                    string listName = xElements[i].Key.Attribute("Name").Value;
+
+                    //同じメソッドがあれば派生クラスのを使う
+                    if (listName == name)
+                    {
+                        //xElements[i] = xFunction;
+                        xElements[i] = new KeyValuePair<XElement, Library>(xFunction, libraryType);
+                        return true;
+                    }
+
+                    if (string.Compare(listName, name) > 0)
+                    {
+                        //xElements.Insert(i, xFunction);
+                        xElements.Insert(i, new KeyValuePair<XElement, Library>(xFunction, libraryType));
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            foreach (XElement xFunction in xFunctuions.Elements())
+            {
+                string name = xFunction.Attribute("Name").Value;
+
+                if (func(xFunction, name)) continue;
+
+                xElements.Add(new KeyValuePair<XElement, Library>(xFunction, libraryType));
+            }
+        }
+
+        public static void ApplyBaseOrDerivedClasses(StackPanel rootPanel, XElement xElement, string elementName, string headerName, Library libraryType)
         {
             XElement xDerivedClasses = xElement.Element(elementName);
 
@@ -286,9 +394,36 @@ namespace LibrarySample.Pages
             {
                 string fileName = xReference.Attribute("FileName").Value;
 
-                XElement xClass = XmlDocuments.GetDocuments(libraryType)[libraryType.LibraryDirectory() + fileName];
+                //別のライブラリ
+                XAttribute xLibraryType = xReference.Attribute("LibraryType");
 
-                panel.Children.Add(new SlideButton(xClass, libraryType) { Glyph = Category.Class.ToGlyph() });
+                Library classLibraryType = xLibraryType != null ? EnumConverter.ToLibraryType(xLibraryType.Value) : libraryType;
+
+                XElement xClass = XmlDocuments.GetDocuments(classLibraryType)[classLibraryType.LibraryDirectory() + fileName];
+
+                panel.Children.Add(new SlideButton(xClass, classLibraryType) { Glyph = Category.Class.ToGlyph() });
+            }
+        }
+
+        public static void ApplyBaseOrDerivedClasses(StackPanel rootPanel, XElement xElement, string headerName, Library libraryType)
+        {
+            if (xElement == null) return;
+
+            StackPanel panel = CreateHeaderPanel(headerName);
+            rootPanel.Children.Add(panel);
+
+            foreach (XElement xReference in xElement.Elements())
+            {
+                string fileName = xReference.Attribute("FileName").Value;
+
+                //別のライブラリ
+                XAttribute xLibraryType = xReference.Attribute("Library");
+
+                Library classLibraryType = xLibraryType != null ? EnumConverter.ToLibraryType(xLibraryType.Value) : libraryType;
+
+                XElement xClass = XmlDocuments.GetDocuments(classLibraryType)[classLibraryType.LibraryDirectory() + fileName];
+
+                panel.Children.Add(new SlideButton(xClass, classLibraryType) { Glyph = Category.Class.ToGlyph() });
             }
         }
     }

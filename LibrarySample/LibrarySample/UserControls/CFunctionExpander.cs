@@ -69,7 +69,7 @@ namespace LibrarySample.UserControls
                     XElement def = xElement.Element("DefinitionFile");
                     XElement source = xElement.Element("SourceCodeFile");
 
-                    SourceCodeViewer defCode = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.C);
+                    SourceCodeViewer defCode = SourceCodeViewer.Create(CodeLanguage.C);
                     defCode.FilePath = XmlPath.CLibrarySourceCodeDirectory + def.Value;
                     AddDefinitionCode(defCode);
 
@@ -80,7 +80,7 @@ namespace LibrarySample.UserControls
                         return;
                     }
 
-                    SourceCodeViewer sourceCodeViewer = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.C);
+                    SourceCodeViewer sourceCodeViewer = SourceCodeViewer.Create(CodeLanguage.C);
                     sourceCodeViewer.FilePath = XmlPath.CLibrarySourceCodeDirectory + source.Value;
 
                     

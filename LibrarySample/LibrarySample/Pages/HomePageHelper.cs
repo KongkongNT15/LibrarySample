@@ -14,7 +14,7 @@ namespace LibrarySample.Pages
 {
     public static class HomePageHelper
     {
-        public static async Task LoadLibrary(StackPanel rootPanel, LibraryType libraryType, string xmlPath)
+        public static async Task LoadLibrary(StackPanel rootPanel, Library libraryType, string xmlPath)
         {
             foreach (var pair in XmlDocuments.GetDocuments(libraryType))
             {

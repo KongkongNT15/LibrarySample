@@ -9,26 +9,30 @@ namespace LibrarySample
 {
     public static class ExtensionMethods
     {
-        public static string LibraryDirectory(this LibraryType libraryType)
+        public static string LibraryDirectory(this Library libraryType)
         {
             return libraryType switch
             {
-                LibraryType.CLibrary => XmlPath.CLibraryDirectory,
-                LibraryType.CppLibrary => XmlPath.CppLibraryDirectory,
-                LibraryType.Win32Library => XmlPath.Win32LibraryDirectory,
-                LibraryType.CppWinRTNamespaceLibrary => XmlPath.CppWinRTNamespaceLibraryDirectory,
+                Library.C => XmlPath.CLibraryDirectory,
+                Library.Cpp => XmlPath.CppLibraryDirectory,
+                Library.Win32 => XmlPath.Win32LibraryDirectory,
+                Library.CppWinRTNamespace => XmlPath.CppWinRTNamespaceLibraryDirectory,
+                Library.Uwp => XmlPath.UwpLibraryDirectory,
+                Library.DotNet => XmlPath.DotNetLibraryDirectory,
                 _ => throw new NotImplementedException(),
             };
         }
 
-        public static string SourceCodeDirectory(this LibraryType libraryType)
+        public static string SourceCodeDirectory(this Library libraryType)
         {
             return libraryType switch
             {
-                LibraryType.CLibrary => XmlPath.CLibrarySourceCodeDirectory,
-                LibraryType.CppLibrary => XmlPath.CppLibrarySourceCodeDirectory,
-                LibraryType.Win32Library => XmlPath.Win32LibrarySourceCodeDirectory,
-                LibraryType.CppWinRTNamespaceLibrary => XmlPath.CppWinRTNamespaceLibrarySourceCodeDirectory,
+                Library.C => XmlPath.CLibrarySourceCodeDirectory,
+                Library.Cpp => XmlPath.CppLibrarySourceCodeDirectory,
+                Library.Win32 => XmlPath.Win32LibrarySourceCodeDirectory,
+                Library.CppWinRTNamespace => XmlPath.CppWinRTNamespaceLibrarySourceCodeDirectory,
+                Library.Uwp => XmlPath .UwpLibrarySourceCodeDirectory,
+                Library.DotNet => XmlPath.DotNetLibrarySourceCodeDirectory,
                 _ => throw new NotImplementedException(),
             };
         }
@@ -61,10 +65,12 @@ namespace LibrarySample
                 Category.Field => "\uEA86",
                 Category.Function => "\uF158",
                 Category.FunctionMacro => "\uE71A",
+                Category.Interface => "\uEA86",
                 Category.Literal => "\uEA3A",
                 Category.Macro => "\uE71A",
                 Category.Method => "\uF158",
                 Category.Operator => "\uE710",
+                Category.Property => "\uEA86",
                 Category.Specialization => "\uEA86",
                 Category.Structure => "\uEA86",
                 Category.TypeDefinition => "\uEA86",

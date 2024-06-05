@@ -7,10 +7,27 @@ namespace Kongkong
 
 	::std::vector<std::wstring_view> SampleManager::_args;
 
-	::std::vector<std::wstring_view> const& SampleManager::Args() noexcept
-	{
-		if (_isLoaded) return _args;
-		_isLoaded = true;
+    int SampleManager::RunSample()
+    {
+        std::wstring_view rootTag = Args()[1];
+        std::wstring_view functionTag = Args()[2];
+
+        if (rootTag == L"winrt.Windows.System.Display.DisplayRequest.class") return Windows::System::Display::DisplayRequestSample::RunSamplePage(functionTag);
+        if (rootTag == L"winrt.Windows.UI.ColorHelper.class") return Windows::UI::ColorHelperSample::RunSamplePage(functionTag);
+        if (rootTag == L"winrt.Windows.UI.Colors.class") return Windows::UI::ColorsSample::RunSamplePage(functionTag);
+
+        return RunNotFoundPage();
+    }
+
+    int SampleManager::RunNotFoundPage()
+    {
+        return MainWindow::ShowWindow<NotFoundPage>();
+    }
+
+    ::std::vector<std::wstring_view> const& SampleManager::Args() noexcept
+    {
+        if (_isLoaded) return _args;
+        _isLoaded = true;
 
         wchar_t* lcommandline = GetCommandLine();
 
@@ -46,21 +63,6 @@ namespace Kongkong
             }
         }
 
-		return _args;
-	}
-
-    int SampleManager::RunSample()
-    {
-        std::wstring_view rootTag = L"Windows.UI.Colors";
-        std::wstring_view functionTag = L"";
-
-        if (rootTag == L"Windows.UI.Colors") return Windows::UI::ColorsSample::RunSamplePage(functionTag);
-
-        return RunNotFoundPage();
-    }
-
-    int SampleManager::RunNotFoundPage()
-    {
-        return MainWindow::ShowWindow<NotFoundPage>();
+        return _args;
     }
 }

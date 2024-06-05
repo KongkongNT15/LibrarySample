@@ -66,7 +66,7 @@ namespace LibrarySample.UserControls
                     XElement def = xElement.Element("DefinitionFile");
                     XElement source = xElement.Element("SourceCodeFile");
 
-                    SourceCodeViewer defCode = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.Cpp);
+                    SourceCodeViewer defCode = SourceCodeViewer.Create(CodeLanguage.Cpp);
                     //Tagと同じ名前のフォルダにある
                     defCode.FilePath = XmlPath.CppLibrarySourceCodeDirectory + Folder + "/" + def.Value;
                     AddDefinitionCode(defCode);
@@ -78,7 +78,7 @@ namespace LibrarySample.UserControls
                         return;
                     }
 
-                    SourceCodeViewer sourceCodeViewer = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage.Cpp);
+                    SourceCodeViewer sourceCodeViewer = SourceCodeViewer.Create(CodeLanguage.Cpp);
                     sourceCodeViewer.FilePath = XmlPath.CppLibrarySourceCodeDirectory + Folder + "/" + source.Value;
 
 

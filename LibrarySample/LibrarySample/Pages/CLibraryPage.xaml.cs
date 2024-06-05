@@ -70,17 +70,17 @@ namespace LibrarySample.Pages
 
         private void ApplyStructures()
         {
-            LibraryPageHelper.ApplyCStructures(ContentsPanel, XElement, LibraryType.CLibrary);
+            LibraryPageHelper.ApplyCStructures(ContentsPanel, XElement, Library.C);
         }
 
         private async Task ApplyFunctions()
         {
-            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Functions", "関数", LibraryType.CLibrary, Category.Function);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "Functions", "関数", Library.C, Category.Function);
         }
 
         private async Task ApplyFunctionMacros()
         {
-            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "FunctionMacros", "関数マクロ", LibraryType.CLibrary, Category.FunctionMacro);
+            await LibraryPageHelper.ApplyFunctionsAsync(ContentsPanel, XElement, "FunctionMacros", "関数マクロ", Library.C, Category.FunctionMacro);
         }
 
         private async Task ApplyMacro()

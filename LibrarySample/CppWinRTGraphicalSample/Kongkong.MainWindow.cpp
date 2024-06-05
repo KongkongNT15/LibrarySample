@@ -70,6 +70,11 @@ namespace Kongkong
         return true;
 	}
 
+    int MainWindow::ShowNotFoundWindow()
+    {
+        return ShowWindow<NotFoundPage>();
+    }
+
     void MainWindow::MessageLoop()
     {
         //メインウインドウ表示

@@ -1,4 +1,5 @@
 using LibrarySample.SampleManagement;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -14,6 +15,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -22,13 +24,13 @@ namespace LibrarySample.UserControls
 {
     public sealed partial class GrammarExpander : Expander
     {
-        public LibraryType LibraryType { get; }
+        public Library LibraryType { get; }
 
         public XElement XElement { get; }
 
         public CodeLanguage CodeLanguage { get; }
 
-        public GrammarExpander(XElement xElement, LibraryType libraryType, CodeLanguage codeLanguage)
+        public GrammarExpander(XElement xElement, Library libraryType, CodeLanguage codeLanguage)
         {
             this.InitializeComponent();
             FIcon.Margin = new Thickness((Data.ControlHeight - 24.0) / 2.0, 0, (Data.ControlHeight - 24.0) / 2.0, 0);
@@ -45,15 +47,22 @@ namespace LibrarySample.UserControls
         {
             string fileName = LibraryType switch
             {
-                LibraryType.CppWinRTNamespaceLibrary => XElement.Element("CppWinRTDefinition").Element("DefinitionFile").Value,
+                Library.CppWinRTNamespace => XElement.Element("CppWinRTDefinition").Element("DefinitionFile").Value,
+                Library.Uwp => CodeLanguage switch
+                {
+                    CodeLanguage.CppWinRT => XElement.Element("Definition").Element("CppWinRTDefinition").Element("DefinitionFile").Value,
+                    CodeLanguage.CSharp => XElement.Element("Definition").Element("CSharpDefinition").Element("DefinitionFile").Value,
+                    _ => throw new Exception(),
+                },
                 _ => XElement.Element("Definition").Element("DefinitionFile").Value,
             };
 
-            SourceCodeViewer sourceCodeViewer = SourceCodeViewer.GetSourceCodeViewer(CodeLanguage);
+            SourceCodeViewer sourceCodeViewer = LibraryType == Library.Uwp ? SourceCodeViewer.CreateWinCodeViewer(CodeLanguage): SourceCodeViewer.Create(CodeLanguage);
             sourceCodeViewer.FilePath = LibraryType switch
             {
-                LibraryType.CppLibrary => XmlPath.CppLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
-                LibraryType.CppWinRTNamespaceLibrary=> XmlPath.CppWinRTNamespaceLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
+                Library.Cpp => XmlPath.CppLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
+                Library.CppWinRTNamespace=> XmlPath.CppWinRTNamespaceLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
+                Library.Uwp => XmlPath.UwpLibrarySourceCodeDirectory + GetXElementRootTag() + "/" + fileName,
 
                 _ => throw new NotImplementedException(),
             };

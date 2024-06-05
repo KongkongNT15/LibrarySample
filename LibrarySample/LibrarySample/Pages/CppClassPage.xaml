@@ -10,6 +10,6 @@
     mc:Ignorable="d">
 
     <ScrollViewer >
-        <StackPanel x:Name="ContentsPanel" Padding="{x:Bind root:Data.PageScrollViewerPadding}" Spacing="{x:Bind root:Data.NavigationViewContentPadding}" />
+        <StackPanel x:Name="RootPanel" Padding="{x:Bind root:Data.PageScrollViewerPadding}" Spacing="{x:Bind root:Data.NavigationViewContentPadding}" />
     </ScrollViewer>
 </Page>

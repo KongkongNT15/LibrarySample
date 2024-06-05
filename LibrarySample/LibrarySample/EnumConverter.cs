@@ -12,6 +12,34 @@ namespace LibrarySample
 {
     public static class EnumConverter
     {
+        public static WinRTDesign ToWinRTDesign(string value, WinRTDesign defaultValue = WinRTDesign.XAML)
+        {
+            return value switch
+            {
+                "XAML" => WinRTDesign.XAML,
+                "CodeOnly" => WinRTDesign.CodeOnly,
+                _ => defaultValue,
+            };
+        }
+
+        public static CodeLanguage ToCodeLanguage(string value)
+        {
+            return value switch
+            {
+                "None" => CodeLanguage.None,
+                "C" => CodeLanguage.C,
+                "CWin32" => CodeLanguage.CWin32,
+                "Cpp" => CodeLanguage.Cpp,
+                "CppWinRT" => CodeLanguage.CppWinRT,
+                "Java" => CodeLanguage.Java,
+                "CSharp" => CodeLanguage.CSharp,
+                "Text" => CodeLanguage.Text,
+                "Xml" => CodeLanguage.Xml,
+                "Xaml" => CodeLanguage.Xaml,
+                _ => throw new NotImplementedException(),
+            };
+        }
+
         public static ElementTheme ToElementTheme(string value, ElementTheme defaultValue = ElementTheme.Default)
         {
             return value switch
@@ -74,29 +102,45 @@ namespace LibrarySample
             };
         }
 
-        public static LibraryType ToLibraryType(Type pageType)
+        public static Library ToLibraryType(Type pageType)
         {
             if (pageType == typeof(CLibraryPage) || pageType == typeof(CStructurePage))
             {
-                return LibraryType.CLibrary;
+                return Library.C;
             }
             if (pageType == typeof(CppLibraryPage) || pageType == typeof(CppClassPage) || pageType == typeof(CppEnumPage))
             {
-                return LibraryType.CppLibrary;
+                return Library.Cpp;
             }
             if (pageType == typeof(Win32LibraryPage) || pageType == typeof(Win32StructurePage))
             {
-                return LibraryType.Win32Library;
+                return Library.Win32;
             }
             if (pageType == typeof(CppWinRTNamespacePage) || pageType == typeof(CppWinRTClassPage))
             {
-                return LibraryType.CppWinRTNamespaceLibrary;
+                return Library.CppWinRTNamespace;
+            }
+            if (pageType == typeof(UwpNamespacePage) || pageType == typeof(UwpClassPage) || pageType == typeof(UwpEnumPage))
+            {
+                return Library.Uwp;
             }
 
             throw new ArgumentException();
         }
 
-        
+        public static Library ToLibraryType(string value)
+        {
+            return value switch
+            {
+                "C" => Library.C,
+                "Cpp" => Library.Cpp,
+                "Win32" => Library.Win32,
+                "CppWinRTNamespace" => Library.CppWinRTNamespace,
+                "Uwp" => Library.Uwp,
+                "DotNet" => Library.DotNet,
+                _ => throw new NotImplementedException(),
+            };
+        }
 
         public static string ToNormalCppVersionName(CppVersion cppVersion)
         {

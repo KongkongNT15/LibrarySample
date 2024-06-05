@@ -27,8 +27,10 @@ namespace LibrarySample.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CHomePage : Page
+    public sealed partial class CHomePage : Page, ICHandler
     {
+        public CVersion CVersion { get; } = SaveData.CVersion;
+        public ProcesserType ProcesserType { get; } = SaveData.CProcesserType;
 
         public CHomePage()
         {
@@ -38,7 +40,7 @@ namespace LibrarySample.Pages
 
         private async void LoadLibrary()
         {
-            await HomePageHelper.LoadLibrary(ContentsPanel, LibraryType.CLibrary, XmlPath.CLibraryDirectory);
+            await HomePageHelper.LoadLibrary(ContentsPanel, Library.C, XmlPath.CLibraryDirectory);
         }
     }
 }

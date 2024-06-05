@@ -1,4 +1,6 @@
+using LibrarySample.Languages;
 using LibrarySample.SampleManagement;
+using LibrarySample.Settings;
 using LibrarySample.UserControls;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -25,8 +27,11 @@ namespace LibrarySample.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CppHomePage : Page
+    public sealed partial class CppHomePage : Page, ICppHandler
     {
+        public CppVersion CppVersion { get; } = SaveData.CppVersion;
+        public ProcesserType ProcesserType { get; } = SaveData.CppProcesserType;
+
         public CppHomePage()
         {
             this.InitializeComponent();
@@ -42,7 +47,7 @@ namespace LibrarySample.Pages
                 
                 XElement xElement = pair.Value;
 
-                ContentsPanel.Children.Add(new SlideButton(xElement, LibraryType.CppLibrary));
+                ContentsPanel.Children.Add(new SlideButton(xElement, Library.Cpp));
 
                 await Task.Delay(1);
             }

@@ -11,6 +11,21 @@
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>
+    <Page Update="Pages\UwpEnumPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\UwpClassPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\UwpHomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\UwpNamespacePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\UwpHeaderButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\Win32HeaderButton.xaml">
       <SubType>Designer</SubType>
     </Page>

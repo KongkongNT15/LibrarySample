@@ -50,6 +50,17 @@
             </local:SettingExpander.Children>
         </local:SettingExpander>
 
+        <local:SettingExpander Title="C#/WinRT" >
+            <local:SettingExpander.Children>
+                <local:InnerInfoTextCard Title="Windows SDK" Value="Windows 11 SDK (10.0.22621.0)" IsFront="True" />
+                <local:InnerInfoTextCard Title=".NET SDK" Value=".NET 8.0" />
+                <local:InnerInfoTextCard Title="ターゲットOSバージョン" Value="Windows 11 22H2 (10.0.22621.1)" />
+                <local:InnerInfoTextCard Title="ターゲット最小OSバージョン" Value="Windows 11 21H2 (10.0.22000.1)" />
+                <local:InnerInfoTextCard Title="C#言語バージョン" Value="12.0" />
+                <local:InnerInfoTextCard Title="文字エンコード" Value="UTF-16" />
+            </local:SettingExpander.Children>
+        </local:SettingExpander>
+
 
         <local:SettingExpander Title="リンク集" >
             <local:SettingExpander.Children >

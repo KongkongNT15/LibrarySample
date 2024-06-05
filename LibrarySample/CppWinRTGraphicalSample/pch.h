@@ -54,8 +54,6 @@
 #include <winrt/Windows.UI.Xaml.Navigation.h>
 #include <winrt/Windows.UI.Xaml.Shapes.h>
 
-#include <winrt/Microsoft.UI.Xaml.Controls.h>
-
 #include <winrt/CppWinRTGraphicalSample.h>
 
 #ifdef _AMD64_
@@ -92,7 +90,7 @@ namespace Kongkong
 		SamplePage();
 
 		::winrt::Windows::Foundation::IInspectable Content() const { return _content.Content(); }
-		void Content(::winrt::Windows::Foundation::IInspectable value) { _content.Content(value); }
+		void Content(::winrt::Windows::Foundation::IInspectable const& value) { _content.Content(value); }
 
 	private:
 		::winrt::Windows::UI::Xaml::Controls::ScrollViewer _content;
@@ -132,6 +130,8 @@ namespace Kongkong
 
 			return 0;
 		}
+
+		static int ShowNotFoundWindow();
 
 	private:
 		static HWND _handle;

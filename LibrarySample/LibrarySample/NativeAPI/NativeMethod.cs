@@ -10,11 +10,11 @@ namespace LibrarySample.NativeAPI
     public static class NativeMethod
     {
         [DllImport("NativeMethod.dll", CharSet=CharSet.Unicode)]
-        private static extern nint StartSample(string commandLine, string input, uint wait, ref uint returnCode);
+        private static extern nint StartSample(string commandLine, string currentDirectory, string input, uint wait, ref uint returnCode);
 
-        public static string StartSampleProcess(string exeName, string commandLine, string input, uint wait, ref uint returnCode)
+        public static string StartSampleProcess(string exeName, string commandLine, string currentDirectory, string input, uint wait, ref uint returnCode)
         {
-            return Marshal.PtrToStringAnsi(StartSample(exeName + " " + commandLine, input, wait, ref returnCode));
+            return Marshal.PtrToStringAnsi(StartSample(exeName + " " + commandLine, currentDirectory, input, wait, ref returnCode));
         }
 
 

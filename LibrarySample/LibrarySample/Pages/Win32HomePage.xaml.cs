@@ -1,4 +1,5 @@
 using LibrarySample.SampleManagement;
+using LibrarySample.Settings;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -22,8 +23,10 @@ namespace LibrarySample.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Win32HomePage : Page
+    public sealed partial class Win32HomePage : Page, IWin32Handler
     {
+        public ProcesserType ProcesserType { get; } = SaveData.Win32ProcesserType;
+
         public Win32HomePage()
         {
             this.InitializeComponent();
@@ -32,7 +35,7 @@ namespace LibrarySample.Pages
 
         private async void LoadLibrary()
         {
-            await HomePageHelper.LoadLibrary(RootPanel, LibraryType.Win32Library, XmlPath.Win32LibraryDirectory);
+            await HomePageHelper.LoadLibrary(RootPanel, Library.Win32, XmlPath.Win32LibraryDirectory);
         }
     }
 }

@@ -12,9 +12,11 @@ namespace LibrarySample.UserControls
         public static readonly IReadOnlyList<string> WinRTTypes = LoadWords("CppWinRT.Type.db");
         public static readonly IReadOnlyList<string> WinRTNamespaces = LoadWords("CppWinRT.Namespace.db");
         public static readonly IReadOnlyList<string> WinRTClassTemplates = LoadWords("CppWinRT.ClassTemplate.db");
-        public static readonly IReadOnlyList<string> UWPEnums = LoadWords("UWP.Enum.db");
-        public static readonly IReadOnlyList<string> UWPNamespaces = LoadWords("UWP.Namespace.db");
-        public static readonly IReadOnlyList<string> UWPTypes = LoadWords("UWP.Type.db");
+        public static readonly IReadOnlyList<string> UwpEnums = LoadWords("Uwp.Enum.db");
+        public static readonly IReadOnlyList<string> UwpNamespaces = LoadWords("Uwp.Namespace.db");
+        public static readonly IReadOnlyList<string> UwpClasss = LoadWords("Uwp.Class.db");
+        public static readonly IReadOnlyList<string> UwpStructs = LoadWords("Uwp.Struct.db");
+        public static readonly IReadOnlyList<string> UwpInterfaces = LoadWords("Uwp.Interface.db");
 
 
         public CppWinRTCodeViewer()
@@ -50,11 +52,13 @@ namespace LibrarySample.UserControls
             DeletedMacro.Add("false");
 
             KeyGreen.Add(WinRTTypes);
-            KeyGreen.Add(UWPTypes);
+            KeyGreen.Add(UwpClasss);
+            KeyGreen.Add(UwpStructs);
+            KeyGreen.Add(UwpInterfaces);
             KeyClassTemplate.Add(WinRTClassTemplates);
-            KeyEnum.Add(UWPEnums);
+            KeyEnum.Add(UwpEnums);
             KeyGlobal.Add(WinRTNamespaces);
-            KeyGlobal.Add(UWPNamespaces);
+            KeyGlobal.Add(UwpNamespaces);
 
         }
     }

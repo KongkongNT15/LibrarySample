@@ -30,10 +30,11 @@ namespace LibrarySample.Pages
 
             RootGrid.Margin = new Thickness(Data.NavigationViewContentPadding, 0, 0, 0);
 
-            AddLibraryButton(new HomePageButton(LibraryType.CLibrary) { ImageSource = ImageSources.CIconSource, Title = HomePageData.CHomePageTitle, Description = HomePageData.CHomePageDescription });
-            AddLibraryButton(new HomePageButton(LibraryType.CppLibrary) { ImageSource = ImageSources.CppIconSource, Title = HomePageData.CppHomePageTitle, Description = HomePageData.CppHomePageDescription });
-            AddLibraryButton(new HomePageButton(LibraryType.Win32Library) { ImageSource = ImageSources.Win32IconSource, Title = HomePageData.Win32HomePageTitle, Description = HomePageData.Win32HomePageDescription });
-            AddLibraryButton(new HomePageButton(LibraryType.CppWinRTNamespaceLibrary) { ImageSource = ImageSources.CppWinRTNamespaceIconSource, Title = HomePageData.CppWinRTNamespaceHomePageTitle, Description = HomePageData.CppWinRTNamespaceHomePageDescription });
+            AddLibraryButton(new HomePageButton(Library.C) { ImageSource = ImageSources.CIconSource, Title = HomePageData.CTitle, Description = HomePageData.CDescription });
+            AddLibraryButton(new HomePageButton(Library.Cpp) { ImageSource = ImageSources.CppIconSource, Title = HomePageData.CppTitle, Description = HomePageData.CppDescription });
+            AddLibraryButton(new HomePageButton(Library.Win32) { ImageSource = ImageSources.Win32IconSource, Title = HomePageData.Win32Title, Description = HomePageData.Win32Description });
+            AddLibraryButton(new HomePageButton(Library.CppWinRTNamespace) { ImageSource = ImageSources.CppWinRTNamespaceIconSource, Title = HomePageData.CppWinRTNamespaceTitle, Description = HomePageData.CppWinRTNamespaceDescription });
+            AddLibraryButton(new HomePageButton(Library.Uwp) { ImageSource = ImageSources.UwpIconSource, Title = HomePageData.UwpTitle, Description = HomePageData.UwpDescription });
         }
 
         public void AddLibraryButton(HomePageButton button)

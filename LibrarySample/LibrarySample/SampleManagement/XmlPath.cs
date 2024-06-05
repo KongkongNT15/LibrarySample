@@ -21,6 +21,12 @@ namespace LibrarySample.SampleManagement
         public static readonly string CppWinRTNamespaceLibraryDirectory = "../Xml/CppWinRTNamespace/";
         public static readonly string CppWinRTNamespaceLibrarySourceCodeDirectory = "../Xml/CppWinRTNamespace/Code/";
 
+        public static readonly string UwpLibraryDirectory = "../Xml/Uwp/";
+        public static readonly string UwpLibrarySourceCodeDirectory = "../Xml/Uwp/Code/";
+
+        public static readonly string DotNetLibraryDirectory = "../Xml/DotNet/";
+        public static readonly string DotNetLibrarySourceCodeDirectory = "../Xml/DotNet/Code/";
+
         public static readonly string ReleaseNoteFilePath = "../Xml/ReleaseNote.xml";
 
         public static bool IsCppHeaderXmlFile(string path)
@@ -28,9 +34,9 @@ namespace LibrarySample.SampleManagement
             return path.EndsWith(".hpp.xml");
         }
 
-        public static bool IsCppWinRTNamespaceXmlFile(string path)
+        public static bool IsNamespaceXmlFile(string path)
         {
-            return path.EndsWith(".Namespace.xml");
+            return path.EndsWith(".namespace.xml");
         }
     }
 }

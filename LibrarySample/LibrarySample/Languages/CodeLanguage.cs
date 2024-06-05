@@ -13,8 +13,10 @@ namespace LibrarySample
         CWin32,
         Cpp,
         CppWinRT,
-        Cs,
+        CSharp,
         Java,
         Text,
+        Xml,
+        Xaml,
     }
 }

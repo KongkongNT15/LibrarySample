@@ -41,9 +41,9 @@ namespace LibrarySample.UserControls
         }
 
         public XElement XElement { get; }
-        LibraryType LibraryType { get; }
+        Library LibraryType { get; }
 
-        public SlideButton(XElement xElement, LibraryType libraryType)
+        public SlideButton(XElement xElement, Library libraryType)
         {
             this.InitializeComponent();
             Click += SlideButton_Click;
@@ -62,10 +62,13 @@ namespace LibrarySample.UserControls
 
             switch (libraryType)
             {
-                case LibraryType.CppLibrary: Title = XElement.Attribute("Name").Value.Replace("::", " : : "); break;
+                case Library.Cpp: Title = XElement.Attribute("Name").Value.Replace("::", " : : "); break;
                 default: Title = XElement.Attribute("Name").Value; break;
             }
             Description = xElement.Attribute("Description").Value;
+
+            //.Net‚Í”ñ‘Î‰ž
+            if (libraryType == Library.DotNet) IsEnabled = false;
         }
 
         private void SlideButton_Click(object sender, RoutedEventArgs e)
@@ -73,7 +76,7 @@ namespace LibrarySample.UserControls
             ContentPageFrame frame = GetParentFrame();
             switch (LibraryType)
             {
-                case LibraryType.CLibrary:
+                case Library.C:
                     switch(XElement.Name.LocalName)
                     {
                         case "Header":
@@ -88,7 +91,7 @@ namespace LibrarySample.UserControls
                     }
                     break;
 
-                case LibraryType.CppLibrary:
+                case Library.Cpp:
                     switch (XElement.Name.LocalName)
                     {
                         case "Header":
@@ -107,7 +110,7 @@ namespace LibrarySample.UserControls
                     }
                     break;
 
-                case LibraryType.Win32Library:
+                case Library.Win32:
                     switch (XElement.Name.LocalName)
                     {
                         case "Header":
@@ -122,7 +125,7 @@ namespace LibrarySample.UserControls
                     }
                     break;
 
-                case LibraryType.CppWinRTNamespaceLibrary:
+                case Library.CppWinRTNamespace:
                     switch (XElement.Name.LocalName)
                     {
                         case "Namespace":
@@ -133,6 +136,23 @@ namespace LibrarySample.UserControls
                         case "Class":
                             frame.Navigate(typeof(CppWinRTClassPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
                             break;
+
+                        default: throw new Exception();
+                    }
+                    break;
+
+                case Library.Uwp:
+                    switch (XElement.Name.LocalName)
+                    {
+                        case "Namespace": frame.Navigate(typeof(UwpNamespacePage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo); break;
+
+                        case "Class":
+                        case "Interface":
+                            frame.Navigate(typeof(UwpClassPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo);
+                            break;
+
+                        case "Enum": frame.Navigate(typeof(UwpEnumPage), null, ContentPageFrame.SlideFromRightNavigationTransitionInfo); break;
+
 
                         default: throw new Exception();
                     }

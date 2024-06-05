@@ -41,6 +41,9 @@ namespace LibrarySample
         private const string _cppWinRTx86ConsoleSampleName = "../Sample/CppWinRT-ConsoleSample-x86";
         private const string _cppWinRTx86GraphicalSampleName = "../Sample/CppWinRT-GraphicalSample-x86";
 
+        private const string _cSharpConsoleSamplex64Name = @"../Sample/DotNet/Net8.0/x64/CSharp-ConsoleSample";
+        private const string _cSharpConsoleSamplex86Name = @"../Sample/DotNet/Net8.0/x64/CSharp-ConsoleSample";
+
         private static SampleRunner _c11x64Sample;
         private static SampleRunner _c17x64Sample;
 
@@ -97,6 +100,12 @@ namespace LibrarySample
         public static SampleRunner CppWinRTx86ConsoleSample => _cppWinRTx86ConsoleSample;
         public static SampleRunner CppWinRTx86GraphicalSample => _cppWinRTx86GraphicalSample;
 
+        private static SampleRunner _cSharpConsoleSampleX64;
+        private static SampleRunner CSharpConsoleSampleX64 => _cSharpConsoleSampleX64;
+
+        private static SampleRunner _cSharpConsoleSampleX86;
+        private static SampleRunner CSharpConsoleSampleX86 => _cSharpConsoleSampleX86;
+
         //コンソールのパス
         public static readonly string SampleLauncherPath = @"../Sample/SampleLauncher";
 
@@ -129,6 +138,9 @@ namespace LibrarySample
 
             _cppWinRTx86ConsoleSample = new SampleRunner(_cppWinRTx86ConsoleSampleName);
             _cppWinRTx86GraphicalSample = new SampleRunner(_cppWinRTx86GraphicalSampleName);
+
+            _cSharpConsoleSampleX64 = new SampleRunner(_cSharpConsoleSamplex64Name);
+            _cSharpConsoleSampleX86 = new SampleRunner(_cSharpConsoleSamplex86Name);
         }
 
         public static SampleRunner GetCSampleRunner(CVersion cLanguage, ProcesserType processerType)
@@ -225,12 +237,63 @@ namespace LibrarySample
             };
         }
 
+        public static SampleRunner GetUwpSampleRunner(LaunchType launchType, ProcesserType processerType, CodeLanguage codeLanguage)
+        {
+            return codeLanguage switch
+            {
+                CodeLanguage.CppWinRT => launchType switch
+                {
+                    LaunchType.Graphical => processerType switch
+                    {
+                        ProcesserType.X64 => CppWinRTx64GraphicalSample,
+                        ProcesserType.X86 => CppWinRTx86GraphicalSample,
+                        _ => throw new NotImplementedException(),
+                    },
+                    LaunchType.PipeConsole or LaunchType.Console => processerType switch
+                    {
+                        ProcesserType.X64 => CppWinRTx64ConsoleSample,
+                        ProcesserType.X86 => CppWinRTx86ConsoleSample,
+                        _ => throw new NotImplementedException(),
+                    },
+                    _ => throw new NotImplementedException(),
+                },
+                CodeLanguage.CSharp => launchType switch
+                {
+                    LaunchType.Graphical => processerType switch
+                    {
+                        ProcesserType.X64 => CppWinRTx64GraphicalSample,
+                        ProcesserType.X86 => CppWinRTx86GraphicalSample,
+                        _ => throw new NotImplementedException(),
+                    },
+                    LaunchType.PipeConsole or LaunchType.Console => processerType switch
+                    {
+                        ProcesserType.X64 => CSharpConsoleSampleX64,
+                        ProcesserType.X86 => CSharpConsoleSampleX86,
+                        _ => throw new NotImplementedException(),
+                    },
+                    _ => throw new NotImplementedException(),
+                },
+                _ => throw new NotSupportedException(),
+            };
+        }
+
+        public async Task<SampleResult> RunSampleAsync(string folderName, string functuonName, string currentDirectory, string input = "")
+        {
+            return await Task.Run(() =>
+            {
+                uint returnCode = 0;
+                string output = NativeAPI.NativeMethod.StartSampleProcess(ApplicationName, folderName + " " + functuonName + " false", currentDirectory, input, SaveData.WaitTime, ref returnCode);
+
+                return new SampleResult(output, returnCode);
+            });
+        }
+
         public async Task<SampleResult> RunSampleAsync(string folderName, string functuonName, string input = "")
         {
             return await Task.Run(() =>
             {
                 uint returnCode = 0;
-                string output = NativeAPI.NativeMethod.StartSampleProcess(ApplicationName, folderName + " " + functuonName + " false", input, SaveData.WaitTime, ref returnCode);
+                string output = NativeAPI.NativeMethod.StartSampleProcess(ApplicationName, folderName + " " + functuonName + " false", Environment.CurrentDirectory, input, SaveData.WaitTime, ref returnCode);
 
                 return new SampleResult(output, returnCode);
             });

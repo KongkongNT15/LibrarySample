@@ -34,7 +34,7 @@ namespace LibrarySample.UserControls
             return words;
         }
 
-        public static SourceCodeViewer GetSourceCodeViewer(CodeLanguage language)
+        public static SourceCodeViewer Create(CodeLanguage language)
         {
             return language switch
             {
@@ -42,12 +42,25 @@ namespace LibrarySample.UserControls
                 CodeLanguage.Cpp => new CppCodeViewer(),
                 CodeLanguage.CWin32 => new Win32CodeViewer(),
                 CodeLanguage.CppWinRT => new CppWinRTCodeViewer(),
+                CodeLanguage.CSharp => new CSharpCodeViewer(),
+                CodeLanguage.Xml => new XmlViewer(),
+                CodeLanguage.Xaml => new XmlViewer(true),
                 _ => new TextViewer(),
             };
         }
 
+        public static SourceCodeViewer CreateWinCodeViewer(CodeLanguage codeLanguage)
+        {
+            return codeLanguage switch
+            {
+                CodeLanguage.CppWinRT => new CppWinRTCodeViewer(),
+                CodeLanguage.CSharp => new CSharpWinRTCodeViewer(),
+                _ => throw new Exception(),
+            };
+        }
+
         //テキストをコピーする用
-        private static DataPackage DataPackage { get; } = new DataPackage();
+        private static readonly DataPackage DataPackage = new DataPackage();
 
         public string FilePath { get; set; } = string.Empty;
 
@@ -65,9 +78,11 @@ namespace LibrarySample.UserControls
                     CodeLanguage.CWin32 => "C",
                     CodeLanguage.Cpp => "C++",
                     CodeLanguage.CppWinRT => "C++/WinRT",
-                    CodeLanguage.Cs => "C#",
+                    CodeLanguage.CSharp => "C#",
                     CodeLanguage.Java => "Java",
                     CodeLanguage.Text => "Text",
+                    CodeLanguage.Xml => "XML",
+                    CodeLanguage.Xaml => "XAML",
                     _  => "Unknown",
                 };
             }
