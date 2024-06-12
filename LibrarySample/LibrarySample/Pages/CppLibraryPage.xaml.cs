@@ -58,6 +58,7 @@ namespace LibrarySample.Pages
         private async void ApplyContents()
         {
             ApplyTypeDefs();
+            await ApplyConstValues();
             await ApplyConcepts();
             ApplyClasses();
             ApplyStructures();
@@ -101,6 +102,11 @@ namespace LibrarySample.Pages
         private void ApplyTypeDefs()
         {
             LibraryPageHelper.ApplyTypeDefs(RootPanel, XElement, "TypeDefinitions");
+        }
+
+        private async Task ApplyConstValues()
+        {
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "ConstantValues", "íËêîíl", Library.Cpp, Category.Field);
         }
 
         private async Task ApplyConcepts()

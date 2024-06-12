@@ -12,6 +12,7 @@
 #include <exception>
 #include <iostream>
 #include <limits>
+#include <random>
 #include <string>
 #include <system_error>
 #include <typeinfo>
@@ -90,6 +91,9 @@ int complex__class__run(FUNCNAME);
 int complex__hpp__run(FUNCNAME);
 int exception__class__run(FUNCNAME);
 int hash__bitset__struct__run(FUNCNAME);
+int linear_congruential_engine__class__run(FUNCNAME);
+int mersenne_twister_engine__class__run(FUNCNAME);
+int subtract_with_carry_engine__class__run(FUNCNAME);
 int type_info__class__run(FUNCNAME);
 
 #endif //!__PCH__

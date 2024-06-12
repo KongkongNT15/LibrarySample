@@ -9,13 +9,17 @@ int main(int argc, char** argv)
 {
     if (argc != 4) {
         cerr << "コマンドライン引数の数が正しくありません" << endl;
+        cerr << "ふぁ！？っく" << endl;
+
         return -1;
     }
 
     if (argv[3] == "true"s) IsConsole = true;
     else if (argv[3] == "false"s) IsConsole = false;
     else {
-        cerr << "コンソール設定が正しくありません" << endl;;
+        cerr << "コンソール設定が正しくありません" << endl;
+        cerr << "ふぁ！？っく" << endl;
+
         return -1;
     }
 

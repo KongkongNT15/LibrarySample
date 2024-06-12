@@ -11,6 +11,7 @@ bool IsEqual(const char* left, const char* right)
 int NotFound(const char* funcName)
 {
     cerr << '"' << funcName << "\"‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½" << endl;
+    cerr << "‚Ó‚ŸIH‚Á‚­" << endl;
     return -1;
 }
 
@@ -32,6 +33,9 @@ int RunSample(const char* folder, const char* func)
     if (IsEqualFolderName("complex.hpp")) return complex__hpp__run(func);
     if (IsEqualFolderName("exception.class")) return exception__class__run(func);
     if (IsEqualFolderName("hash.bitset.struct")) return hash__bitset__struct__run(func);
+    if (IsEqualFolderName("linear_congruential_engine.class")) return linear_congruential_engine__class__run(func);
+    if (IsEqualFolderName("mersenne_twister_engine.class")) return mersenne_twister_engine__class__run(func);
+    if (IsEqualFolderName("subtract_with_carry_engine.class")) return subtract_with_carry_engine__class__run(func);
     if (IsEqualFolderName("type_info.class")) return type_info__class__run(func);
 
     return NotFound(folder);

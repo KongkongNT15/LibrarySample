@@ -75,7 +75,7 @@ namespace LibrarySample.Settings
             set => Instance._uwpProcesserType = value;
         }
 
-        private uint _waitTime = 400;
+        private uint _waitTime = 120;
         public static uint WaitTime
         {
             get => Instance._waitTime;

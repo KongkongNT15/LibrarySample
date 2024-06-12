@@ -60,6 +60,15 @@
     <ClCompile Include="complex.class.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
+    <ClCompile Include="mersenne_twister_engine.class.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="linear_congruential_engine.class.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="subtract_with_carry_engine.class.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

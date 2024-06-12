@@ -62,8 +62,9 @@ namespace LibrarySample.Pages
             ApplyBaseClasses();
             ApplyDerivedClasses();
             ApplyInnerClasses();
-            await ApplyStaticMethods();
             ApplyTypeDefinitions();
+            await ApplyConstValues();
+            await ApplyStaticMethods();
             await ApplyConstructors();
             await ApplyDestructor();
             await ApplyFields();
@@ -134,6 +135,11 @@ namespace LibrarySample.Pages
         private void ApplyTypeDefinitions()
         {
             LibraryPageHelper.ApplyTypeDefs(RootPanel, XElement, "TypeDefinitions");
+        }
+
+        private async Task ApplyConstValues()
+        {
+            await LibraryPageHelper.ApplyClassMembersAsync(RootPanel, XElement, "ConstantValues", "íËêîíl", Library.Cpp, Category.Field);
         }
 
         private async Task ApplyConstructors()
