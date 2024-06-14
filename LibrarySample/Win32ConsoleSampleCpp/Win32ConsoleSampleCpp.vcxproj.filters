@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Winuser.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="Kongkong.RunNotFound.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Kongkong.IsConsole.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Kongkong.IsEqualString.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Kongkong.RunSample.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Kongkong.IsEqualStringW.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="AllSamples.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sample">
+      <UniqueIdentifier>{c934f43d-db2a-47c9-b8d4-5b31d298d236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kongkong">
+      <UniqueIdentifier>{0258b827-3ccc-493a-8e1e-3f452a73d0f5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

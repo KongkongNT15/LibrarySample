@@ -46,6 +46,7 @@ namespace LibrarySample.Pages
         }
 
         public ProcesserType ProcesserType { get; } = SaveData.Win32ProcesserType;
+        public CodeLanguage CodeLanguage { get; } = SaveData.Win32CodeLanguage;
 
         public Win32LibraryPage()
         {
@@ -83,7 +84,7 @@ namespace LibrarySample.Pages
 
         private async Task ApplyMacro()
         {
-            await LibraryPageHelper.ApplyMacro(this, RootPanel, XElement, SampleRunner.GetWin32SampleRunner(LaunchType.Console, ProcesserType));
+            await LibraryPageHelper.ApplyMacro(this, RootPanel, XElement, SampleRunner.GetWin32SampleRunner(LaunchType.Console, ProcesserType, CodeLanguage));
         }
     }
 }

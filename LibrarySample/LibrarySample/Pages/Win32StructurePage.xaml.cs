@@ -42,6 +42,7 @@ namespace LibrarySample.Pages
         }
 
         public ProcesserType ProcesserType { get; } = SaveData.Win32ProcesserType;
+        public CodeLanguage CodeLanguage { get; } = SaveData.Win32CodeLanguage;
 
         public Win32StructurePage()
         {

@@ -26,6 +26,7 @@ namespace LibrarySample.Pages
     public sealed partial class Win32HomePage : Page, IWin32Handler
     {
         public ProcesserType ProcesserType { get; } = SaveData.Win32ProcesserType;
+        public CodeLanguage CodeLanguage { get; } = SaveData.Win32CodeLanguage;
 
         public Win32HomePage()
         {

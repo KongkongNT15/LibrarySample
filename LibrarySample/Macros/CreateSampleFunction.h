@@ -1,0 +1,1 @@
+#define CREATE_SAMPLE_FUNCTION(name) namespace Kongkong:: name { int RunSample(const char* tag); }

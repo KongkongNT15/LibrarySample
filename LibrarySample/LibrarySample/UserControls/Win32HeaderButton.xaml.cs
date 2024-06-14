@@ -25,18 +25,43 @@ namespace LibrarySample.UserControls
 
         public event SelectionChangedEventHandler SelectionChanged
         {
-            add => ComboBox.SelectionChanged += value;
-            remove => ComboBox.SelectionChanged -= value;
+            add
+            {
+                ComboBox.SelectionChanged += value;
+                LanguageComboBox.SelectionChanged += value;
+            }
+            remove
+            {
+                ComboBox.SelectionChanged -= value;
+                LanguageComboBox.SelectionChanged -= value;
+            }
         }
 
         private Win32HeaderButton()
         {
             this.InitializeComponent();
 
+            LanguageComboBox.SelectedItem = SaveData.Win32CodeLanguage switch
+            {
+                CodeLanguage.CWin32 => "C",
+                CodeLanguage.CppWin32 => "C++",
+                _ => throw new Exception()
+            };
             ComboBox.SelectedItem = SaveData.Win32ProcesserType.ToString().ToLower();
 
             this.ComboBox.SelectionChanged += Win32HeaderButton_SelectionChanged;
+            this.LanguageComboBox.SelectionChanged += LanguageComboBox_SelectionChanged;
         }
+
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SaveData.Win32CodeLanguage = (LanguageComboBox.SelectedItem as string) switch
+            {
+                "C" => CodeLanguage.CWin32,
+                "C++" => CodeLanguage.CppWin32,
+                _ => throw new Exception(),
+            };
+    }
 
         private void Win32HeaderButton_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

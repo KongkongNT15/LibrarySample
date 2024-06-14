@@ -11,8 +11,8 @@ namespace LibrarySample
     {
         private class SuggestionContent
         {
-            public readonly string Title;
-            public readonly XElement XElement;
+            public readonly string Title = "";
+            public readonly XElement XElement = null;
         }
     }
 }

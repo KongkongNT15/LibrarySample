@@ -147,26 +147,36 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChangeToModernStyle.c" />
     <ClCompile Include="CloseWindow.c" />
+    <ClCompile Include="DefaultSampleWindowProc.c" />
+    <ClCompile Include="GetArgs.c" />
+    <ClCompile Include="GetRegistoryDoubleWordW.c" />
+    <ClCompile Include="GetWindowProcedure.c" />
     <ClCompile Include="GetWindowRect.c" />
+    <ClCompile Include="IsEqualStringA.c" />
+    <ClCompile Include="IsEqualStringW.c" />
+    <ClCompile Include="IsLightTheme.c" />
     <ClCompile Include="IsZoomed.c" />
+    <ClCompile Include="Font.c" />
     <ClCompile Include="MessageBeep.c" />
     <ClCompile Include="MessageBoxW.c" />
+    <ClCompile Include="NotFound.c" />
+    <ClCompile Include="NotFoundWindowProc.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SampleManagement.c" />
+    <ClCompile Include="SetAsCenter.c" />
+    <ClCompile Include="SetTitleBarTheme.c" />
     <ClCompile Include="WinMain.c" />
     <ClCompile Include="WinUser.Samples.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllSamples.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="SampleManagement.h" />
+    <ClInclude Include="WinUser.GetWinUserProcedure.h" />
     <ClInclude Include="WinUser.Samples.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="app.manifest" />

@@ -6,17 +6,43 @@
   <ItemGroup>
     <ClCompile Include="pch.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="SampleManagement.c" />
     <ClCompile Include="Winuser.h.c">
       <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="handleapi.h.c">
       <Filter>Sample</Filter>
     </ClCompile>
+    <ClCompile Include="fileapi.h.c">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="GetLineA.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="GetLineW.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="RunNotFound.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsConsole.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsEqualStringA.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsEqualStringW.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="RunSample.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sample">
       <UniqueIdentifier>{566c5d5c-1c19-4dd1-ac6c-67bc6164150d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kongkong">
+      <UniqueIdentifier>{3e71b1ea-7dd4-4b29-a5de-7f99e9795a12}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -30,6 +30,7 @@ namespace LibrarySample
                 "C" => CodeLanguage.C,
                 "CWin32" => CodeLanguage.CWin32,
                 "Cpp" => CodeLanguage.Cpp,
+                "CppWin32" => CodeLanguage.CppWin32,
                 "CppWinRT" => CodeLanguage.CppWinRT,
                 "Java" => CodeLanguage.Java,
                 "CSharp" => CodeLanguage.CSharp,

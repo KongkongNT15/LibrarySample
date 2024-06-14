@@ -1,12 +1,5 @@
 #include "pch.h"
-
-static int macro(void)
-{
-    PutMacro(CharLower, CALL_BY_ANSI_OR_UNICODE);
-    PutMacro(MessageBox, CALL_BY_ANSI_OR_UNICODE);
-
-    return 0;
-}
+#include "../Macros/WinUser.macro.h"
 
 //GetDpiForSystem
 static int f0(void)
@@ -25,5 +18,5 @@ int RunWinuserSample(const char* tag)
 
     if (IsEqualStringA(tag, TAG_MACRO)) return macro();
 
-    return NotFound(tag);
+    return RunNotFound(tag);
 }

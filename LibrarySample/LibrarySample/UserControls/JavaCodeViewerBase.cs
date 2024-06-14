@@ -222,9 +222,13 @@ namespace LibrarySample.UserControls
                                 for (++i; i < st.Length; ++i)
                                 {
                                     tmp += st[i];
-                                    if (st[i] == '\"' && st[i - 1] != '\\')
+                                    if (st[i] == '\"')
                                     {
-                                        break;
+                                        if (st[i - 1] != '\\') break;
+                                        if (i - 2 < 0) break;
+
+                                        //"...\\"パターン
+                                        if (st[i - 2] == '\\') break;
                                     }
                                 }
                                 run.Foreground = TyairoColorBrush;

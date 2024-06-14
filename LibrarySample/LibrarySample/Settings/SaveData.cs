@@ -47,6 +47,13 @@ namespace LibrarySample.Settings
             set => Instance._win32ProcesserType= value;
         }
 
+        private CodeLanguage _win32CodeLanguage = CodeLanguage.CWin32;
+        public static CodeLanguage Win32CodeLanguage
+        {
+            get => Instance._win32CodeLanguage;
+            set => Instance._win32CodeLanguage = value;
+        }
+
         private ProcesserType _cppWinRTNamespaceProcesserType = ProcesserType.X64;
         public static ProcesserType CppWinRTNamespaceProcesserType
         {
@@ -75,7 +82,7 @@ namespace LibrarySample.Settings
             set => Instance._uwpProcesserType = value;
         }
 
-        private uint _waitTime = 120;
+        private uint _waitTime = 50;
         public static uint WaitTime
         {
             get => Instance._waitTime;
@@ -109,6 +116,7 @@ namespace LibrarySample.Settings
             WriteData(streamWriter, "CProcesserType", CProcesserType.ToString());
             WriteData(streamWriter, "CppVersion", CppVersion.ToString());
             WriteData(streamWriter, "CppProcesserType", CppProcesserType.ToString());
+            WriteData(streamWriter, "Win32CodeLanguage", Win32CodeLanguage.ToString());
             WriteData(streamWriter, "Win32ProcesserType", Win32ProcesserType.ToString());
             WriteData(streamWriter, "CppWinRTNamespaceProcesserType", CppWinRTNamespaceProcesserType.ToString());
             WriteData(streamWriter, "UwpCodeLanguage", UwpCodeLanguage.ToString());
@@ -151,6 +159,10 @@ namespace LibrarySample.Settings
 
                     case "CppProcesserType":
                         _cppProcesserType = EnumConverter.ToProcesserType(value[1]);
+                        break;
+
+                    case "Win32CodeLanguage":
+                        _win32CodeLanguage = EnumConverter.ToCodeLanguage(value[1]);
                         break;
 
                     case "Win32ProcesserType":

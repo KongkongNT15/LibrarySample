@@ -12,6 +12,7 @@ namespace LibrarySample
         C,
         CWin32,
         Cpp,
+        CppWin32,
         CppWinRT,
         CSharp,
         Java,

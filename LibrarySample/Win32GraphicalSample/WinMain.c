@@ -55,7 +55,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
     double kakudairitus = GetDpiForSystem() / 96.0;
     //
-    font = CreateFont(
+    Font = CreateFont(
         (int)(16 * kakudairitus), (int)(6.8 * kakudairitus),					//高さ, 幅
         0, 0,					//角度1, 角度2
         FW_DONTCARE,			//太さ
@@ -67,7 +67,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         DEFAULT_PITCH | FF_DONTCARE, //ピッチとファミリ
         L"Yu Gothic UI");
 
-    if (font == NULL) {
+    if (Font == NULL) {
         return 1;
     }
 
@@ -86,7 +86,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         DispatchMessage(&msg);
     }
 
-    DeleteObject(font);
+    DeleteObject(Font);
 
 	return 0;
 }

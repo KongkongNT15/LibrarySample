@@ -33,6 +33,7 @@
                 <local:InnerInfoTextCard Title="ターゲットOSバージョン" Value="Windows 11 22H2 (10.0.22621.1)" />
                 <local:InnerInfoTextCard Title="ターゲット最小OSバージョン" Value="Windows 11 21H2 (10.0.22000.1)" />
                 <local:InnerInfoTextCard Title="C言語バージョン" Value="C17" />
+                <local:InnerInfoTextCard Title="C++言語バージョン" Value="C++20" />
                 <local:InnerInfoTextCard Title="文字エンコード" Value="UTF-16" />
                 <local:InnerInfoTextCard Title="コンソールの文字エンコード" Value="Shift-Jis" />
             </local:SettingExpander.Children>

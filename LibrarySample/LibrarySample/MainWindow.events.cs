@@ -341,7 +341,7 @@ namespace LibrarySample
 
         private void Window_SizeChanged(object sender, WindowSizeChangedEventArgs args)
         {
-            bool isZoomed = WinUser.IsZoomed(HWnd) == BOOL.TRUE;
+            bool isZoomed = Winuser.IsZoomed(HWnd) == BOOL.TRUE;
 
             //状態が変わっていなければ何もしない
             if (isZoomed == IsZoomed) return;

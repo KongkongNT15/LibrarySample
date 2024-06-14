@@ -9,5 +9,6 @@ namespace LibrarySample.Pages
     public interface IWin32Handler
     {
         ProcesserType ProcesserType { get; }
+        CodeLanguage CodeLanguage { get; }
     }
 }

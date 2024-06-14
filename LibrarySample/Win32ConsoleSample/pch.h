@@ -1,5 +1,7 @@
 #pragma once
 
+#include <locale.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,24 +9,20 @@
 
 #include <Windows.h>
 
-#define TAG_MACRO "?macro"
-#define CALL_BY_ANSI_OR_UNICODE "ANSI‚ÆUNICODE‚ÌŒÄ‚Ñ•ª‚¯"
+#include "../Macros/MacroDefinition.h"
 
-#define MacroHelper(x) #x
-#define Macro(x) MacroHelper(x)
+extern int IsConsole;
 
-#define PutMacro(x, message) puts(#x); puts(MacroHelper(x)); puts(message)
-
-int IsConsole();
-void SetIsConsole(int value);
+size_t GetLineA(char* buffer, size_t bufferCount);
+size_t GetLineW(wchar_t* buffer, size_t bufferCount);
 
 int IsEqualStringA(const char* left, const char* right);
 int IsEqualStringW(const wchar_t* left, const wchar_t* right);
 
 int RunSample(const char* headerTag, const char* sampleTag);
 
-int NotFound(const char* tag);
+int RunNotFound(const char* tag);
 
-
+int RunFileapiSample(const char* tag);
 int RunHandleapiSample(const char* tag);
 int RunWinuserSample(const char* tag);

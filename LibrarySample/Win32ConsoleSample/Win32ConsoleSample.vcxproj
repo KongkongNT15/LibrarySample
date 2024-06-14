@@ -142,13 +142,20 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="fileapi.h.c" />
+    <ClCompile Include="GetLineA.c" />
+    <ClCompile Include="GetLineW.c" />
     <ClCompile Include="handleapi.h.c" />
+    <ClCompile Include="IsConsole.c" />
+    <ClCompile Include="IsEqualStringA.c" />
+    <ClCompile Include="IsEqualStringW.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SampleManagement.c" />
+    <ClCompile Include="RunNotFound.c" />
+    <ClCompile Include="RunSample.c" />
     <ClCompile Include="Winuser.h.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

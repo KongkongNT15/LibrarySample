@@ -166,7 +166,7 @@ namespace LibrarySample
             await NavigationViewItemCreater.AddUwpNamespace(menuItems);
         }
 
-        
+
 
         private async void SetSelectedItem(ContentPageFrame contentPageFrame)
         {
@@ -232,7 +232,7 @@ namespace LibrarySample
                             //
                             foreach (object obj2 in item1.MenuItems)
                             {
-                                if(obj2 is XmlNavigationViewItem item2)
+                                if (obj2 is XmlNavigationViewItem item2)
                                 {
                                     if (item2.XElement == xElement)
                                     {
@@ -242,7 +242,7 @@ namespace LibrarySample
 
                                         return;
                                     }
-                                    
+
                                 }
                             }
                         }
@@ -289,7 +289,7 @@ namespace LibrarySample
                 {
                     element.Visibility = Visibility.Collapsed;
                 }
-                
+
             }
         }
 
@@ -464,14 +464,11 @@ namespace LibrarySample
             RightPaddingColumn.Width = new GridLength(AppWindow.TitleBar.RightInset / scaleAdjustment);
             LeftPaddingColumn.Width = new GridLength(AppWindow.TitleBar.LeftInset / scaleAdjustment);
 
-            List<Windows.Graphics.RectInt32> dragRectsList = new();
-
             Windows.Graphics.RectInt32 dragRectL;
-            dragRectL.X = (int)((LeftPaddingColumn.ActualWidth) * scaleAdjustment);
+            dragRectL.X = (int)(LeftPaddingColumn.ActualWidth * scaleAdjustment);
             dragRectL.Y = 0;
             dragRectL.Height = (int)(TitleBar.ActualHeight * scaleAdjustment);
             dragRectL.Width = (int)(LeftDragColumn.ActualWidth * scaleAdjustment);
-            dragRectsList.Add(dragRectL);
 
             Windows.Graphics.RectInt32 dragRectR;
             dragRectR.X = (int)((LeftPaddingColumn.ActualWidth
@@ -480,12 +477,8 @@ namespace LibrarySample
             dragRectR.Y = 0;
             dragRectR.Height = (int)(TitleBar.ActualHeight * scaleAdjustment);
             dragRectR.Width = (int)(RightDragColumn.ActualWidth * scaleAdjustment);
-            dragRectsList.Add(dragRectR);
 
-            Windows.Graphics.RectInt32[] dragRects = dragRectsList.ToArray();
-
-            AppWindow.TitleBar.SetDragRectangles(dragRects);
-
+            AppWindow.TitleBar.SetDragRectangles(new Windows.Graphics.RectInt32[] { dragRectL, dragRectR });
         }
     }
 }

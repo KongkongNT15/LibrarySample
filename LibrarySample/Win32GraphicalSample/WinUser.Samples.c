@@ -1,4 +1,6 @@
 #include "pch.h"
+#include "WinUser.GetWinUserProcedure.h"
+#include "WinUser.Samples.h"
 
 WindowProcedure GetWinUserProcedure(const wchar_t* tag)
 {

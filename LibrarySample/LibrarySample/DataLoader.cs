@@ -10,8 +10,6 @@ namespace LibrarySample
     internal static class DataLoader
     {
 
-        public static List<string> CLibraryList { get; } = new List<string>();
-
         //NavigationViewのヘッダーに表示するアイテムを取得
         public static string[] CreateHeaderItem(XElement xElement, CodeLanguage languageType)
         {

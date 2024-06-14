@@ -7,44 +7,85 @@
     <Filter Include="Sample\NewFilter1">
       <UniqueIdentifier>{e5fd07c4-5487-45d7-b59e-efbdbe9414e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sample\Winuser.h">
+    <Filter Include="Kongkong">
+      <UniqueIdentifier>{a5d71f4e-83a3-455d-b278-673cd328431c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\WinUser.h">
       <UniqueIdentifier>{db8ec477-45b2-4433-ae3f-8d1532888b26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.c" />
     <ClCompile Include="pch.c" />
-    <ClCompile Include="SampleManagement.c" />
     <ClCompile Include="MessageBoxW.c">
-      <Filter>Sample\Winuser.h</Filter>
+      <Filter>Sample\WinUser.h</Filter>
     </ClCompile>
     <ClCompile Include="WinUser.Samples.c">
-      <Filter>Sample\Winuser.h</Filter>
+      <Filter>Sample\WinUser.h</Filter>
     </ClCompile>
     <ClCompile Include="MessageBeep.c">
-      <Filter>Sample\Winuser.h</Filter>
+      <Filter>Sample\WinUser.h</Filter>
     </ClCompile>
     <ClCompile Include="CloseWindow.c">
-      <Filter>Sample\Winuser.h</Filter>
+      <Filter>Sample\WinUser.h</Filter>
     </ClCompile>
     <ClCompile Include="IsZoomed.c">
-      <Filter>Sample\Winuser.h</Filter>
+      <Filter>Sample\WinUser.h</Filter>
     </ClCompile>
     <ClCompile Include="GetWindowRect.c">
-      <Filter>Sample\Winuser.h</Filter>
+      <Filter>Sample\WinUser.h</Filter>
+    </ClCompile>
+    <ClCompile Include="IsEqualStringA.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsEqualStringW.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="GetRegistoryDoubleWordW.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsLightTheme.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="GetArgs.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="SetTitleBarTheme.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="SetAsCenter.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeToModernStyle.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="NotFoundWindowProc.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultSampleWindowProc.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="NotFound.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="GetWindowProcedure.c">
+      <Filter>Kongkong</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="SampleManagement.h" />
     <ClInclude Include="WinUser.Samples.h">
-      <Filter>Sample\Winuser.h</Filter>
+      <Filter>Sample\WinUser.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AllSamples.h" />
+    <ClInclude Include="WinUser.GetWinUserProcedure.h">
+      <Filter>Sample\WinUser.h</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="app.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

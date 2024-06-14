@@ -6,6 +6,7 @@
     xmlns:controls="using:LibrarySample.UserControls"
     xmlns:local="using:LibrarySample"
     xmlns:pages="using:LibrarySample.Pages"
+    xmlns:windowing="using:Microsoft.UI.Windowing"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -101,10 +102,6 @@
 
                 </Grid>
             </NavigationView.Header>
-
-            <NavigationView.AutoSuggestBox >
-                
-            </NavigationView.AutoSuggestBox>
 
             <Grid x:Name="ContentsGrid" />
 

@@ -11,8 +11,8 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    if (IsEqualStringA(argv[3], "true")) SetIsConsole(1);
-    else if (IsEqualStringA(argv[3], "false")) SetIsConsole(0);
+    if (IsEqualStringA(argv[3], "true")) IsConsole = 1;
+    else if (IsEqualStringA(argv[3], "false")) IsConsole = 0;
     else {
         fputs("ÉRÉìÉ\Å[Éãê›íËÇ™ê≥ÇµÇ≠Ç†ÇËÇ‹ÇπÇÒ\n", stderr);
         return -1;

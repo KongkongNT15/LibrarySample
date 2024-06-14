@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "WinUser.Samples.h"
 
 #define WCS_LENGTH 100
 
