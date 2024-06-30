@@ -12,7 +12,10 @@ namespace Kongkong
         std::wstring_view rootTag = Args()[1];
         std::wstring_view functionTag = Args()[2];
 
+        if (rootTag == L"winrt.event_token.struct") return event_tokenSample::RunSamplePage(functionTag);
         if (rootTag == L"winrt.Windows.System.Display.DisplayRequest.class") return Windows::System::Display::DisplayRequestSample::RunSamplePage(functionTag);
+        if (rootTag == L"winrt.Windows.System.Inventory.InstalledDesktopApp.class") return Windows::System::Inventory::InstalledDesktopAppSample::RunSamplePage(functionTag);
+        if (rootTag == L"winrt.Windows.System.Power.PowerManager.class") return Windows::System::Power::PowerManagerSample::RunSamplePage(functionTag);
         if (rootTag == L"winrt.Windows.UI.ColorHelper.class") return Windows::UI::ColorHelperSample::RunSamplePage(functionTag);
         if (rootTag == L"winrt.Windows.UI.Colors.class") return Windows::UI::ColorsSample::RunSamplePage(functionTag);
 

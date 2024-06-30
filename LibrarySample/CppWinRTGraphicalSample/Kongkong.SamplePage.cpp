@@ -5,6 +5,14 @@ using namespace winrt::Windows::UI::Xaml::Controls;
 
 namespace Kongkong
 {
+	void SamplePage::AddText(winrt::Windows::UI::Xaml::Controls::StackPanel const& stackPanel, winrt::hstring const& text)
+	{
+		TextBlock textBlock;
+		textBlock.Text(text);
+
+		stackPanel.Children().Append(textBlock);
+	}
+
 	StackPanel SamplePage::CreateBlockPanel(hstring const& title, BlockPanelType type)
 	{
 		StackPanel panel;

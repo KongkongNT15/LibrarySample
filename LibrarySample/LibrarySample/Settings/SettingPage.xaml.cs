@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using LibrarySample.UserControls;
+using LibrarySample.SampleManagement;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -21,7 +22,7 @@ namespace LibrarySample.Settings
 {
     public sealed partial class SettingPage : ScrollableControl
     {
-        public static SettingPage Instance { get; } = new SettingPage();
+        public static readonly SettingPage Instance = new SettingPage();
 
         private SettingPage()
         {
@@ -30,10 +31,18 @@ namespace LibrarySample.Settings
             RootPanel.Padding = new Thickness(0, 0, 0, Data.NavigationViewContentPadding);
 
             WaitTimeNumberBox.Value = SaveData.WaitTime;
+            SampleDisplayFormatComboBox.SelectedIndex = (int)SaveData.DisplayFormat;
             ThemeComboBox.SelectedIndex = (int)SaveData.RequestedTheme;
 
+
             WaitTimeNumberBox.ValueChanged += WaitTimeNumberBox_ValueChanged;
+            SampleDisplayFormatComboBox.SelectionChanged += SampleDisplayFormatComboBox_SelectionChanged;
             ThemeComboBox.SelectionChanged += ThemeComboBox_SelectionChanged;
+        }
+
+        private void SampleDisplayFormatComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SaveData.DisplayFormat = (SampleDisplayFormat)SampleDisplayFormatComboBox.SelectedIndex;
         }
 
         private void WaitTimeNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)

@@ -81,7 +81,7 @@ namespace LibrarySample.UserControls
 
             savePicker.SuggestedFileName = "Sample";
 
-            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, MainWindow.GetParentWindow(this).HWnd);
+            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, this.OwnerWindowHandle());
 
             for (int i = 0; i < _extentions.Length; i += 2)
             {

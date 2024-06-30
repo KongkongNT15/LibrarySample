@@ -2,12 +2,15 @@
 
 #include <Windows.h>
 #include <dwmapi.h>
-
 #include <unknwn.h>
+
+#include <chrono>
+#include <list>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <vector>
+
 #include <winrt/base.h>
 #include <hstring.h>
 #include <windows.UI.xaml.hosting.desktopwindowxamlsource.h>    //DesktopWindowXamlSource
@@ -78,6 +81,8 @@ namespace Kongkong
 	};
 
 	struct SamplePage {
+		static void AddText(winrt::Windows::UI::Xaml::Controls::StackPanel const& stackPanel, winrt::hstring const& text);
+		static void AddText(winrt::Windows::UI::Xaml::Controls::StackPanel const& stackPanel, winrt::hstring const& text, winrt::Windows::UI::Text::FontWeight const& fontWeight, double fontSize);
 
 		static winrt::Windows::UI::Xaml::Controls::StackPanel CreateBlockPanel(winrt::hstring const& title, BlockPanelType type = BlockPanelType::Normal);
 		static winrt::Windows::UI::Xaml::Controls::StackPanel CreateOuterPanel();

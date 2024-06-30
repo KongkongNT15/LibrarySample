@@ -19,12 +19,19 @@
                         <ResourceDictionary x:Key="Default">
                             <SolidColorBrush x:Key="SourceCodeViewerBackgroundBrush" >#60050505</SolidColorBrush>
                             <SolidColorBrush x:Key="ConsolePaneBackgroundBrush" >#C0000000</SolidColorBrush>
-
+                            
+                            <SolidColorBrush x:Key="PopUpWindowBackground">#202020</SolidColorBrush>
+                            <SolidColorBrush x:Key="PopUpWindowSeparatorBrush" >#181818</SolidColorBrush>
+                            <SolidColorBrush x:Key="PopUpWindowButtonsBackground" >#80101010</SolidColorBrush>
                         </ResourceDictionary>
 
                         <ResourceDictionary x:Key="Light">
                             <SolidColorBrush x:Key="SourceCodeViewerBackgroundBrush" >#202020</SolidColorBrush>
                             <SolidColorBrush x:Key="ConsolePaneBackgroundBrush" >#0C0C0C</SolidColorBrush>
+
+                            <SolidColorBrush x:Key="PopUpWindowBackground">#FAFAFA</SolidColorBrush>
+                            <SolidColorBrush x:Key="PopUpWindowSeparatorBrush" >#E5E5E5</SolidColorBrush>
+                            <SolidColorBrush x:Key="PopUpWindowButtonsBackground" >#60E0E0E0</SolidColorBrush>
                         </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>

@@ -89,6 +89,13 @@ namespace LibrarySample.Settings
             set => Instance._waitTime = value;
         }
 
+        private SampleDisplayFormat _displayFormat = SampleDisplayFormat.Expander;
+        public static SampleDisplayFormat DisplayFormat
+        {
+            get => Instance._displayFormat;
+            set => Instance._displayFormat = value;
+        }
+
         private ElementTheme _requestedTheme = ElementTheme.Default;
         public static ElementTheme RequestedTheme
         {
@@ -97,6 +104,7 @@ namespace LibrarySample.Settings
             {
                 Instance._requestedTheme = value;
                 MainWindow.ChangeAllWindowTheme(value);
+                PopUpWindow.ChangeAllWindowTheme(value);
                 SettingWindow.SetTheme(value);
             }
         }
@@ -124,6 +132,7 @@ namespace LibrarySample.Settings
             WriteData(streamWriter, "UwpProcesserType", UwpProcesserType.ToString());
             WriteData(streamWriter, "WaitTime", WaitTime.ToString());
             WriteData(streamWriter, "RequestedTheme", RequestedTheme.ToString());
+            WriteData(streamWriter, "DisplayFormat", DisplayFormat.ToString());
         }
 
         private static void WriteData(StreamWriter streamWriter, string property, string value)
@@ -192,7 +201,12 @@ namespace LibrarySample.Settings
                     case "RequestedTheme":
                         _requestedTheme = EnumConverter.ToElementTheme(value[1]);
                         break;
-                        
+
+                    case "DisplayFormat":
+                        _displayFormat = EnumConverter.ToSampleDisplayFormat(value[1]);
+                        break;
+
+
                 }
             }
         }

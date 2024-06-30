@@ -35,6 +35,7 @@
     <None Remove="Pages\Win32HomePage.xaml" />
     <None Remove="Pages\Win32LibraryPage.xaml" />
     <None Remove="Pages\Win32StructurePage.xaml" />
+    <None Remove="PopUpWindow.xaml" />
     <None Remove="Resources\ExpanderStyles.xaml" />
     <None Remove="Settings\AboutAppPage.xaml" />
     <None Remove="Settings\AppInfoCard.xaml" />
@@ -44,6 +45,7 @@
     <None Remove="Settings\SettingPage.xaml" />
     <None Remove="Settings\SettingWindowContent.xaml" />
     <None Remove="Settings\VersionInfoPage.xaml" />
+    <None Remove="UserControls\CardButton.xaml" />
     <None Remove="UserControls\CHeaderButton.xaml" />
     <None Remove="UserControls\ConsolePane.xaml" />
     <None Remove="UserControls\CppHeaderButton.xaml" />
@@ -93,6 +95,16 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="PopUpWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UserControls\CardButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\UwpEnumPage.xaml">

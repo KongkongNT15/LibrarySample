@@ -12,7 +12,9 @@ namespace LibrarySample.UserControls
     {
         public string Text => NumberBox.Value.ToString();
 
-        private NumberBox NumberBox { get; } = new NumberBox();
+        private readonly NumberBox NumberBox = new NumberBox();
+
+        private FunctionExpander FunctionExpander = null;
 
         public NumberBoxPane(XElement xElement)
         {
@@ -30,12 +32,19 @@ namespace LibrarySample.UserControls
 
             NumberBox.Value = double.Parse(xValue.Value);
 
+            NumberBox.ValueChanged += NumberBox_ValueChanged1;
             NumberBox.ValueChanged += NumberBox_ValueChanged;
+        }
+
+        private void NumberBox_ValueChanged1(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            FunctionExpander = FunctionExpander.GetParentFunctionExpander(this);
+            NumberBox.ValueChanged -= NumberBox_ValueChanged1;
         }
 
         private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
         {
-            FunctionExpander.GetParentFunctionExpander(this).Launch();
+            FunctionExpander.Launch();
         }
     }
 }

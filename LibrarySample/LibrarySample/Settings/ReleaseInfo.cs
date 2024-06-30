@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LibrarySample.Settings
 {
@@ -35,6 +34,11 @@ namespace LibrarySample.Settings
 
             DateText = $"{Year}年{Month}月{Date}日";
             VersionText = $"Version {VersionMajor}.{VersionMinor}.{VersionBuild}.{VersionRevision}";
+        }
+
+        public override string ToString()
+        {
+            return $"{DateText}  {VersionText}";
         }
     }
 }

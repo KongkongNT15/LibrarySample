@@ -57,22 +57,24 @@ namespace LibrarySample
         {
             return sampleType switch
             {
-                Category.Class => "\uEA86",
+                Category.Class => "\uECAA",
                 Category.Concept => "\uEA86",
                 Category.Constructor => "\uF158",
                 Category.Destructor => "\uF158",
-                Category.Enum => "\uEA86",
+                Category.Delegate => "\uEC57",
+                Category.Enum => "\uE8FD",
+                Category.Event => "\uEC57",
                 Category.Field => "\uEA86",
                 Category.Function => "\uF158",
                 Category.FunctionMacro => "\uE71A",
-                Category.Interface => "\uEA86",
+                Category.Interface => "\uF57B",
                 Category.Literal => "\uEA3A",
                 Category.Macro => "\uE71A",
                 Category.Method => "\uF158",
                 Category.Operator => "\uE710",
                 Category.Property => "\uEA86",
-                Category.Specialization => "\uEA86",
-                Category.Structure => "\uEA86",
+                Category.Specialization => "\uECAA",
+                Category.Structure => "\uECA5",
                 Category.TypeDefinition => "\uEA86",
                 _ => throw new Exception()
             };

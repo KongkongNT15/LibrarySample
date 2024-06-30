@@ -3,9 +3,6 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Winuser.cpp">
-      <Filter>Sample</Filter>
-    </ClCompile>
     <ClCompile Include="Kongkong.RunNotFound.cpp">
       <Filter>Kongkong</Filter>
     </ClCompile>
@@ -21,10 +18,18 @@
     <ClCompile Include="Kongkong.IsEqualStringW.cpp">
       <Filter>Kongkong</Filter>
     </ClCompile>
+    <ClCompile Include="fleapi.h.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="handleapi.h.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="WinUser.h.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="AllSamples.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sample">

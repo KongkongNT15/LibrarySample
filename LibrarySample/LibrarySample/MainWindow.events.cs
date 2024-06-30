@@ -336,6 +336,7 @@ namespace LibrarySample
             {
                 SaveData.Save();
                 SettingWindow.CloseWindow();
+                PopUpWindow.CloseAll();
             }
         }
 

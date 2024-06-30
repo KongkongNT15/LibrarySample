@@ -28,9 +28,7 @@ namespace LibrarySample.Settings
 
             XElement xReleaseNotes = XElement.Load(XmlPath.ReleaseNoteFilePath);
 
-            var elements = xReleaseNotes.Elements();
-            var xReleaseNote = elements.Last();
-
+            var xReleaseNote = xReleaseNotes.Element("ReleaseNote");
             ReleaseInfo releaseInfo = new ReleaseInfo(xReleaseNote);
 
             TitleText.Text = "Library Sample";

@@ -10,7 +10,7 @@ namespace Kongkong
 
 	bool MainWindow::Create(HINSTANCE hInstance, int nShowCmd)
 	{
-        if (_isCreated) return false;
+        if (_isCreated) [[unlikely]] return false;
         _isCreated = true;
         _nShowCmd = nShowCmd;
 
@@ -123,6 +123,25 @@ namespace Kongkong
             ::SetWindowPos(_contentHandle, nullptr, 0, 0, rcClient.right - rcClient.left, rcClient.bottom - rcClient.top, SWP_SHOWWINDOW);
 
             break;
+
+        case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hWnd, &ps);
+
+            bool isDark = _desktopSource.Content().as<winrt::Windows::UI::Xaml::FrameworkElement>().ActualTheme() == winrt::Windows::UI::Xaml::ElementTheme::Dark;
+
+            if (isDark) {
+                FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOWTEXT + 1));
+            }
+            else {
+                FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+            }
+
+            EndPaint(hWnd, &ps);
+
+            break;
+        }
 
         default:
             return ::DefWindowProc(hWnd, messageCode, wParam, lParam);

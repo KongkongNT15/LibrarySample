@@ -15,6 +15,9 @@ namespace LibrarySample.UserControls
             KeyBlue.Add(CSharpCodeViewer.KeyWordsBlue);
             KeyPurple.Add(CSharpCodeViewer.KeyWordsPurple);
             KeyClass.Add(CSharpCodeViewer.KeyWordsClass);
+            KeyStructs.Add(CSharpCodeViewer.KeyWordsStruct);
+            KeyGenericClass.Add(CSharpCodeViewer.KeyWordsGenericClass);
+            KeyGenericInterface.Add(CSharpCodeViewer.KeyWordsGenericInterface);
 
             KeyClass.Add(CppWinRTCodeViewer.UwpClasss);
             KeyEnum.Add(CppWinRTCodeViewer.UwpEnums);

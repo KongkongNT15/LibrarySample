@@ -11,49 +11,4 @@
     
     >
 
-    <local:ViewExpander
-        x:Name="EExpander"
-        Expanding="ViewExpander_Expanding"
-        HorizontalAlignment="Stretch"
-        MinHeight="{x:Bind root:Data.ControlHeight}"
-        >
-
-        <StackPanel x:Name="RootPanel" Spacing="{x:Bind root:Data.FunctionExpanderStackPanelSpacing}" >
-
-            <StackPanel x:Name="DefinitionPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
-                <TextBlock Text="定義" Style="{StaticResource FunctionExpanderContentTitleTextBlockStyle}" />
-            </StackPanel>
-
-            <StackPanel x:Name="ParameterPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
-                <TextBlock Text="パラメーター" Style="{StaticResource FunctionExpanderContentTitleTextBlockStyle}" />
-            </StackPanel>
-
-            <StackPanel x:Name="ReturnsPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
-                <TextBlock Text="戻り値" Style="{StaticResource FunctionExpanderContentTitleTextBlockStyle}" />
-            </StackPanel>
-
-            <StackPanel x:Name="SamplePanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
-                <TextBlock Text="サンプル" Style="{StaticResource FunctionExpanderContentTitleTextBlockStyle}" />
-            </StackPanel>
-
-            <StackPanel x:Name="ResultsPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" >
-                <Grid x:Name="ResultsInnerGrid" >
-                    <TextBlock Text="実行結果" VerticalAlignment="Bottom" />
-                    <StackPanel x:Name="LaunchButtons" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <Button x:Name="ReloadButton" Click="ReloadButton_Click" >
-                            <FontIcon Glyph="&#xE72C;" />
-                        </Button>
-                        <Button x:Name="LaunchButton" Click="LaunchButton_Click" >
-                            <FontIcon Glyph="&#xE756;" FontFamily="Segoe MDL2 Assets" />
-                        </Button>
-                    </StackPanel>
-                    
-                </Grid>
-                <local:InputsPanel x:Name="_inputsPanel" Spacing="{x:Bind root:Data.DefaultStackPanelSpacing}" />
-                <local:ConsolePane x:Name="_outputConsole" />
-            </StackPanel>
-
-        </StackPanel>
-    </local:ViewExpander>
-    
 </UserControl>

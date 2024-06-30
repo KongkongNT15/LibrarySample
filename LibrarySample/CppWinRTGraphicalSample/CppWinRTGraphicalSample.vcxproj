@@ -155,6 +155,8 @@
       <DependentUpon>ErrorTextBlock.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
+    <ClCompile Include="event_tokenSample.cpp" />
+    <ClCompile Include="event_tokenSample.event_tokenPage.cpp" />
     <ClCompile Include="Kongkong.MainWindow.cpp" />
     <ClCompile Include="Kongkong.NotFoundPage.cpp" />
     <ClCompile Include="Kongkong.SamplePage.cpp" />
@@ -165,6 +167,13 @@
     <ClCompile Include="Kongkong.SampleManager.cpp" />
     <ClCompile Include="Windows.System.Display.DisplayRequestSample.cpp" />
     <ClCompile Include="Windows.System.Display.DisplayRequestSample.DisplayRequestPage.cpp" />
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.cpp" />
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.DisplayNamePage.cpp" />
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.DisplayVersionPage.cpp" />
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.IdPage.cpp" />
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.PublisherPage.cpp" />
+    <ClCompile Include="Windows.System.Power.PowerManagerSample.cpp" />
+    <ClCompile Include="Windows.System.Power.PowerManagerSample.PowerManagerPage.cpp" />
     <ClCompile Include="Windows.UI.ColorHelperSample.cpp" />
     <ClCompile Include="Windows.UI.ColorHelperSample.FromArgbPage.cpp" />
     <ClCompile Include="Windows.UI.ColorHelperSample.ToDisplayNamePage.cpp" />
@@ -178,9 +187,18 @@
       <DependentUpon>ErrorTextBlock.idl</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
+    <ClInclude Include="event_tokenSample.event_tokenPage.h" />
+    <ClInclude Include="event_tokenSample.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Windows.System.Display.DisplayRequestSample.DisplayRequestPage.h" />
     <ClInclude Include="Windows.System.Display.DisplayRequestSample.h" />
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.DisplayNamePage.h" />
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.DisplayVersionPage.h" />
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.h" />
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.IdPage.h" />
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.PublisherPage.h" />
+    <ClInclude Include="Windows.System.Power.PowerManagerSample.h" />
+    <ClInclude Include="Windows.System.Power.PowerManagerSample.PowerManagerPage.h" />
     <ClInclude Include="Windows.UI.ColorHelperSample.FromArgbPage.h" />
     <ClInclude Include="Windows.UI.ColorHelperSample.h" />
     <ClInclude Include="Windows.UI.ColorHelperSample.ToDisplayNamePage.h" />

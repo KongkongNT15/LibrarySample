@@ -18,22 +18,39 @@ using LibrarySample.Settings;
 using System.Linq.Expressions;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.UI.Text;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace LibrarySample.UserControls
 {
-    public abstract partial class FunctionExpander : UserControl
+    public abstract partial class FunctionExpander : UserControl, ICardGlyphText
     {
         public static FunctionExpander GetParentFunctionExpander(FrameworkElement frameworkElement)
         {
-            while (frameworkElement is not FunctionExpander)
+            try
             {
-                frameworkElement = frameworkElement.Parent as FrameworkElement;
-            }
+                FrameworkElement element = frameworkElement;
+                while (element is not FunctionExpander)
+                {
+                    element = element.Parent as FrameworkElement;
 
-            return frameworkElement as FunctionExpander;
+                    if (element is null) throw new Exception();
+                }
+
+                return element as FunctionExpander;
+            }
+            catch
+            {
+                FrameworkElement element = frameworkElement;
+                while (element.Tag is not FunctionExpander)
+                {
+                    element = element.Parent as FrameworkElement;
+                }
+
+                return element.Tag as FunctionExpander;
+            }
         }
 
         public static FunctionExpander Create(Library libraryType, XElement xElement, Category category)
@@ -52,20 +69,20 @@ namespace LibrarySample.UserControls
 
         public string Title
         {
-            get => EExpander.Title;
-            set => EExpander.Title = value;
+            get => CurrentTextContent.Title;
+            set => CurrentTextContent.Title = value;
         }
 
         public string Description
         {
-            get => EExpander.Description;
-            set => EExpander.Description = value;
+            get => CurrentTextContent.Description;
+            set => CurrentTextContent.Description = value;
         }
 
         public string Glyph
         {
-            get => EExpander.Glyph;
-            set => EExpander.Glyph = value;
+            get => CurrentTextContent.Glyph;
+            set => CurrentTextContent.Glyph = value;
         }
 
         public Category Category { get; }
@@ -88,10 +105,51 @@ namespace LibrarySample.UserControls
         //サンプルを実行中かどうか
         protected bool _isWorking = false;
 
-        public Expander Expander => EExpander;
+        private ICardGlyphText CurrentTextContent => SaveData.DisplayFormat switch
+        {
+            SampleDisplayFormat.Expander => ViewExpander,
+            SampleDisplayFormat.PopUp => CardButton,
+            _ => throw new NotImplementedException(),
+        };
+
+        private CardButton CardButton = null;
+        private ViewExpander ViewExpander = null;
+        private StackPanel RootPanel = null;
+        private StackPanel DefinitionPanel = null;
+        private StackPanel ParameterPanel = null;
+        private StackPanel ReturnsPanel = null;
+        private StackPanel SamplePanel = null;
+        private StackPanel ResultsPanel = null;
+        private Grid ResultsInnerGrid = null;
+        private StackPanel LaunchButtons = null;
+        private Button ReloadButton = null;
+        private Button LaunchButton = null;
+        private InputsPanel _inputsPanel = null;
+        private ConsolePane _outputConsole = null;
+
+        private FrameworkElement SampleContent = null;
 
         public FunctionExpander(XElement xElement, Category category, LaunchType defaultLaunchType = LaunchType.PipeConsole)
         {
+            switch (SaveData.DisplayFormat)
+            {
+                case SampleDisplayFormat.Expander:
+                    ViewExpander = new ViewExpander
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        MinHeight = Data.ControlHeight
+                    };
+                    ViewExpander.Expanding += ViewExpander_Expanding;
+                    Content = ViewExpander;
+                    break;
+                case SampleDisplayFormat.PopUp:
+                    CardButton = new CardButton();
+                    CardButton.Click += CardButton_Click_Initialize;
+                    CardButton.Click += CardButton_Click;
+                    Content = CardButton;
+                    break;
+            }
+
             XElement = xElement;
 
             this.InitializeComponent();
@@ -125,6 +183,84 @@ namespace LibrarySample.UserControls
             
         }
 
+        private void CardButton_Click_Initialize(object sender, RoutedEventArgs e)
+        {
+            CardButton.Click -= CardButton_Click_Initialize;
+            InitializeContent();
+            SetContent();
+        }
+
+        private void CardButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SampleContent.Parent == null)
+            {
+                PopUpWindow popUpWindow = new PopUpWindow(SampleContent);
+                popUpWindow.Title = Title;
+
+                popUpWindow.Activate();
+            }
+            else
+            {
+                var window = PopUpWindow.SearchWindow(SampleContent);
+                window.Activate();
+
+            }
+        }
+
+        private void InitializeContent()
+        {
+            RootPanel = new StackPanel
+            {
+                Spacing = Data.FunctionExpanderStackPanelSpacing,
+            };
+            SampleContent = RootPanel;
+            RootPanel.Tag = this;
+
+            DefinitionPanel = new StackPanel { Spacing = Data.DefaultStackPanelSpacing };
+            RootPanel.Children.Add(DefinitionPanel);
+            DefinitionPanel.Children.Add(new TextBlock { Text = "定義", FontSize = 18, FontWeight = FontWeights.Bold, });
+
+            ParameterPanel = new StackPanel { Spacing = Data.DefaultStackPanelSpacing };
+            RootPanel.Children.Add(ParameterPanel);
+            ParameterPanel.Children.Add(new TextBlock { Text = "パラメーター", FontSize = 18, FontWeight = FontWeights.Bold, });
+
+            ReturnsPanel = new StackPanel { Spacing = Data.DefaultStackPanelSpacing };
+            RootPanel.Children.Add(ReturnsPanel);
+            ReturnsPanel.Children.Add(new TextBlock { Text = "戻り値", FontSize = 18, FontWeight = FontWeights.Bold, });
+
+            SamplePanel = new StackPanel { Spacing = Data.DefaultStackPanelSpacing };
+            RootPanel.Children.Add(SamplePanel);
+            SamplePanel.Children.Add(new TextBlock { Text = "サンプル", FontSize = 18, FontWeight = FontWeights.Bold, });
+
+            ResultsPanel = new StackPanel { Spacing = Data.DefaultStackPanelSpacing };
+            RootPanel.Children.Add(ResultsPanel);
+            ResultsInnerGrid = new Grid();
+            ResultsPanel.Children.Add(ResultsInnerGrid);
+            ResultsInnerGrid.Children.Add(new TextBlock { Text = "実行結果", VerticalAlignment = VerticalAlignment.Bottom });
+
+            LaunchButtons = new StackPanel
+            {
+                Spacing = Data.DefaultStackPanelSpacing,
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Right,
+            };
+            ResultsInnerGrid.Children.Add(LaunchButtons);
+
+            ReloadButton = new Button { Content = new FontIcon { Glyph = "\uE72C" } };
+            ReloadButton.Click += ReloadButton_Click;
+            LaunchButtons.Children.Add(ReloadButton);
+
+            LaunchButton = new Button { Content = new FontIcon { Glyph = "\uE756", FontFamily = new FontFamily("Segoe MDL2 Assets") } };
+            LaunchButton.Click += LaunchButton_Click;
+            LaunchButtons.Children.Add (LaunchButton);
+
+            _inputsPanel = new InputsPanel { Spacing = Data.DefaultStackPanelSpacing };
+            ResultsPanel.Children.Add(_inputsPanel);
+
+            _outputConsole = new ConsolePane();
+            ResultsPanel.Children.Add(_outputConsole);
+        }
+
         //ここで定義とサンプルのコードの両方を設定
         protected abstract void ApplySourceCode();
 
@@ -144,7 +280,7 @@ namespace LibrarySample.UserControls
             infoBar.IsOpen = true;
             infoBar.Severity = InfoBarSeverity.Error;
 
-            Expander.Content = infoBar;
+            SampleContent = infoBar;
         }
 
         //_folderと_funcNameに値を入れる
@@ -400,9 +536,8 @@ namespace LibrarySample.UserControls
             LaunchByButton();
         }
 
-        private void ViewExpander_Expanding(Expander sender, ExpanderExpandingEventArgs args)
+        private void SetContent()
         {
-            Expander.Expanding -= ViewExpander_Expanding;
             SetAsDeletedFunction();
 
 
@@ -423,7 +558,14 @@ namespace LibrarySample.UserControls
             {
                 Launch();
             }
+        }
 
+        private void ViewExpander_Expanding(Expander sender, ExpanderExpandingEventArgs args)
+        {
+            ViewExpander.Expanding -= ViewExpander_Expanding;
+            InitializeContent();
+            ViewExpander.Content = SampleContent;
+            SetContent();
         }
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)

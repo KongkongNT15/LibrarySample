@@ -10,20 +10,50 @@
     <ClCompile Include="winrt.hstring.struct.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
-    <ClCompile Include="SampleManagement.cpp" />
     <ClCompile Include="winrt.namespace.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
     <ClCompile Include="winrt.Windows.Data.Html.HtmlUtilities.class.cpp">
       <Filter>Sample</Filter>
     </ClCompile>
+    <ClCompile Include="winrt.event_token.struct.cpp">
+      <Filter>Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="RunSample.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsConsole.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsEqualString.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="NotFound.cpp">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="AllSamples.h" />
+    <ClInclude Include="winrt.hstring.struct.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="winrt.event_token.struct.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="winrt.namespace.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="winrt.Windows.Data.Html.HtmlUtilities.class.h">
+      <Filter>Sample</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sample">
       <UniqueIdentifier>{75234881-28b8-4c4d-a4a4-62435ed0a8f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kongkong">
+      <UniqueIdentifier>{f727f038-2a78-4a3c-bbde-89eebb3de55b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

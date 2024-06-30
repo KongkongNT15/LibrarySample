@@ -20,7 +20,7 @@ namespace Kongkong
 
 	int NotFound(const char* tag);
 
-	int Run_winrt_hstring_struct(const char* functionTag);
-	int Run_winrt_Windows_Data_Html_HtmlUtilities_class(const char* tag);
+	
+	
 }
 

@@ -18,7 +18,7 @@ using Microsoft.UI.Xaml.Navigation;
 
 namespace LibrarySample.UserControls
 {
-    public partial class ViewExpander : Expander
+    public partial class ViewExpander : Expander, ICardGlyphText
     {
         public string Title
         {

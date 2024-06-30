@@ -58,7 +58,7 @@ namespace LibrarySample.Pages
 
             foreach (XElement xMember in XElement.Elements())
             {
-                panel.Children.Add(new ValueCard { Title = xMember.Attribute("Name").Value, Description = xMember.Attribute("Description").Value, Value = xMember.Attribute("Value")?.Value, Glyph = Category.Enum.ToGlyph() });
+                panel.Children.Add(new ValueCard { Title = xMember.Attribute("Name").Value, Description = xMember.Attribute("Description").Value, Value = xMember.Attribute("Value")?.Value, Glyph = Category.Field.ToGlyph() });
             }
         }
     }

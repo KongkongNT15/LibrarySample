@@ -1,5 +1,8 @@
-﻿using Microsoft.UI.Windowing;
+﻿using LibrarySample.NativeAPI.Win32;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +63,13 @@ namespace LibrarySample.Settings
             AppWindow.Resize(new Windows.Graphics.SizeInt32((int)(916 * scaling), (int)(640 * scaling)));
 
             Content = SettingWindowContent.Instance;
+
+            if (WindowAPI.SetTitleBarMicaAlt(HWnd) == 0)
+            {
+                (SettingWindowContent.Instance.Content as Grid).Background = null;
+                SystemBackdrop = new MicaBackdrop();
+            }
+
             (Content as FrameworkElement).RequestedTheme = SaveData.RequestedTheme;
 
             Title = "設定";

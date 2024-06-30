@@ -119,7 +119,7 @@ namespace LibrarySample.UserControls
                 var infoBar = new InfoBar
                 {
                     Title = "ふぁ！？っく",
-                    Message = "C#/WinRTのGUIサンプルは現在準備中です\n「起動」をクリックするとC++/WinRTのサンプルが起動します",
+                    Message = "LibrarySampleではC#/WinRTのGUIサンプルに対応しません\n「起動」をクリックするとC++/WinRTのサンプルが起動します",
                     Severity = InfoBarSeverity.Warning,
                     IsClosable = false,
                     IsOpen = true,

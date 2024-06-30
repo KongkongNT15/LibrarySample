@@ -14,7 +14,7 @@ namespace LibrarySample
         public static readonly double ControlHeight = 68;
         public static readonly double MinControlHeight = 60;
 
-        public static readonly Thickness ControlPadding = new Thickness(24, 20, 24, 20);
+        public static readonly Thickness ControlPadding = new Thickness(24, 12, 24, 12);
         public static readonly double ControlPaddingHeight = 24;
 
         public static readonly double DefaultButtonWidth = 64;

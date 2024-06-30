@@ -78,7 +78,7 @@ namespace LibrarySample.UserControls
             if (_isOpen) return;
             _isOpen = true;
             FileOpenPicker picker = new();
-            WinRT.Interop.InitializeWithWindow.Initialize(picker, MainWindow.GetParentWindow(this).HWnd);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, this.OwnerWindowHandle());
 
             foreach (string extention in  _extentions)
             {

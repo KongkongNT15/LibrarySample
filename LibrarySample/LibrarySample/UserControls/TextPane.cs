@@ -18,13 +18,22 @@ namespace LibrarySample.UserControls
             set => TextBox.Text = value;
         }
 
+        private FunctionExpander FunctionExpander = null;
+
         public TextPane(XElement xElement)
         {
             Content = TextBox;
             Title = xElement.Attribute("Title").Value;
             Text = xElement.Attribute("Text").Value;
 
+            TextBox.TextChanging += TextBox_TextChanging1;
             TextBox.TextChanging += TextBox_TextChanging;
+        }
+
+        private void TextBox_TextChanging1(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            FunctionExpander = FunctionExpander.GetParentFunctionExpander(this);
+            TextBox.TextChanging -= TextBox_TextChanging1;
         }
 
         public void DeleteEvent()
@@ -34,7 +43,7 @@ namespace LibrarySample.UserControls
 
         private void TextBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
-            FunctionExpander.GetParentFunctionExpander(this).Launch();
+            FunctionExpander.Launch();
         }
     }
 }

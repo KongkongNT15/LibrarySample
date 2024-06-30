@@ -32,8 +32,8 @@ namespace LibrarySample.UserControls
         protected List<IReadOnlyList<string>> KeyFunc { get; } = [];
         protected List<IReadOnlyList<string>> KeyYellow { get; } = [];
         protected List<IReadOnlyList<string>> KeyNamespace { get; } = [];
-        protected List<IReadOnlyList<string>> KeyStatic { get; } = [];
-        protected List<IReadOnlyList<string>> KeyJenericClass { get; } = [];
+        protected List<IReadOnlyList<string>> KeyGenericClass { get; } = [];
+        protected List<IReadOnlyList<string>> KeyGenericInterface { get; } = [];
         protected List<IReadOnlyList<string>> KeyEnum { get; } = [];
         protected List<IReadOnlyList<string>> KeyInterface { get; } = [];
 
@@ -109,22 +109,33 @@ namespace LibrarySample.UserControls
             }
             if (Contains(KeyEnum, tmp))
             {
-                if (i + 1 < st.Length)
+                if (i + 2 < st.Length)
                 {
-                    run.Foreground = st[i + 1] == '.' ? EnumColorBrush : LocalParameterColorBrush;
+                    run.Foreground = st[i + 2] == '=' ? LocalParameterColorBrush : EnumColorBrush;
                     return true;
                 }
-                run.Foreground = ClassColorBrush;
+                run.Foreground = EnumColorBrush;
                 return true;
 
             }
-            if (Contains(KeyJenericClass, tmp))
+            if (Contains(KeyGenericClass, tmp))
             {
                 if (i + 1 < st.Length)
                 {
                     if (st[i + 1] == '<')
                     {
                         run.Foreground = ClassColorBrush;
+                        return true;
+                    }
+                }
+            }
+            if (Contains(KeyGenericInterface, tmp))
+            {
+                if (i + 1 < st.Length)
+                {
+                    if (st[i + 1] == '<')
+                    {
+                        run.Foreground = InterfaceColorBrush;
                         return true;
                     }
                 }

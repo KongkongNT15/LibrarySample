@@ -12,6 +12,34 @@ namespace LibrarySample
 {
     internal static class WindowAPI
     {
+        public static Window OwnerWindow(this FrameworkElement uIElement)
+        {
+            Window window;
+            
+            try
+            {
+                window = MainWindow.GetParentWindow(uIElement);
+            }
+            catch
+            {
+                try
+                {
+                    window = PopUpWindow.SearchWindow(uIElement);
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+
+            return window;
+        }
+
+        public static IntPtr OwnerWindowHandle(this FrameworkElement frameworkElement)
+        {
+            return WinRT.Interop.WindowNative.GetWindowHandle(frameworkElement.OwnerWindow());
+        }
+
         public static void SetTitleBarTheme(IntPtr hWnd, FrameworkElement windowContent)
         {
             int value = windowContent.ActualTheme == ElementTheme.Dark ? BOOL.TRUE : BOOL.FALSE;
@@ -24,6 +52,12 @@ namespace LibrarySample
             int value = windowContent.ActualTheme == ElementTheme.Dark ? BOOL.TRUE : BOOL.FALSE;
 
             _ = DwmAPI.DwmSetWindowAttribute(WinRT.Interop.WindowNative.GetWindowHandle(window), 20, ref value, sizeof(int));
+        }
+
+        public static int SetTitleBarMicaAlt(IntPtr hWnd)
+        {
+            int value = 4;
+            return DwmAPI.DwmSetWindowAttribute(hWnd, 38, ref value, sizeof(int));
         }
 
         public static double GetScaleAdjustment(IntPtr hWnd)

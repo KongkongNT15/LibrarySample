@@ -111,20 +111,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AllSamples.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="winrt.event_token.struct.h" />
+    <ClInclude Include="winrt.hstring.struct.h" />
+    <ClInclude Include="winrt.namespace.h" />
+    <ClInclude Include="winrt.Windows.Data.Html.HtmlUtilities.class.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="PropertySheet.props" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="IsConsole.cpp" />
+    <ClCompile Include="IsEqualString.cpp" />
+    <ClCompile Include="RunSample.cpp" />
+    <ClCompile Include="winrt.event_token.struct.cpp" />
     <ClCompile Include="winrt.hstring.struct.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SampleManagement.cpp" />
+    <ClCompile Include="NotFound.cpp" />
     <ClCompile Include="winrt.namespace.cpp" />
     <ClCompile Include="winrt.Windows.Data.Html.HtmlUtilities.class.cpp" />
   </ItemGroup>

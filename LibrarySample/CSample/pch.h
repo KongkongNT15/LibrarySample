@@ -24,15 +24,14 @@
 #include <unistd.h>
 #endif
 
+extern int IsConsole;
+
 int ExitFailure();
 
 size_t getline(char* buffer, size_t bufferLength);
 size_t getwcsline(wchar_t* buffer, size_t bufferLength);
 
 int IsEqual(const char* left, const char* right);
-
-int IsConsole();
-void SetIsConsole(int value);
 
 int NotFound(const char* name);
 

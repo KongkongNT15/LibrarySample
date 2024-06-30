@@ -6,6 +6,7 @@
     xmlns:controls="using:LibrarySample.UserControls"
     xmlns:local="using:LibrarySample.Settings"
     xmlns:root="using:LibrarySample"
+    xmlns:sampleManagement="using:LibrarySample.SampleManagement"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -16,6 +17,12 @@
             <TextBlock Text="構成設定" />
             <controls:DescriptionSettingCard Title="サンプル待機時間(ミリ秒)" Description="サンプルプログラムの終了を待つ最大時間を設定します" >
                 <NumberBox x:Name="WaitTimeNumberBox" SpinButtonPlacementMode="Inline" SmallChange="10" LargeChange="100" Minimum="10" Maximum="7200" Width="160" />
+            </controls:DescriptionSettingCard>
+            <controls:DescriptionSettingCard Title="サンプル表示形式" Description="設定を反映するにはページを再読み込みしてください" >
+                <ComboBox x:Name="SampleDisplayFormatComboBox" Width="116" >
+                    <x:String>Expander</x:String>
+                    <x:String>ポップアップ</x:String>
+                </ComboBox>
             </controls:DescriptionSettingCard>
         </StackPanel>
 

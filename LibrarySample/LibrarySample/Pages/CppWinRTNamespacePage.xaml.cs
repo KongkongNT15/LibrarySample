@@ -57,6 +57,7 @@ namespace LibrarySample.Pages
         {
             ApplyClasses();
             ApplyStructures();
+            await ApplyOperators();
             await ApplyFunctions();
         }
 
@@ -68,6 +69,11 @@ namespace LibrarySample.Pages
         private void ApplyStructures()
         {
             LibraryPageHelper.ApplyClasses(RootPanel, XElement, "Structures", "ç\ë¢ëÃ", Library.CppWinRTNamespace, Category.Structure);
+        }
+
+        private async Task ApplyOperators()
+        {
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Operators", "ââéZéq", Library.CppWinRTNamespace, Category.Operator);
         }
 
         private async Task ApplyFunctions()

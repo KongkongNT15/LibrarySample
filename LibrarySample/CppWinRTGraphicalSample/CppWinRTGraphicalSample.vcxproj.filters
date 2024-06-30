@@ -36,6 +36,33 @@
     <ClCompile Include="Windows.System.Display.DisplayRequestSample.cpp">
       <Filter>Sample\Windows.System.Display</Filter>
     </ClCompile>
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.cpp">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.DisplayNamePage.cpp">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.DisplayVersionPage.cpp">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.IdPage.cpp">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.System.Inventory.InstalledDesktopAppSample.PublisherPage.cpp">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="event_tokenSample.cpp">
+      <Filter>Sample\event_token</Filter>
+    </ClCompile>
+    <ClCompile Include="event_tokenSample.event_tokenPage.cpp">
+      <Filter>Sample\event_token</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.System.Power.PowerManagerSample.cpp">
+      <Filter>Sample\Windows.System.Power</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.System.Power.PowerManagerSample.PowerManagerPage.cpp">
+      <Filter>Sample\Windows.System.Power</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -61,6 +88,33 @@
     <ClInclude Include="Windows.System.Display.DisplayRequestSample.h">
       <Filter>Sample\Windows.System.Display</Filter>
     </ClInclude>
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.h">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.DisplayNamePage.h">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.DisplayVersionPage.h">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.IdPage.h">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.System.Inventory.InstalledDesktopAppSample.PublisherPage.h">
+      <Filter>Sample\Windows.System.Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="event_tokenSample.h">
+      <Filter>Sample\event_token</Filter>
+    </ClInclude>
+    <ClInclude Include="event_tokenSample.event_tokenPage.h">
+      <Filter>Sample\event_token</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.System.Power.PowerManagerSample.h">
+      <Filter>Sample\Windows.System.Power</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.System.Power.PowerManagerSample.PowerManagerPage.h">
+      <Filter>Sample\Windows.System.Power</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -83,6 +137,15 @@
     </Filter>
     <Filter Include="Sample\Windows.System.Display">
       <UniqueIdentifier>{8e7e161c-9323-4b14-bed4-01129636b814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\Windows.System.Inventory">
+      <UniqueIdentifier>{f35a8697-9458-4b68-bcc2-a86b6651d599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\event_token">
+      <UniqueIdentifier>{6dfeafb6-c05a-4066-86ba-403d05a4902e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample\Windows.System.Power">
+      <UniqueIdentifier>{3b5ad530-686f-45c8-996b-cd60e51728af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

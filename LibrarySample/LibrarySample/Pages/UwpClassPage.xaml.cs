@@ -84,12 +84,15 @@ namespace LibrarySample.Pages
             ApplyBaseClasses();
             ApplyImplements();
             ApplyDerivedClasses();
+            await ApplyStaticProperties();
             await ApplyStaticMethods();
+            await ApplyStaticEvents();
             await ApplyConstructors();
             await ApplyFields();
             await ApplyProperties();
             await ApplyOperators();
             await ApplyMethods();
+            await ApplyEvents();
         }
 
         private void ApplyGrammar()
@@ -127,9 +130,19 @@ namespace LibrarySample.Pages
             LibraryPageHelper.ApplyBaseOrDerivedClasses(RootPanel, xClasses, "派生クラス", Library.Uwp);
         }
 
+        private async Task ApplyStaticProperties()
+        {
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "StaticProperties", "静的プロパティ", Library.Uwp, Category.Property);
+        }
+
         private async Task ApplyStaticMethods()
         {
             await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "StaticMethods", "静的メソッド", Library.Uwp, Category.Method);
+        }
+
+        private async Task ApplyStaticEvents()
+        {
+            await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "StaticEvents", "静的イベント", Library.Uwp, Category.Event);
         }
 
         private async Task ApplyConstructors()
@@ -155,6 +168,11 @@ namespace LibrarySample.Pages
         private async Task ApplyMethods()
         {
             await LibraryPageHelper.ApplyClassMembersWinRTAsync(RootPanel, XElement, "Methods", "メソッド", Library.Uwp, Category.Method, CodeLanguage);
+        }
+
+        private async Task ApplyEvents()
+        {
+            await LibraryPageHelper.ApplyClassMembersWinRTAsync(RootPanel, XElement, "Events", "イベント", Library.Uwp, Category.Event, CodeLanguage);
         }
     }
 }

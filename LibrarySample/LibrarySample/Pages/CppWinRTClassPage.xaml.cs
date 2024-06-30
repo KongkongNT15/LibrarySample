@@ -57,8 +57,10 @@ namespace LibrarySample.Pages
         {
             ApplyGrammar();
             await ApplyConstructors();
+            await ApplyFields();
             await ApplyOperators();
             await ApplyMethods();
+            await ApplyEvents();
         }
 
         private void ApplyGrammar()
@@ -74,6 +76,11 @@ namespace LibrarySample.Pages
             await LibraryPageHelper.ApplyFunctionsAsync(RootPanel, XElement, "Constructors", "コンストラクター", Library.CppWinRTNamespace, Category.Constructor);
         }
 
+        private async Task ApplyFields()
+        {
+            await LibraryPageHelper.ApplyClassMembersAsync(RootPanel, XElement, "Fields", "フィールド", Library.CppWinRTNamespace, Category.Field);
+        }
+
         private async Task ApplyOperators()
         {
             await LibraryPageHelper.ApplyClassMembersAsync(RootPanel, XElement, "Operators", "演算子", Library.CppWinRTNamespace, Category.Operator);
@@ -82,6 +89,11 @@ namespace LibrarySample.Pages
         private async Task ApplyMethods()
         {
             await LibraryPageHelper.ApplyClassMembersAsync(RootPanel, XElement, "Methods", "メンバー関数", Library.CppWinRTNamespace, Category.Method);
+        }
+
+        private async Task ApplyEvents()
+        {
+            await LibraryPageHelper.ApplyClassMembersAsync(RootPanel, XElement, "Events", "イベント", Library.CppWinRTNamespace, Category.Event);
         }
     }
 }

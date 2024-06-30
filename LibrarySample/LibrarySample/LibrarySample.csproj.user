@@ -11,6 +11,12 @@
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>
+    <Page Update="PopUpWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\CardButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\UwpEnumPage.xaml">
       <SubType>Designer</SubType>
     </Page>

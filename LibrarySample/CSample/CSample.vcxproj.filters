@@ -1,21 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Sample">
       <UniqueIdentifier>{8a184b6c-494c-4053-93a6-733044424555}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System">
-      <UniqueIdentifier>{92b97940-ba3a-4c37-8c59-507983da9d6e}</UniqueIdentifier>
+    <Filter Include="Kongkong">
+      <UniqueIdentifier>{1581afb0-33f6-45b8-a8c5-0645cbd62d64}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="assert.h.c">
@@ -36,17 +27,8 @@
     <ClCompile Include="stdio.h.c">
       <Filter>Sample</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
-      <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.c">
-      <Filter>System</Filter>
-    </ClCompile>
     <ClCompile Include="stdnoreturn.h.c">
       <Filter>Sample</Filter>
-    </ClCompile>
-    <ClCompile Include="samplerun.c">
-      <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="inttypes.h.c">
       <Filter>Sample</Filter>
@@ -54,5 +36,37 @@
     <ClCompile Include="float.h.c">
       <Filter>Sample</Filter>
     </ClCompile>
+    <ClCompile Include="getline.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="getwcsline.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsEqual.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsConsole.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="NotFound.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitFailure.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="IsShiftJisMultiByteChar.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="GetUTF8MultiByteCharLength.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="RunSample.c">
+      <Filter>Kongkong</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c" />
+    <ClCompile Include="pch.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
 </Project>

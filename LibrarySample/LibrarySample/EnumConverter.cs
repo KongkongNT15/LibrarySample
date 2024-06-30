@@ -22,6 +22,16 @@ namespace LibrarySample
             };
         }
 
+        public static SampleDisplayFormat ToSampleDisplayFormat(string value)
+        {
+            return value switch
+            {
+                "Expander" => SampleDisplayFormat.Expander,
+                "PopUp" => SampleDisplayFormat.PopUp,
+                _ => throw new NotImplementedException(),
+            };
+        }
+
         public static CodeLanguage ToCodeLanguage(string value)
         {
             return value switch
